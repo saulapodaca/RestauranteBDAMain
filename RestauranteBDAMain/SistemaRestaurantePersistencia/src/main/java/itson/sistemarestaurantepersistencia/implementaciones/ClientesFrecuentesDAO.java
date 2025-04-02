@@ -16,7 +16,8 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO{
 
     @Override
     public ClienteFrecuente registrar(NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO) {
-        
+        ClienteFrecuente ClienteFrecuente = null;
+        return ClienteFrecuente;
     }
     
     

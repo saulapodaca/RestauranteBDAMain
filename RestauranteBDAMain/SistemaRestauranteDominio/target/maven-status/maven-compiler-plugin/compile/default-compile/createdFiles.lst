@@ -7,4 +7,5 @@ itson\sistemarestaurantedominio\ProductoIngrediente.class
 itson\sistemarestaurantedominio\TipoProducto.class
 itson\sistemarestaurantedominio\Ingrediente.class
 itson\sistemarestaurantedominio\ClienteFrecuente.class
+itson\sistemarestaurantedominio\dtos\NuevoClienteFrecuenteDTO.class
 itson\sistemarestaurantedominio\Mesa.class
