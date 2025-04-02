@@ -21,7 +21,7 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
     private static final String DEFAULT_NOMBRE = "INGRESE EL O LOS NOMBRES";
     private static final String DEFAULT_APELLIDO_PATERNO = "INGRESE EL APELLIDO PATERNO";
     private static final String DEFAULT_APELLIDO_MATERNO = "INGRESE EL APELLIDO MATERNO";
-    private static final String DEFAULT_CORREO = "INGRESE EL CORREO SIN @";
+    private static final String DEFAULT_CORREO = "INGRESE EL CORREO";
     private static final String DEFAULT_TELEFONO = "INGRESE EL NUMERO DE TELEFONO";
 
     public RegistrarClienteFrecuenteForm() {
