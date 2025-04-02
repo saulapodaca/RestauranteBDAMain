@@ -4,7 +4,7 @@
  */
 package itson.sistemarestaurantenegocio.implementaciones;
 
-import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
+
 import itson.sistemarestaurantepersistencia.IClientesFrecuentesDAO;
 
 /**

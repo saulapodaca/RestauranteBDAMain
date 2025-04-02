@@ -14,7 +14,6 @@ import javax.swing.JTextField;
  *
  * @author rauln
  */
-
 public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
 
     // Constantes para los textos por defecto (agregar al inicio de la clase)
@@ -95,7 +94,6 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
     }
 
     // Métodos de validación
-
     private boolean esTextoPorDefecto(String texto, String placeholder) {
         return texto.isEmpty() || texto.equals(placeholder);
     }
@@ -125,6 +123,25 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
         for (String dominio : dominios) {
             comboBoxDominios.addItem(dominio);
         }
+    }
+
+    private void limpiarFormulario() {
+        // Limpiar campos de texto
+        textFieldIngresarNombre.setText(DEFAULT_NOMBRE);
+        textFieldIngresarApellidoPaterno.setText(DEFAULT_APELLIDO_PATERNO);
+        textFieldIngresarApellidoMaterno.setText(DEFAULT_APELLIDO_MATERNO);
+        textFieldIngresarCorreoElectronico.setText(DEFAULT_CORREO);
+        textFieldIngresarTelefono.setText(DEFAULT_TELEFONO);
+
+        // Restablecer color de los textos a gris
+        textFieldIngresarNombre.setForeground(Color.GRAY);
+        textFieldIngresarApellidoPaterno.setForeground(Color.GRAY);
+        textFieldIngresarApellidoMaterno.setForeground(Color.GRAY);
+        textFieldIngresarCorreoElectronico.setForeground(Color.GRAY);
+        textFieldIngresarTelefono.setForeground(Color.GRAY);
+
+        // Restablecer el JComboBox a su valor por defecto
+        comboBoxDominios.setSelectedIndex(0);
     }
 
     /**
@@ -319,7 +336,7 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
         }
 
         JOptionPane.showMessageDialog(background, "Registro exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-    
+        limpiarFormulario();
     }//GEN-LAST:event_botonRegistrarMouseClicked
 
     /**
