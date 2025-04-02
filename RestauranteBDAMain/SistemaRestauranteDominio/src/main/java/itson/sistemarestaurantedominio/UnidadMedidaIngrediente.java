@@ -1,13 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Enum.java to edit this template
- */
 package itson.sistemarestaurantedominio;
 
-/**
- *
- * @author saula
- */
+// @author SAUL ISAAC APODACA BALDENEGRO 00000252020
 public enum UnidadMedidaIngrediente {
     PIEZAS,
     GRAMOS,

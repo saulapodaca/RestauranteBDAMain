@@ -20,6 +20,7 @@ public class DetalleComanda implements Serializable {
     @Column(name = "idDetallesComandas")
     private Long id;
 
+    
     public Long getId() {
         return id;
     }
