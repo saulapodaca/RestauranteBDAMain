@@ -8,6 +8,18 @@
     </parent>
     <artifactId>SistemaRestaurantePresentacion</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SistemaRestaurantePersistencia</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>SistemaVideojuegosNegocio</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
     <properties>
         <maven.compiler.release>22</maven.compiler.release>
         <exec.mainClass>itson.sistemarestaurantepresentacion.SistemaRestaurantePresentacion</exec.mainClass>
