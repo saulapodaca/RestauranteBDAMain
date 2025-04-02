@@ -4,11 +4,12 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantedominio.dtos.NuevoClienteFrecuenteDTO;
+import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
@@ -22,13 +23,15 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
     private static final String DEFAULT_APELLIDO_MATERNO = "INGRESE EL APELLIDO MATERNO";
     private static final String DEFAULT_CORREO = "INGRESE EL CORREO ";
     private static final String DEFAULT_TELEFONO = "INGRESE EL NUMERO DE TELEFONO";
+    private IClientesFrecuentesBO clientesFrecuentesBO;
 
-    public RegistrarClienteFrecuenteForm() {
+    public RegistrarClienteFrecuenteForm(IClientesFrecuentesBO clientesFrecuentesBO) {
         initComponents();
         cargarDominiosCorreo();
         ajustarComboBox();
         configurarPlaceholders();
         setLocationRelativeTo(null);
+        this.clientesFrecuentesBO = clientesFrecuentesBO;
     }
 
     private void ajustarComboBox() {
@@ -91,26 +94,6 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
         configurarPlaceholder(textFieldIngresarApellidoMaterno, DEFAULT_APELLIDO_MATERNO);
         configurarPlaceholder(textFieldIngresarCorreoElectronico, DEFAULT_CORREO);
         configurarPlaceholder(textFieldIngresarTelefono, DEFAULT_TELEFONO);
-    }
-
-    // Métodos de validación
-    private boolean esTextoPorDefecto(String texto, String placeholder) {
-        return texto.isEmpty() || texto.equals(placeholder);
-    }
-
-    // Nombres y apellidos: Solo letras y espacios
-    private boolean validarNombreApellido(String texto) {
-        return texto.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$");
-    }
-
-    // Correo: No caracteres sospechosos como < > " ' ; -- y espacios
-    private boolean validarCorreo(String correo) {
-        return correo.matches("^[a-zA-Z0-9._-]+$");
-    }
-
-    // Teléfono: Exactamente 10 dígitos numéricos
-    private boolean validarTelefono(String telefono) {
-        return telefono.matches("^\\d{10}$");
     }
 
     // Método para llenar el JComboBox con los dominios
@@ -303,40 +286,34 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxDominiosItemStateChanged
 
     private void botonRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarMouseClicked
-        String nombre = textFieldIngresarNombre.getText().trim();
-        String apellidoP = textFieldIngresarApellidoPaterno.getText().trim();
-        String apellidoM = textFieldIngresarApellidoMaterno.getText().trim();
-        String correoSinArroba = textFieldIngresarCorreoElectronico.getText().trim();
-        String dominio = (String) comboBoxDominios.getSelectedItem();
-        String telefono = textFieldIngresarTelefono.getText().trim();
+        try {
+            String nombre = textFieldIngresarNombre.getText().trim();
+            String apellidoP = textFieldIngresarApellidoPaterno.getText().trim();
+            String apellidoM = textFieldIngresarApellidoMaterno.getText().trim();
+            String correoSinArroba = textFieldIngresarCorreoElectronico.getText().trim();
+            String dominio = (String) comboBoxDominios.getSelectedItem();
+            String telefono = textFieldIngresarTelefono.getText().trim();
+            String correoCompleto = correoSinArroba + dominio;
 
-        if (esTextoPorDefecto(nombre, DEFAULT_NOMBRE)
-                || esTextoPorDefecto(apellidoP, DEFAULT_APELLIDO_PATERNO)
-                || esTextoPorDefecto(apellidoM, DEFAULT_APELLIDO_MATERNO)
-                || esTextoPorDefecto(correoSinArroba, DEFAULT_CORREO)
-                || esTextoPorDefecto(telefono, DEFAULT_TELEFONO)) {
-            JOptionPane.showMessageDialog(background, "Error: Todos los campos deben completarse correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
+
+            // Crear el DTO con la fecha incluida
+            NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO = new NuevoClienteFrecuenteDTO(
+                    nombre, apellidoP, apellidoM, correoCompleto, telefono
+            );
+
+            // Registrar el cliente
+            this.clientesFrecuentesBO.registrarClienteFrecuente(nuevoClienteFrecuenteDTO);
+
+            // Mensaje de éxito
+            JOptionPane.showMessageDialog(background, "Registro exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarFormulario();
+
+        } catch (IllegalArgumentException e) {
+            JOptionPane.showMessageDialog(background, e.getMessage(), "Error de Validación", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(background, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        // Validaciones de seguridad y formato
-        if (!validarNombreApellido(nombre) || !validarNombreApellido(apellidoP) || !validarNombreApellido(apellidoM)) {
-            JOptionPane.showMessageDialog(background, "Error: Nombres y apellidos solo pueden contener letras y espacios.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!validarCorreo(correoSinArroba)) {
-            JOptionPane.showMessageDialog(background, "Error: El correo contiene caracteres inválidos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        if (!validarTelefono(telefono)) {
-            JOptionPane.showMessageDialog(background, "Error: El número de teléfono debe tener exactamente 10 dígitos.", "Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        JOptionPane.showMessageDialog(background, "Registro exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        limpiarFormulario();
     }//GEN-LAST:event_botonRegistrarMouseClicked
 
     /**

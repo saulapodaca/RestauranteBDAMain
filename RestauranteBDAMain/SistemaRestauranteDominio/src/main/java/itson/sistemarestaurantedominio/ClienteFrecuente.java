@@ -1,18 +1,8 @@
 package itson.sistemarestaurantedominio;
 
-//@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-
 import java.io.Serializable;
 import java.util.Calendar;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
+import javax.persistence.*;
 
 @Entity
 @Table(name = "clientesFrecuentes")
@@ -39,59 +29,61 @@ public class ClienteFrecuente implements Serializable {
     private String correo;
     
     @Temporal(TemporalType.DATE)
-    @Column(name = "fechaRegistro", nullable = false)
+    @Column(name = "fechaRegistro", nullable = true)
     private Calendar fechaRegistro;
+
+    public ClienteFrecuente() {}
     
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getApellidoPaterno() {
-        return apellidoPaterno;
-    }
-
-    public String getApellidoMaterno() {
-        return apellidoMaterno;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public Calendar getFechaRegistro() {
-        return fechaRegistro;
-    }
-    
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
     }
 
     public void setApellidoPaterno(String apellidoPaterno) {
         this.apellidoPaterno = apellidoPaterno;
     }
 
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
     public void setApellidoMaterno(String apellidoMaterno) {
         this.apellidoMaterno = apellidoMaterno;
+    }
+
+    public String getTelefono() {
+        return telefono;
     }
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
+    public String getCorreo() {
+        return correo;
+    }
+
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public Calendar getFechaRegistro() {
+        return fechaRegistro;
     }
 
     public void setFechaRegistro(Calendar fechaRegistro) {
@@ -100,27 +92,19 @@ public class ClienteFrecuente implements Serializable {
     
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
+        return (id != null ? id.hashCode() : 0);
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof ClienteFrecuente)) {
-            return false;
-        }
-        ClienteFrecuente other = (ClienteFrecuente) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        ClienteFrecuente other = (ClienteFrecuente) obj;
+        return id != null && id.equals(other.id);
     }
 
     @Override
     public String toString() {
-        return "itson.sistemarestaurantedominio.ClienteFrecuente[ id=" + id + " ]";
+        return "ClienteFrecuente{id=" + id + ", nombre='" + nombre + "', apellidoPaterno='" + apellidoPaterno + "', apellidoMaterno='" + apellidoMaterno + "', telefono='" + telefono + "', correo='" + correo + "', fechaRegistro=" + fechaRegistro.getTime() + "}";
     }
-
 }

@@ -7,6 +7,10 @@ package itson.sistemarestaurantepersistencia.implementaciones;
 import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantedominio.dtos.NuevoClienteFrecuenteDTO;
 import itson.sistemarestaurantepersistencia.IClientesFrecuentesDAO;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -16,8 +20,20 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO{
 
     @Override
     public ClienteFrecuente registrar(NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO) {
-        ClienteFrecuente ClienteFrecuente = null;
-        return ClienteFrecuente;
+        EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
+        entityManager.getTransaction().begin();
+        ClienteFrecuente clienteFrecuente = new ClienteFrecuente();
+        clienteFrecuente.setNombre(nuevoClienteFrecuenteDTO.getNombre());
+        clienteFrecuente.setApellidoPaterno(nuevoClienteFrecuenteDTO.getApellidoPaterno());
+        clienteFrecuente.setApellidoMaterno(nuevoClienteFrecuenteDTO.getApellidoMaterno());
+        clienteFrecuente.setCorreo(nuevoClienteFrecuenteDTO.getCorreo());
+        clienteFrecuente.setTelefono(nuevoClienteFrecuenteDTO.getNumeroTelefono());
+        Calendar fechaRegistro = Calendar.getInstance();
+        clienteFrecuente.setFechaRegistro(fechaRegistro);
+        
+        entityManager.persist(clienteFrecuente);
+        entityManager.getTransaction().commit();
+        return clienteFrecuente;
     }
     
     

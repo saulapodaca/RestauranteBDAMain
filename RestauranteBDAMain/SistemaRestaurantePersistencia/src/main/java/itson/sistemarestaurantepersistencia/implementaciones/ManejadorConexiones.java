@@ -17,8 +17,8 @@ public class ManejadorConexiones {
     private static EntityManagerFactory emFactoryReal;
     private static EntityManagerFactory emFactoryTest;
 
-    private static final String PERSISTENCE_UNIT_REAL = "itson_SistemaRestaurantePersistencia_jar_1.0PU2";
-    private static final String PERSISTENCE_UNIT_TEST = "itson_SistemaRestaurantePersistencia_jar_1.0PU2_TEST";
+    private static final String PERSISTENCE_UNIT_REAL = "itson_SistemaRestaurantePersistencia_jar_1.0PU";
+    private static final String PERSISTENCE_UNIT_TEST = "itson_SistemaRestaurantePersistencia_jar_1.0PU_TEST";
 
     private static void initializeFactories() {
         if (emFactoryReal == null) {

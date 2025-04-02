@@ -13,15 +13,13 @@ public class NuevoClienteFrecuenteDTO {
     private String apellidoPaterno;
     private String apellidoMaterno;
     private String correo;
-    private String dominio;
     private String numeroTelefono;
 
-    public NuevoClienteFrecuenteDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String dominio, String numeroTelefono) {
+    public NuevoClienteFrecuenteDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String numeroTelefono) {
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
         this.apellidoMaterno = apellidoMaterno;
         this.correo = correo;
-        this.dominio = dominio;
         this.numeroTelefono = numeroTelefono;
     }
 
@@ -41,16 +39,7 @@ public class NuevoClienteFrecuenteDTO {
         return correo;
     }
 
-    public String getDominio() {
-        return dominio;
-    }
-
     public String getNumeroTelefono() {
         return numeroTelefono;
-    }
-
-
-    
-    
-    
+    }  
 }
