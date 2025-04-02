@@ -9,5 +9,48 @@ package itson.sistemarestaurantedominio.dtos;
  * @author rauln
  */
 public class NuevoClienteFrecuenteDTO {
+    private String nombre;
+    private String apellidoPaterno;
+    private String apellidoMaterno;
+    private String correo;
+    private String dominio;
+    private String numeroTelefono;
+
+    public NuevoClienteFrecuenteDTO(String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String dominio, String numeroTelefono) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.dominio = dominio;
+        this.numeroTelefono = numeroTelefono;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getApellidoPaterno() {
+        return apellidoPaterno;
+    }
+
+    public String getApellidoMaterno() {
+        return apellidoMaterno;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public String getDominio() {
+        return dominio;
+    }
+
+    public String getNumeroTelefono() {
+        return numeroTelefono;
+    }
+
+
+    
+    
     
 }
