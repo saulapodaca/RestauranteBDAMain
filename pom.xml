@@ -9,7 +9,7 @@
         <module>RestauranteBDAMain/SistemaRestauranteDominio</module>
         <module>RestauranteBDAMain/SistemaRestaurantePersistencia</module>
         <module>RestauranteBDAMain/SistemaRestauranteNegocio</module>
-        <module>SistemaRestaurantePresentacion</module>
+        <module>RestauranteBDAMain/SistemaRestaurantePresentacion</module>
     </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
