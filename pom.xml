@@ -6,10 +6,6 @@
     <version>1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>../SistemaRestaurantePersistencia</module>
-        <module>../SistemaRestauranteNegocio</module>
-        <module>../SistemaRestaurantePresentacion</module>
-        <module>../SistemaRestauranteDominio</module>
         <module>RestauranteBDAMain/SistemaRestauranteDominio</module>
         <module>RestauranteBDAMain/SistemaRestaurantePersistencia</module>
         <module>RestauranteBDAMain/SistemaRestauranteNegocio</module>
