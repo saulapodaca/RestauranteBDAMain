@@ -99,7 +99,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
         textFieldIngresarStock.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         textFieldIngresarStock.setForeground(new java.awt.Color(204, 204, 204));
-        textFieldIngresarStock.setText("INGRESE INGREDIENTES");
+        textFieldIngresarStock.setText("INGRESE EL STOCK INICIAL");
         textFieldIngresarStock.setBorder(null);
         textFieldIngresarStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,35 +255,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_textFieldIngresarNombreProductoActionPerformed
 
     private void textFieldIngresarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarStockActionPerformed
-        String consulta = "SELECT p.idProducto, p.nombre, p.precio, p.tipo, p.stock " +
-                          "FROM productos p " +
-                          "JOIN productos_ingredientes pi ON p.idProducto = pi.idProducto " +
-                          "JOIN ingredientes i ON pi.idIngrediente = i.idIngrediente " +
-                          "WHERE i.nombre LIKE ?";
-
-        try (PreparedStatement stmt = conexion.prepareStatement(consulta)) {
-            stmt.setString(1, "%" + BUSCAR_INGREDIENTE_DEFAULT + "%"); // Búsqueda flexible
-
-            ResultSet resultado = stmt.executeQuery();
-
-            boolean encontrado = false;
-            while (resultado.next()) {
-                encontrado = true;
-                System.out.println("ID: " + resultado.getInt("idProducto"));
-                System.out.println("Nombre: " + resultado.getString("nombre"));
-                System.out.println("Precio: " + resultado.getDouble("precio"));
-                System.out.println("Tipo: " + resultado.getString("tipo"));
-                System.out.println("Stock: " + resultado.getInt("stock"));
-                System.out.println("------------------------");
-            }
-
-            if (!encontrado) {
-                System.out.println("No se encontraron productos con ese ingrediente.");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error al buscar producto por ingrediente: " + e.getMessage());
-        }
+        // TODO add your handling code here:
     }//GEN-LAST:event_textFieldIngresarStockActionPerformed
 
     /**
