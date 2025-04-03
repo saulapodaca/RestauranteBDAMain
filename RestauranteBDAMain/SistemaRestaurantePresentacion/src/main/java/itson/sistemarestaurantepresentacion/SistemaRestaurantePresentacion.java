@@ -20,9 +20,9 @@ public class SistemaRestaurantePresentacion {
         RegistrarClienteFrecuenteForm prueba = new RegistrarClienteFrecuenteForm(clientesFrecuentesBO);
         prueba.setVisible(true);
 
-        IIngredientesBO ingredientesBO = FabricaObjNegocio.crearIngredienteBO();
-        RegistrarIngredienteForm pruebaRegistrarIngrediente = new RegistrarIngredienteForm(ingredientesBO);
-        pruebaRegistrarIngrediente.setVisible(true);
+//        IIngredientesBO ingredientesBO = FabricaObjNegocio.crearIngredienteBO();
+//        RegistrarIngredienteForm pruebaRegistrarIngrediente = new RegistrarIngredienteForm(ingredientesBO);
+//        pruebaRegistrarIngrediente.setVisible(true);
         
     }
 }
