@@ -28,7 +28,7 @@ public class IngredientesBO implements IIngredientesBO{
         validarNombre(nuevoIngredienteDTO.getNombre());
         validarStock(nuevoIngredienteDTO.getStock());
         validarExistenciaInventario(nuevoIngredienteDTO.getNombre(), nuevoIngredienteDTO.getUnidadMedidaIngrediente());
-        return null;
+        return ingredientesDAO.registrar(nuevoIngredienteDTO);
     }
 
     public void validarNombre(String nombre) throws NombreInvalidoException {
@@ -46,7 +46,7 @@ public class IngredientesBO implements IIngredientesBO{
     public void validarExistenciaInventario(String nombre, UnidadMedidaIngrediente unidadMedidaIngrediente) throws IngredienteRegistradoException{
         List<IngredienteRegistradoDTO> ingredientesDTO = ingredientesDAO.obtenerInventarioIngredientes();
         for(IngredienteRegistradoDTO ing: ingredientesDTO)
-            if(ing.getNombre().equals(nombre) && ing.getUnidadMedidaIngrediente().equals(unidadMedidaIngrediente))
+            if(ing.getNombre().equalsIgnoreCase(nombre) && ing.getUnidadMedidaIngrediente().equals(unidadMedidaIngrediente))
                 throw new IngredienteRegistradoException("El ingrediente ya se encuentra registrado");
     }
     

@@ -1,3 +1,8 @@
 itson\sistemarestaurantenegocio\fabrica\FabricaObjNegocio.class
 itson\sistemarestaurantenegocio\IClientesFrecuentesBO.class
+itson\sistemarestaurantenegocio\implementaciones\IngredientesBO.class
+itson\sistemarestaurantenegocio\excepciones\StockInvalidoException.class
+itson\sistemarestaurantenegocio\excepciones\IngredienteRegistradoException.class
+itson\sistemarestaurantenegocio\excepciones\NombreInvalidoException.class
 itson\sistemarestaurantenegocio\implementaciones\ClientesFrecuentesBO.class
+itson\sistemarestaurantenegocio\IIngredientesBO.class
