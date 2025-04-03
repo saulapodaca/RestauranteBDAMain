@@ -22,32 +22,16 @@ public class IngredienteRegistradoDTO {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public float getStock() {
         return stock;
-    }
-
-    public void setStock(float stock) {
-        this.stock = stock;
     }
     
     public String getNombre() {
         return nombre;
     }
-
-    public void setNombre(String nombre){
-        this.nombre = nombre;
-    }
-    
     
     public UnidadMedidaIngrediente getUnidadMedidaIngrediente() {
         return unidadMedidaIngrediente;
     }
 
-    public void setUnidadMedidaIngrediente(UnidadMedidaIngrediente unidadMedidaIngrediente) {
-        this.unidadMedidaIngrediente = unidadMedidaIngrediente;
-    }
 }
