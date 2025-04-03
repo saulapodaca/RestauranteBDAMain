@@ -4,17 +4,75 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
+import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
+import itson.sistemarestaurantenegocio.IIngredientesBO;
+import itson.sistemarestaurantenegocio.excepciones.IngredienteRegistradoException;
+import itson.sistemarestaurantenegocio.excepciones.NombreInvalidoException;
+import itson.sistemarestaurantenegocio.excepciones.StockInvalidoException;
+import java.awt.Color;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author saula
  */
 public class RegistrarIngredienteForm extends javax.swing.JFrame {
-
+    
+    private static final String NOMBRE_DEFAULT = "INGRESE EL NOMBRE DEL INGREDIENTE";
+    private static final String STOCK_DEFAULT = "INGRESE EL STOCK INICIAL";
+    
+    private IIngredientesBO ingredientesBO;
     /**
      * Creates new form RegistrarIngredienteForm
      */
-    public RegistrarIngredienteForm() {
+    public RegistrarIngredienteForm(IIngredientesBO ingredientesBO) {
         initComponents();
+        configurarPlaceholders();
+        this.ingredientesBO = ingredientesBO;
+    }
+    
+   public void limpiarFormulario(){
+       textFieldIngresarNombre.setText("");
+       comboBoxUnidadMedida.setSelectedIndex(0);
+       textFieldIngresarStock.setText("");
+   }
+   
+   // Método para configurar un campo de texto con su placeholder
+
+    private void configurarPlaceholder(javax.swing.JTextField textField, String placeholderText) {
+        // Establecer el texto y color inicial
+        textField.setText(placeholderText);
+        textField.setForeground(Color.GRAY);
+
+        // Agregar FocusListener para manejar el comportamiento del placeholder
+        textField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                // Cuando el campo obtiene el foco
+                if (textField.getText().equals(placeholderText)) {
+                    textField.setText("");
+                    textField.setForeground(Color.BLACK);
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                // Cuando el campo pierde el foco
+                if (textField.getText().isEmpty()) {
+                    textField.setText(placeholderText);
+                    textField.setForeground(Color.GRAY);
+                }
+            }
+        });
+    }
+
+    // Método para configurar los placeholders en todos los campos
+    private void configurarPlaceholders() {
+        configurarPlaceholder(textFieldIngresarNombre, NOMBRE_DEFAULT);
+        configurarPlaceholder(textFieldIngresarStock, STOCK_DEFAULT);
     }
 
     /**
@@ -33,9 +91,6 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
         labelStock = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
-        jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
         botonRegistrar = new javax.swing.JLabel();
         textFieldIngresarStock = new javax.swing.JTextField();
@@ -66,9 +121,6 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
         background.add(labelStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
         background.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 105, 240, 5));
         background.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 155, 240, 5));
-        background.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 205, 240, 5));
-        background.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 255, 150, 5));
-        background.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 255, 70, 5));
         background.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 305, 240, 5));
 
         botonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/REGISTRAR.png"))); // NOI18N
@@ -107,6 +159,11 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
         textFieldIngresarNombre.setForeground(new java.awt.Color(204, 204, 204));
         textFieldIngresarNombre.setText("INGRESE EL NOMBRE DEL INGREDIENTE");
         textFieldIngresarNombre.setBorder(null);
+        textFieldIngresarNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textFieldIngresarNombreActionPerformed(evt);
+            }
+        });
         background.add(textFieldIngresarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 250, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -127,7 +184,20 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarMouseClicked
-
+        try{
+            String nombre = textFieldIngresarNombre.getText().trim();
+            float stock = Float.parseFloat(textFieldIngresarStock.getText());
+            String unidadSeleccionada = comboBoxUnidadMedida.getSelectedItem().toString();
+            UnidadMedidaIngrediente unidadMedida = UnidadMedidaIngrediente.valueOf(unidadSeleccionada);
+       
+            NuevoIngredienteDTO ingredienteDTO = new NuevoIngredienteDTO(nombre, unidadMedida, stock);
+            this.ingredientesBO.registrar(ingredienteDTO);
+            
+            JOptionPane.showMessageDialog(background, "Registro de ingrediente exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarFormulario();
+        }catch(IngredienteRegistradoException | NombreInvalidoException | StockInvalidoException e){
+            JOptionPane.showMessageDialog(background, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_botonRegistrarMouseClicked
 
     private void comboBoxUnidadMedidaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxUnidadMedidaItemStateChanged
@@ -138,6 +208,10 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_comboBoxUnidadMedidaActionPerformed
 
+    private void textFieldIngresarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textFieldIngresarNombreActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -146,9 +220,6 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxUnidadMedida;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JLabel labelNombre;
     private javax.swing.JLabel labelStock;

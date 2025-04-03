@@ -7,6 +7,7 @@ package itson.sistemarestaurantepresentacion;
 
 import itson.sistemarestaurantenegocio.fabrica.FabricaObjNegocio;
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
+import itson.sistemarestaurantenegocio.IIngredientesBO;
 
 /**
  *
@@ -15,9 +16,13 @@ import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
 public class SistemaRestaurantePresentacion {
 
     public static void main(String[] args) {
-        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
-        RegistrarClienteFrecuenteForm prueba = new RegistrarClienteFrecuenteForm(clientesFrecuentesBO);
-        prueba.setVisible(true);
+//        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
+//        RegistrarClienteFrecuenteForm prueba = new RegistrarClienteFrecuenteForm(clientesFrecuentesBO);
+//        prueba.setVisible(true);
+
+            IIngredientesBO ingredientesBO = FabricaObjNegocio.crearIngredienteBO();
+            RegistrarIngredienteForm pruebaRegistrarIngrediente = new RegistrarIngredienteForm(ingredientesBO);
+            pruebaRegistrarIngrediente.setVisible(true);
         
     }
 }
