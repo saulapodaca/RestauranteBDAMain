@@ -31,15 +31,10 @@ public class IngredientesDAO implements IIngredientesDAO {
     @Override
     public List<IngredienteRegistradoDTO> obtenerInventarioIngredientes() {
         EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
-        String jpqlQuery = "SELECT nombre, unidadMedida FROM Ingrediente";
+        String jpqlQuery = "SELECT new itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO(i.nombre, i.unidadMedida) FROM Ingrediente i";
         //CONSULTO MI BD PARA QUE ME DEVUELVA LOS INGREDIENTES QUE TENGO
-        TypedQuery<Ingrediente> query = entityManager.createQuery(jpqlQuery, Ingrediente.class);
-        List<Ingrediente> ingredientes = query.getResultList();
-        
-        //HAGO CONVERSIÓN A DTO
-        List<IngredienteRegistradoDTO> ingredientesDTO = new ArrayList<>();
-        for(Ingrediente ing: ingredientes)
-            ingredientesDTO.add(new IngredienteRegistradoDTO(ing.getNombre(),ing.getUnidadMedida()));
+        TypedQuery<IngredienteRegistradoDTO> query = entityManager.createQuery(jpqlQuery, IngredienteRegistradoDTO.class);
+        List<IngredienteRegistradoDTO> ingredientesDTO = query.getResultList();
         
         return ingredientesDTO;
     }

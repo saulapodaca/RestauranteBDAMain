@@ -1,3 +1,5 @@
 itson\sistemarestaurantepersistencia\IClientesFrecuentesDAO.class
+itson\sistemarestaurantepersistencia\IIngredientesDAO.class
 itson\sistemarestaurantepersistencia\implementaciones\ManejadorConexiones.class
+itson\sistemarestaurantepersistencia\implementaciones\IngredientesDAO.class
 itson\sistemarestaurantepersistencia\implementaciones\ClientesFrecuentesDAO.class
