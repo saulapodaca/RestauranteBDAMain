@@ -4,9 +4,6 @@
  */
 package itson.sistemarestaurantepresentacion;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -15,11 +12,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegistrarProductos extends javax.swing.JFrame {
       DefaultTableModel mt = new DefaultTableModel();
-    private static final String NOMBRE_DEFAULT = "INGRESE EL NOMBRE DEL PRODUCTO";
-    private static final String PRECIO_DEFAULT = "INGRESE EL PRECIO DEL PRODUCTO";
-    private static final String  BUSCAR_INGREDIENTE_DEFAULT= "BUSCAR EL NOMBRE DEL INGREDIENTE";
-    
-      
     /**
      * Creates new form RegistrarProductos
      */
@@ -50,10 +42,10 @@ public class RegistrarProductos extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         botonRegistrar = new javax.swing.JLabel();
         textFieldIngresarStock = new javax.swing.JTextField();
-        comboBoxTipoDeProducto = new javax.swing.JComboBox<>();
-        textFieldIngresarPrecioProducto = new javax.swing.JTextField();
+        comboBoxUnidadMedida = new javax.swing.JComboBox<>();
+        textFieldIngresarNombre = new javax.swing.JTextField();
         labelUnidadMedida1 = new javax.swing.JLabel();
-        textFieldIngresarNombreProducto = new javax.swing.JTextField();
+        textFieldIngresarNombre1 = new javax.swing.JTextField();
 
         jScrollPane2.setViewportView(jTextPane1);
 
@@ -98,48 +90,48 @@ public class RegistrarProductos extends javax.swing.JFrame {
         textFieldIngresarStock.setBorder(null);
         background.add(textFieldIngresarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 250, -1));
 
-        comboBoxTipoDeProducto.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
-        comboBoxTipoDeProducto.setForeground(new java.awt.Color(204, 204, 204));
-        comboBoxTipoDeProducto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PIEZAS", "GRAMOS", "MILILITROS" }));
-        comboBoxTipoDeProducto.setBorder(null);
-        comboBoxTipoDeProducto.addItemListener(new java.awt.event.ItemListener() {
+        comboBoxUnidadMedida.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        comboBoxUnidadMedida.setForeground(new java.awt.Color(204, 204, 204));
+        comboBoxUnidadMedida.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "PIEZAS", "GRAMOS", "MILILITROS" }));
+        comboBoxUnidadMedida.setBorder(null);
+        comboBoxUnidadMedida.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                comboBoxTipoDeProductoItemStateChanged(evt);
+                comboBoxUnidadMedidaItemStateChanged(evt);
             }
         });
-        comboBoxTipoDeProducto.addActionListener(new java.awt.event.ActionListener() {
+        comboBoxUnidadMedida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboBoxTipoDeProductoActionPerformed(evt);
+                comboBoxUnidadMedidaActionPerformed(evt);
             }
         });
-        background.add(comboBoxTipoDeProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 80, 20));
-        comboBoxTipoDeProducto.setSelectedIndex(1);
+        background.add(comboBoxUnidadMedida, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 80, 20));
+        comboBoxUnidadMedida.setSelectedIndex(1);
 
-        textFieldIngresarPrecioProducto.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
-        textFieldIngresarPrecioProducto.setForeground(new java.awt.Color(204, 204, 204));
-        textFieldIngresarPrecioProducto.setText("INGRESE EL PRECIO");
-        textFieldIngresarPrecioProducto.setBorder(null);
-        textFieldIngresarPrecioProducto.addActionListener(new java.awt.event.ActionListener() {
+        textFieldIngresarNombre.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        textFieldIngresarNombre.setForeground(new java.awt.Color(204, 204, 204));
+        textFieldIngresarNombre.setText("INGRESE EL PRECIO");
+        textFieldIngresarNombre.setBorder(null);
+        textFieldIngresarNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldIngresarPrecioProductoActionPerformed(evt);
+                textFieldIngresarNombreActionPerformed(evt);
             }
         });
-        background.add(textFieldIngresarPrecioProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, -1));
+        background.add(textFieldIngresarNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 130, -1));
 
         labelUnidadMedida1.setFont(new java.awt.Font("Montserrat SemiBold", 1, 12)); // NOI18N
         labelUnidadMedida1.setText("Tipo *Obligatorio*");
         background.add(labelUnidadMedida1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, -1, -1));
 
-        textFieldIngresarNombreProducto.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
-        textFieldIngresarNombreProducto.setForeground(new java.awt.Color(204, 204, 204));
-        textFieldIngresarNombreProducto.setText("INGRESE EL NOMBRE DEL PRODUCTO");
-        textFieldIngresarNombreProducto.setBorder(null);
-        textFieldIngresarNombreProducto.addActionListener(new java.awt.event.ActionListener() {
+        textFieldIngresarNombre1.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        textFieldIngresarNombre1.setForeground(new java.awt.Color(204, 204, 204));
+        textFieldIngresarNombre1.setText("INGRESE EL NOMBRE DEL PRODUCTO");
+        textFieldIngresarNombre1.setBorder(null);
+        textFieldIngresarNombre1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldIngresarNombreProductoActionPerformed(evt);
+                textFieldIngresarNombre1ActionPerformed(evt);
             }
         });
-        background.add(textFieldIngresarNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 250, -1));
+        background.add(textFieldIngresarNombre1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 250, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,9 +155,9 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
     private void botonRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarMouseClicked
         try{
-            String nombre = textFieldIngresarPrecioProducto.getText().trim();
+            String nombre = textFieldIngresarNombre.getText().trim();
             float stock = Float.parseFloat(textFieldIngresarStock.getText());
-            String unidadSeleccionada = comboBoxTipoDeProducto.getSelectedItem().toString();
+            String unidadSeleccionada = comboBoxUnidadMedida.getSelectedItem().toString();
             UnidadMedidaIngrediente unidadMedida = UnidadMedidaIngrediente.valueOf(unidadSeleccionada);
 
             NuevoIngredienteDTO ingredienteDTO = new NuevoIngredienteDTO(nombre, unidadMedida, stock);
@@ -178,46 +170,21 @@ public class RegistrarProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonRegistrarMouseClicked
 
-    private void comboBoxTipoDeProductoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxTipoDeProductoItemStateChanged
+    private void comboBoxUnidadMedidaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboBoxUnidadMedidaItemStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxTipoDeProductoItemStateChanged
+    }//GEN-LAST:event_comboBoxUnidadMedidaItemStateChanged
 
-    private void comboBoxTipoDeProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTipoDeProductoActionPerformed
+    private void comboBoxUnidadMedidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxUnidadMedidaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboBoxTipoDeProductoActionPerformed
+    }//GEN-LAST:event_comboBoxUnidadMedidaActionPerformed
 
-    private void textFieldIngresarPrecioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarPrecioProductoActionPerformed
+    private void textFieldIngresarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldIngresarPrecioProductoActionPerformed
+    }//GEN-LAST:event_textFieldIngresarNombreActionPerformed
 
-    private void textFieldIngresarNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarNombreProductoActionPerformed
+    private void textFieldIngresarNombre1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarNombre1ActionPerformed
         // TODO add your handling code here:
-        String consulta = "SELECT * FROM productos WHERE nombre LIKE ?";
-
-        try (PreparedStatement stmt = consulta.prepareStatement(consulta)) {
-            stmt.setString(1, "%" + NOMBRE_DEFAULT + "%"); // Búsqueda parcial
-
-            ResultSet resultado = stmt.executeQuery();
-
-            boolean encontrado = false;
-            while (resultado.next()) {
-                encontrado = true;
-                System.out.println("ID: " + resultado.getInt("idProducto"));
-                System.out.println("Nombre: " + resultado.getString("nombre"));
-                System.out.println("Precio: " + resultado.getDouble("precio"));
-                System.out.println("Tipo: " + resultado.getString("tipo"));
-                System.out.println("Stock: " + resultado.getInt("stock"));
-                System.out.println("------------------------");
-            }
-
-            if (!encontrado) {
-                System.out.println("No se encontró ningún producto con ese nombre.");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error al buscar producto: " + e.getMessage());
-        }
-    }//GEN-LAST:event_textFieldIngresarNombreProductoActionPerformed
+    }//GEN-LAST:event_textFieldIngresarNombre1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -257,7 +224,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel background;
     private javax.swing.JLabel botonRegistrar;
-    private javax.swing.JComboBox<String> comboBoxTipoDeProducto;
+    private javax.swing.JComboBox<String> comboBoxUnidadMedida;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -268,8 +235,8 @@ public class RegistrarProductos extends javax.swing.JFrame {
     private javax.swing.JLabel labelUnidadMedida;
     private javax.swing.JLabel labelUnidadMedida1;
     private javax.swing.JLabel registrarNuevoIngredienteTxt2;
-    private javax.swing.JTextField textFieldIngresarNombreProducto;
-    private javax.swing.JTextField textFieldIngresarPrecioProducto;
+    private javax.swing.JTextField textFieldIngresarNombre;
+    private javax.swing.JTextField textFieldIngresarNombre1;
     private javax.swing.JTextField textFieldIngresarStock;
     // End of variables declaration//GEN-END:variables
 }
