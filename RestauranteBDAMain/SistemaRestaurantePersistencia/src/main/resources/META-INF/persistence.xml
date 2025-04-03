@@ -3,15 +3,12 @@
   <persistence-unit name="itson_SistemaRestaurantePersistencia_jar_1.0PU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>itson.sistemarestaurantedominio.ClienteFrecuente</class>
-<<<<<<< HEAD
     <class>itson.sistemarestaurantedominio.Comanda</class>
     <class>itson.sistemarestaurantedominio.DetalleComanda</class>
     <class>itson.sistemarestaurantedominio.Ingrediente</class>
     <class>itson.sistemarestaurantedominio.Mesa</class>
     <class>itson.sistemarestaurantedominio.Producto</class>
     <class>itson.sistemarestaurantedominio.ProductoIngrediente</class>
-=======
->>>>>>> 72307e5 (Agregazion del RegistroProducto)
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/sistema_restaurante?zeroDateTimeBehavior=CONVERT_TO_NULL"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

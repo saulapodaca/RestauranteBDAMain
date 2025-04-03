@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\saula\OneDrive\Documentos\NetBeansProjects\ProyectoUnidad2\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\excepciones\IngredienteRegistradoException.java
 C:\Users\saula\OneDrive\Documentos\NetBeansProjects\ProyectoUnidad2\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\excepciones\NombreInvalidoException.java
 C:\Users\saula\OneDrive\Documentos\NetBeansProjects\ProyectoUnidad2\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\excepciones\StockInvalidoException.java
@@ -7,8 +6,3 @@ C:\Users\saula\OneDrive\Documentos\NetBeansProjects\ProyectoUnidad2\RestauranteB
 C:\Users\saula\OneDrive\Documentos\NetBeansProjects\ProyectoUnidad2\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\IIngredientesBO.java
 C:\Users\saula\OneDrive\Documentos\NetBeansProjects\ProyectoUnidad2\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\implementaciones\ClientesFrecuentesBO.java
 C:\Users\saula\OneDrive\Documentos\NetBeansProjects\ProyectoUnidad2\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\implementaciones\IngredientesBO.java
-=======
-C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\implementaciones\ClientesFrecuentesBO.java
-C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\fabrica\FabricaObjNegocio.java
-C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\IClientesFrecuentesBO.java
->>>>>>> 72307e5 (Agregazion del RegistroProducto)

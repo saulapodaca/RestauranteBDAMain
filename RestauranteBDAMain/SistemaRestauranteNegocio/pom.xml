@@ -16,7 +16,6 @@
             <artifactId>SistemaRestaurantePersistencia</artifactId>
             <version>${project.version}</version>
         </dependency>
-<<<<<<< HEAD
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
@@ -35,8 +34,6 @@
             <version>5.10.3</version>
             <scope>test</scope>
         </dependency>
-=======
->>>>>>> 72307e5 (Agregazion del RegistroProducto)
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
