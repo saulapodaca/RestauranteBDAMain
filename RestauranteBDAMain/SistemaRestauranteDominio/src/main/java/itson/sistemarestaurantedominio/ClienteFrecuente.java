@@ -25,13 +25,16 @@ public class ClienteFrecuente implements Serializable {
     @Column(name = "telefono", nullable = false, length = 10, unique = true)
     private String telefono;
     
-    @Column(name = "correo", nullable = true, unique = true, length = 100)
+    @Column(name = "correo", nullable = false, unique = true, length = 100)
     private String correo;
     
     @Temporal(TemporalType.DATE)
-    @Column(name = "fechaRegistro", nullable = true)
+    @Column(name = "fechaRegistro", nullable = false)
     private Calendar fechaRegistro;
-
+    
+    @Column(name = "puntosFidelidad", nullable = false)
+    private int puntosFidelidad = 0;
+    
     public ClienteFrecuente() {}
     
     public Long getId() {
@@ -88,6 +91,14 @@ public class ClienteFrecuente implements Serializable {
 
     public void setFechaRegistro(Calendar fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
+    }
+    
+    public int getPuntosFidelidad(){
+        return puntosFidelidad;
+    }
+    
+    public void setPuntosFidelidad(int puntosFidelidad){
+        this.puntosFidelidad = puntosFidelidad;
     }
     
     @Override
