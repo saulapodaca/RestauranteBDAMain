@@ -136,11 +136,6 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
         textFieldIngresarStock.setForeground(new java.awt.Color(204, 204, 204));
         textFieldIngresarStock.setText("INGRESE EL STOCK INICIAL");
         textFieldIngresarStock.setBorder(null);
-        textFieldIngresarStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldIngresarStockActionPerformed(evt);
-            }
-        });
         background.add(textFieldIngresarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 250, -1));
 
         comboBoxUnidadMedida.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
@@ -216,10 +211,6 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
     private void textFieldIngresarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldIngresarNombreActionPerformed
-
-    private void textFieldIngresarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarStockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldIngresarStockActionPerformed
 
 
 
