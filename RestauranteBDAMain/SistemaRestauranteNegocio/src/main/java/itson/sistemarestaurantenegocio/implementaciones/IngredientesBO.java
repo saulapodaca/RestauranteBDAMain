@@ -45,7 +45,6 @@ public class IngredientesBO implements IIngredientesBO{
     
     public void validarExistenciaInventario(String nombre, UnidadMedidaIngrediente unidadMedidaIngrediente) throws IngredienteRegistradoException{
         List<IngredienteRegistradoDTO> ingredientesDTO = ingredientesDAO.obtenerInventarioIngredientes();
-        //TODO NO DEBE DE RECORRER QUE SEA UNA CONSULTA
         for(IngredienteRegistradoDTO ing: ingredientesDTO)
             if(ing.getNombre().equalsIgnoreCase(nombre) && ing.getUnidadMedidaIngrediente().equals(unidadMedidaIngrediente))
                 throw new IngredienteRegistradoException("El ingrediente ya se encuentra registrado");
