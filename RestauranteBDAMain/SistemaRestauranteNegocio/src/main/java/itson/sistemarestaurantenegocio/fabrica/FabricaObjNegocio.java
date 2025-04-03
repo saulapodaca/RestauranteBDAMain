@@ -5,9 +5,13 @@
 package itson.sistemarestaurantenegocio.fabrica;
 
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
+import itson.sistemarestaurantenegocio.IIngredientesBO;
 import itson.sistemarestaurantenegocio.implementaciones.ClientesFrecuentesBO;
+import itson.sistemarestaurantenegocio.implementaciones.IngredientesBO;
 import itson.sistemarestaurantepersistencia.IClientesFrecuentesDAO;
+import itson.sistemarestaurantepersistencia.IIngredientesDAO;
 import itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAO;
+import itson.sistemarestaurantepersistencia.implementaciones.IngredientesDAO;
 
 /**
  *
@@ -19,6 +23,12 @@ public class FabricaObjNegocio {
         IClientesFrecuentesDAO clientesFrecuentesDAO = new ClientesFrecuentesDAO();
         IClientesFrecuentesBO clientesFrecuentesBO = new ClientesFrecuentesBO(clientesFrecuentesDAO);
         return clientesFrecuentesBO;
+    }
+    
+    public static IIngredientesBO crearIngredienteBO(){
+        IIngredientesDAO ingredientesDAO = new IngredientesDAO();
+        IIngredientesBO ingredientesBO = new IngredientesBO(ingredientesDAO);
+        return ingredientesBO;
     }
     
 }
