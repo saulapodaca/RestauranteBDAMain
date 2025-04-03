@@ -38,8 +38,16 @@ public class IngredienteRegistradoDTO {
         return nombre;
     }
 
+    public void setNombre(String nombre){
+        this.nombre = nombre;
+    }
+    
+    
     public UnidadMedidaIngrediente getUnidadMedidaIngrediente() {
         return unidadMedidaIngrediente;
     }
 
+    public void setUnidadMedidaIngrediente(UnidadMedidaIngrediente unidadMedidaIngrediente) {
+        this.unidadMedidaIngrediente = unidadMedidaIngrediente;
+    }
 }
