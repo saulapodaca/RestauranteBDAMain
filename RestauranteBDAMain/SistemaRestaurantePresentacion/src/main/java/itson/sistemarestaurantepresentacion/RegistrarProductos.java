@@ -4,13 +4,9 @@
  */
 package itson.sistemarestaurantepresentacion;
 
-import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
-import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -23,7 +19,7 @@ public class RegistrarProductos extends javax.swing.JFrame {
     private static final String PRECIO_DEFAULT = "INGRESE EL PRECIO DEL PRODUCTO";
     private static final String  BUSCAR_INGREDIENTE_DEFAULT= "BUSCAR EL NOMBRE DEL INGREDIENTE";
     
-      private Connection conexion;
+      
     /**
      * Creates new form RegistrarProductos
      */
@@ -31,7 +27,6 @@ public class RegistrarProductos extends javax.swing.JFrame {
         initComponents();
         String ids[] = {"Nombre ","Precio ","Tipo de Producto "};
     mt.setColumnIdentifiers(ids);
-    this.conexion = conexion;
     }
 
     /**
@@ -101,11 +96,6 @@ public class RegistrarProductos extends javax.swing.JFrame {
         textFieldIngresarStock.setForeground(new java.awt.Color(204, 204, 204));
         textFieldIngresarStock.setText("INGRESE EL STOCK INICIAL");
         textFieldIngresarStock.setBorder(null);
-        textFieldIngresarStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textFieldIngresarStockActionPerformed(evt);
-            }
-        });
         background.add(textFieldIngresarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 250, -1));
 
         comboBoxTipoDeProducto.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
@@ -198,31 +188,6 @@ public class RegistrarProductos extends javax.swing.JFrame {
 
     private void textFieldIngresarPrecioProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarPrecioProductoActionPerformed
         // TODO add your handling code here:
-         String consulta = "SELECT * FROM productos WHERE precio = ?";
-
-        try (PreparedStatement stmt = conexion.prepareStatement(consulta)) {
-            stmt.setDouble(1, precioProducto); // Filtrar por precio exacto
-
-            ResultSet resultado = stmt.executeQuery();
-
-            boolean encontrado = false;
-            while (resultado.next()) {
-                encontrado = true;
-                System.out.println("ID: " + resultado.getInt("idProducto"));
-                System.out.println("Nombre: " + resultado.getString("nombre"));
-                System.out.println("Precio: " + resultado.getDouble("precio"));
-                System.out.println("Tipo: " + resultado.getString("tipo"));
-                System.out.println("Ingrediente: " + resultado.getString("Ingrediente"));
-                System.out.println("------------------------");
-            }
-
-            if (!encontrado) {
-                System.out.println("No se encontraron productos con ese precio.");
-            }
-
-        } catch (SQLException e) {
-            System.out.println("Error al buscar producto: " + e.getMessage());
-        }
     }//GEN-LAST:event_textFieldIngresarPrecioProductoActionPerformed
 
     private void textFieldIngresarNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarNombreProductoActionPerformed
@@ -253,10 +218,6 @@ public class RegistrarProductos extends javax.swing.JFrame {
             System.out.println("Error al buscar producto: " + e.getMessage());
         }
     }//GEN-LAST:event_textFieldIngresarNombreProductoActionPerformed
-
-    private void textFieldIngresarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldIngresarStockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textFieldIngresarStockActionPerformed
 
     /**
      * @param args the command line arguments
