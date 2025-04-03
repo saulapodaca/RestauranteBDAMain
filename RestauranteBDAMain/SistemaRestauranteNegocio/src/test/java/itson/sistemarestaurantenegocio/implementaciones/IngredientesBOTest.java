@@ -9,6 +9,7 @@ import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
 import itson.sistemarestaurantepersistencia.implementaciones.IngredientesDAO;
+import itson.sistemarestaurantepersistencia.implementaciones.ManejadorConexiones;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,6 +28,7 @@ public class IngredientesBOTest {
     
     @BeforeAll
     public static void setUpClass() {
+        //TODO: cambio de base de datos a la de prueba
     }
     
     @AfterAll
