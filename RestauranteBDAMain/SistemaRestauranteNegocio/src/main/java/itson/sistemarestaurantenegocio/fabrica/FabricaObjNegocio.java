@@ -5,7 +5,6 @@
 package itson.sistemarestaurantenegocio.fabrica;
 
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
-<<<<<<< HEAD
 import itson.sistemarestaurantenegocio.IIngredientesBO;
 import itson.sistemarestaurantenegocio.implementaciones.ClientesFrecuentesBO;
 import itson.sistemarestaurantenegocio.implementaciones.IngredientesBO;
@@ -13,11 +12,9 @@ import itson.sistemarestaurantepersistencia.IClientesFrecuentesDAO;
 import itson.sistemarestaurantepersistencia.IIngredientesDAO;
 import itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAO;
 import itson.sistemarestaurantepersistencia.implementaciones.IngredientesDAO;
-=======
 import itson.sistemarestaurantenegocio.implementaciones.ClientesFrecuentesBO;
 import itson.sistemarestaurantepersistencia.IClientesFrecuentesDAO;
 import itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAO;
->>>>>>> 72307e5 (Agregazion del RegistroProducto)
 
 /**
  *
@@ -31,15 +28,11 @@ public class FabricaObjNegocio {
         return clientesFrecuentesBO;
     }
     
-<<<<<<< HEAD
     public static IIngredientesBO crearIngredienteBO(){
         IIngredientesDAO ingredientesDAO = new IngredientesDAO();
         IIngredientesBO ingredientesBO = new IngredientesBO(ingredientesDAO);
         return ingredientesBO;
     }
-    
-=======
->>>>>>> 72307e5 (Agregazion del RegistroProducto)
 }
 
 

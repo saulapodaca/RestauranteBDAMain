@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
 
 public class IngredientesDAO implements IIngredientesDAO {
@@ -31,12 +34,23 @@ public class IngredientesDAO implements IIngredientesDAO {
     @Override
     public List<IngredienteRegistradoDTO> obtenerInventarioIngredientes() {
         EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
-        String jpqlQuery = "SELECT new itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO(i.nombre, i.unidadMedida) FROM Ingrediente i";
+        String jpqlQuery = "SELECT new itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO(i.id, i.nombre, i.unidadMedida, i.stock) FROM Ingrediente i";
         //CONSULTO MI BD PARA QUE ME DEVUELVA LOS INGREDIENTES QUE TENGO
         TypedQuery<IngredienteRegistradoDTO> query = entityManager.createQuery(jpqlQuery, IngredienteRegistradoDTO.class);
         List<IngredienteRegistradoDTO> ingredientesDTO = query.getResultList();
         
         return ingredientesDTO;
+    }
+    
+    public boolean existenciaIngredienteInventario(String nombre, UnidadMedidaIngrediente unidadMedida){
+        EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Ingrediente> cq = cb.createQuery(Ingrediente.class);
+        Root<Ingrediente> root = cq.from(Ingrediente.class);
+        cq.select(root).where(cb.like(root.get("nombre"), nombre));
+        TypedQuery<Ingrediente> tq = entityManager.createQuery(cq);
+        
+        
     }
 
 }

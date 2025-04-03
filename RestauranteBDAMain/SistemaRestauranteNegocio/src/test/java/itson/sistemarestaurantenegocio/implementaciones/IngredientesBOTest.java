@@ -8,8 +8,9 @@ import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
+import itson.sistemarestaurantepersistencia.IIngredientesDAO;
 import itson.sistemarestaurantepersistencia.implementaciones.IngredientesDAO;
-import itson.sistemarestaurantepersistencia.implementaciones.ManejadorConexiones;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -48,9 +49,10 @@ public class IngredientesBOTest {
      */
     @Test
     public void testRegistrarOk() throws Exception {
-        IngredientesDAO ingredientesDAO = new IngredientesDAO();
+        IIngredientesDAO ingredientesDAO = new IngredientesDAO();
+        IngredientesBO ingredientesBO = new IngredientesBO(ingredientesDAO);
         NuevoIngredienteDTO nuevoIngredienteDTO = new NuevoIngredienteDTO("Queso", UnidadMedidaIngrediente.GRAMOS, 250.3f);
-        Ingrediente ingredienteGuardado = ingredientesDAO.registrar(nuevoIngredienteDTO);
+        Ingrediente ingredienteGuardado = ingredientesBO.registrar(nuevoIngredienteDTO);
         assertNotNull(ingredienteGuardado.getId());
         assertEquals(nuevoIngredienteDTO.getNombre(), ingredienteGuardado.getNombre());
         assertEquals(nuevoIngredienteDTO.getUnidadMedidaIngrediente(), ingredienteGuardado.getUnidadMedida());
@@ -59,15 +61,15 @@ public class IngredientesBOTest {
 
         /**
      * Test of registrar method, of class IngredientesBO.
+     * @throws java.lang.Exception
      */
     @Test
     public void testRegistrarIngredienteRepetido() throws Exception {
-        IngredientesDAO ingredientesDAO = new IngredientesDAO();
-        NuevoIngredienteDTO nuevoIngredienteDTO = new NuevoIngredienteDTO("Queso", UnidadMedidaIngrediente.GRAMOS, 250.3f);
-        Ingrediente ingredienteGuardado = ingredientesDAO.registrar(nuevoIngredienteDTO);
-        
-        for (IngredienteRegistradoDTO ing: ingredientesDAO.obtenerInventarioIngredientes())
-            System.out.println(ing.getNombre() + "  " + "  " +ing.getUnidadMedidaIngrediente());
+        IIngredientesDAO ingredientesDAO = new IngredientesDAO();
+        IngredientesBO ingredientesBO = new IngredientesBO(ingredientesDAO);
+        List<IngredienteRegistradoDTO> ingredientes = ingredientesDAO.obtenerInventarioIngredientes();
+        NuevoIngredienteDTO nuevoIngredienteDTO = new NuevoIngredienteDTO(ingredientes.get(0).getNombre(), ingredientes.get(0).getUnidadMedidaIngrediente(), ingredientes.get(0).getStock());
+        ingredientesBO.registrar(nuevoIngredienteDTO);
         
     }
     
