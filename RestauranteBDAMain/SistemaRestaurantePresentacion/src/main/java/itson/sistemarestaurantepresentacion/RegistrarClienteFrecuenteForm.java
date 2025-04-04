@@ -136,6 +136,10 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
             String dominio = (String) comboBoxDominios.getSelectedItem();
             String telefono = textFieldIngresarTelefono.getText().trim();
             String correoCompleto = correoSinArroba + dominio;
+            
+            if (correoCompleto.equals("INGRESE EL CORREO@gmail.com")) {
+                correoCompleto = null;
+            }
 
             // Crear el DTO con los datos ingresados
             NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO = new NuevoClienteFrecuenteDTO(

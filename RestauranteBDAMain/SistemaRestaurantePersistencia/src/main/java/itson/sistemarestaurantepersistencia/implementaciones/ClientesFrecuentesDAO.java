@@ -28,9 +28,11 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
         try {
             entityManager.getTransaction().begin();
 
-            // Validar si el correo ya está registrado
-            if (existeCorreo(nuevoClienteFrecuenteDTO.getCorreo())) {
-                throw new IllegalArgumentException("El correo ingresado ya está registrado.");
+            // Validar si el correo ya está registrado SOLO SI NO ES NULL
+            if (nuevoClienteFrecuenteDTO.getCorreo() != null) {
+                if (existeCorreo(nuevoClienteFrecuenteDTO.getCorreo())) {
+                    throw new IllegalArgumentException("El correo ingresado ya está registrado.");
+                }
             }
 
             // Validar si el teléfono ya está registrado
@@ -63,6 +65,10 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
 
     @Override
     public boolean existeCorreo(String correo) {
+        if (correo == null) {
+            return false; // Si es NULL, no validamos unicidad
+        }
+
         EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
         try {
             TypedQuery<Long> query = entityManager.createQuery(
@@ -99,16 +105,16 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
         List<ClienteFrecuente> clientes = new ArrayList<>();
 
         try {
-            String jpql = "SELECT c FROM ClienteFrecuente c WHERE " +
-                          "LOWER(c.nombre) LIKE LOWER(:filtro) OR " +
-                          "LOWER(c.apellidoPaterno) LIKE LOWER(:filtro) OR " +
-                          "LOWER(c.apellidoMaterno) LIKE LOWER(:filtro) OR " +
-                          "LOWER(c.correo) LIKE LOWER(:filtro) OR " +
-                          "c.telefono LIKE :filtro";
+            String jpql = "SELECT c FROM ClienteFrecuente c WHERE "
+                    + "LOWER(c.nombre) LIKE LOWER(:filtro) OR "
+                    + "LOWER(c.apellidoPaterno) LIKE LOWER(:filtro) OR "
+                    + "LOWER(c.apellidoMaterno) LIKE LOWER(:filtro) OR "
+                    + "LOWER(c.correo) LIKE LOWER(:filtro) OR "
+                    + "c.telefono LIKE :filtro";
 
             clientes = entityManager.createQuery(jpql, ClienteFrecuente.class)
-                                    .setParameter("filtro", "%" + filtro + "%")
-                                    .getResultList();
+                    .setParameter("filtro", "%" + filtro + "%")
+                    .getResultList();
         } finally {
             if (entityManager != null && entityManager.isOpen()) {
                 entityManager.close();
@@ -118,5 +124,4 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
         return clientes;
     }
 
-
-    }
+}
