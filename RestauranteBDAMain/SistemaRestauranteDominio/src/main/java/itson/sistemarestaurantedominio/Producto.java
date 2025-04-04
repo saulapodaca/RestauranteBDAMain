@@ -3,6 +3,8 @@ package itson.sistemarestaurantedominio;
 //@author SAUL ISAAC APODACA BALDENEGRO 00000252020
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,8 +12,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 @Entity
 @Table(name = "productos")
@@ -24,14 +26,32 @@ public class Producto implements Serializable {
 
     @Column(name = "nombre", nullable = false)
     private String nombre;
-    
+
     @Enumerated(EnumType.STRING)
     @Column(name = "tipoProducto", nullable = false)
     private TipoProducto tipoProducto;
-    
+
     @Column(name = "precio", nullable = false)
     private float precio;
-    
+
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    private List<ProductoIngrediente> ingredientes;
+
+    public List<ProductoIngrediente> getIngredientes() {
+        return ingredientes;
+    }
+
+    public void setIngredientes(List<ProductoIngrediente> ingredientes) {
+        this.ingredientes = ingredientes;
+    }
+
+    public Producto(String nombre, TipoProducto tipoProducto, float precio, List<ProductoIngrediente> ingredientes) {
+        this.nombre = nombre;
+        this.tipoProducto = tipoProducto;
+        this.precio = precio;
+        this.ingredientes = ingredientes;
+    }
+
     public Long getId() {
         return id;
     }
