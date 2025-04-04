@@ -45,6 +45,11 @@ public class Producto implements Serializable {
         this.ingredientes = ingredientes;
     }
 
+    public Producto() {
+    }
+    
+    
+
     public Producto(String nombre, TipoProducto tipoProducto, float precio, List<ProductoIngrediente> ingredientes) {
         this.nombre = nombre;
         this.tipoProducto = tipoProducto;

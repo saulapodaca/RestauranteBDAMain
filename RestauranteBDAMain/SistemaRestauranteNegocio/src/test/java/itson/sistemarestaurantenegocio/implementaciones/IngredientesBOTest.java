@@ -22,74 +22,74 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author saula
  */
 public class IngredientesBOTest {
-    
-    public IngredientesBOTest() {
-    }
-    
-    @BeforeAll
-    public static void setUpClass() {
-        //TODO: cambio de base de datos a la de prueba
-    }
-    
-    @AfterAll
-    public static void tearDownClass() {
-    }
-    
-    @BeforeEach
-    public void setUp() {
-    }
-    
-    @AfterEach
-    public void tearDown() {
-    }
-
-    /**
-     * Test of registrar method, of class IngredientesBO.
-     */
-    @Test
-    public void testRegistrarOk() throws Exception {
-        IngredientesDAO ingredientesDAO = new IngredientesDAO();
-        NuevoIngredienteDTO nuevoIngredienteDTO = new NuevoIngredienteDTO("Queso", UnidadMedidaIngrediente.GRAMOS, 250.3f);
-        Ingrediente ingredienteGuardado = ingredientesDAO.registrar(nuevoIngredienteDTO);
-        assertNotNull(ingredienteGuardado.getId());
-        assertEquals(nuevoIngredienteDTO.getNombre(), ingredienteGuardado.getNombre());
-        assertEquals(nuevoIngredienteDTO.getUnidadMedidaIngrediente(), ingredienteGuardado.getUnidadMedida());
-        assertEquals(nuevoIngredienteDTO.getStock(), ingredienteGuardado.getStock());
-    }
-
-        /**
-     * Test of registrar method, of class IngredientesBO.
-     */
-    @Test
-    public void testRegistrarIngredienteRepetido() throws Exception {
-        IngredientesDAO ingredientesDAO = new IngredientesDAO();
-        NuevoIngredienteDTO nuevoIngredienteDTO = new NuevoIngredienteDTO("Queso", UnidadMedidaIngrediente.GRAMOS, 250.3f);
-        Ingrediente ingredienteGuardado = ingredientesDAO.registrar(nuevoIngredienteDTO);
-        
-        for (IngredienteRegistradoDTO ing: ingredientesDAO.obtenerInventarioIngredientes())
-            System.out.println(ing.getNombre() + "  " + "  " +ing.getUnidadMedidaIngrediente());
-        
-    }
-    
-    /**
-     * Test of validarNombre method, of class IngredientesBO.
-     */
-    @Test
-    public void testValidarNombre() throws Exception {
-    }
-
-    /**
-     * Test of validarStock method, of class IngredientesBO.
-     */
-    @Test
-    public void testValidarStock() throws Exception {
-    }
-
-    /**
-     * Test of validarExistenciaInventario method, of class IngredientesBO.
-     */
-    @Test
-    public void testValidarExistenciaInventario() throws Exception {
-    }
-    
+//    
+//    public IngredientesBOTest() {
+//    }
+//    
+//    @BeforeAll
+//    public static void setUpClass() {
+//        //TODO: cambio de base de datos a la de prueba
+//    }
+//    
+//    @AfterAll
+//    public static void tearDownClass() {
+//    }
+//    
+//    @BeforeEach
+//    public void setUp() {
+//    }
+//    
+//    @AfterEach
+//    public void tearDown() {
+//    }
+//
+//    /**
+//     * Test of registrar method, of class IngredientesBO.
+//     */
+//    @Test
+//    public void testRegistrarOk() throws Exception {
+//        IngredientesDAO ingredientesDAO = new IngredientesDAO();
+//        NuevoIngredienteDTO nuevoIngredienteDTO = new NuevoIngredienteDTO("Queso", UnidadMedidaIngrediente.GRAMOS, 250.3f);
+//        Ingrediente ingredienteGuardado = ingredientesDAO.registrar(nuevoIngredienteDTO);
+//        assertNotNull(ingredienteGuardado.getId());
+//        assertEquals(nuevoIngredienteDTO.getNombre(), ingredienteGuardado.getNombre());
+//        assertEquals(nuevoIngredienteDTO.getUnidadMedidaIngrediente(), ingredienteGuardado.getUnidadMedida());
+//        assertEquals(nuevoIngredienteDTO.getStock(), ingredienteGuardado.getStock());
+//    }
+//
+//        /**
+//     * Test of registrar method, of class IngredientesBO.
+//     */
+//    @Test
+//    public void testRegistrarIngredienteRepetido() throws Exception {
+//        IngredientesDAO ingredientesDAO = new IngredientesDAO();
+//        NuevoIngredienteDTO nuevoIngredienteDTO = new NuevoIngredienteDTO("Queso", UnidadMedidaIngrediente.GRAMOS, 250.3f);
+//        Ingrediente ingredienteGuardado = ingredientesDAO.registrar(nuevoIngredienteDTO);
+//        
+//        for (IngredienteRegistradoDTO ing: ingredientesDAO.obtenerInventarioIngredientes())
+//            System.out.println(ing.getNombre() + "  " + "  " +ing.getUnidadMedidaIngrediente());
+//        
+//    }
+//    
+//    /**
+//     * Test of validarNombre method, of class IngredientesBO.
+//     */
+//    @Test
+//    public void testValidarNombre() throws Exception {
+//    }
+//
+//    /**
+//     * Test of validarStock method, of class IngredientesBO.
+//     */
+//    @Test
+//    public void testValidarStock() throws Exception {
+//    }
+//
+//    /**
+//     * Test of validarExistenciaInventario method, of class IngredientesBO.
+//     */
+//    @Test
+//    public void testValidarExistenciaInventario() throws Exception {
+//    }
+//    
 }

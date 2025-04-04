@@ -28,6 +28,11 @@ public class Mesa implements Serializable {
     @Enumerated(EnumType.STRING)
     @Column(name = "estadoMesa", nullable = false)
     private EstadoMesa estadoMesa;
+
+    public Mesa() {
+    }
+    
+    
     
     public Long getId() {
         return id;

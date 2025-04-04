@@ -31,6 +31,11 @@ public class Ingrediente implements Serializable {
     
     @Column(name = "stock", nullable = false)
     private float stock;
+
+    public Ingrediente() {
+    }
+    
+    
     
     public Long getId() {
         return id;

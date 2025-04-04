@@ -8,13 +8,13 @@ import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantedominio.dtos.NuevoClienteFrecuenteDTO;
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
 import itson.sistemarestaurantepersistencia.IClientesFrecuentesDAO;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author rauln
  */
-
-
 public class ClientesFrecuentesBO implements IClientesFrecuentesBO {
 
     // Constantes para los textos por defecto
@@ -48,7 +48,6 @@ public class ClientesFrecuentesBO implements IClientesFrecuentesBO {
             throw new IllegalArgumentException("Error: Nombres y apellidos solo pueden contener letras y espacios.");
         }
 
-
         System.out.println(nuevoClienteFrecuenteDTO.getNumeroTelefono());
         // Validación de teléfono
         if (!validarTelefono(nuevoClienteFrecuenteDTO.getNumeroTelefono())) {
@@ -68,14 +67,16 @@ public class ClientesFrecuentesBO implements IClientesFrecuentesBO {
         return texto.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$");
     }
 
-
-
     private boolean validarTelefono(String telefono) {
         return telefono.matches("^\\d{10}$");
     }
 
-
- 
-    
+    @Override
+    public List<ClienteFrecuente> buscarClientes(String filtro) {
+        if (filtro == null || filtro.trim().isEmpty()) {
+            return new ArrayList<>(); // Retorna lista vacía si el filtro está vacío
+        }
+        return clienteFrecuenteDAO.buscarClientes(filtro.trim());
+    }
 
 }

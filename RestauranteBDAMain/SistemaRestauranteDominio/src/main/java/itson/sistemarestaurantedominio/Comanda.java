@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
 
 
 @Entity
-@Table(name = "comandas")
+@Table(name = "comandas" )
 public class Comanda implements Serializable {
 
     @Id

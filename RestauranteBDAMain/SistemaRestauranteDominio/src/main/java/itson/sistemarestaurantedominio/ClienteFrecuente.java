@@ -33,7 +33,7 @@ public class ClienteFrecuente implements Serializable {
     @Column(name = "fechaRegistro", nullable = false)
     private Calendar fechaRegistro;
 
-    @Column(name = "puntosFidelidad", nullable = false)
+    @Column(name = "puntosFidelidad", nullable = true)
     private int puntosFidelidad = 0;
 
     @OneToMany(mappedBy = "clienteFrecuente", cascade = CascadeType.ALL)

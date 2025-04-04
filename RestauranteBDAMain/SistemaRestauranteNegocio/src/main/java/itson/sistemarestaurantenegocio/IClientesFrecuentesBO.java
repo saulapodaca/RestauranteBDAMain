@@ -6,6 +6,7 @@ package itson.sistemarestaurantenegocio;
 
 import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantedominio.dtos.NuevoClienteFrecuenteDTO;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,5 @@ import itson.sistemarestaurantedominio.dtos.NuevoClienteFrecuenteDTO;
  */
 public interface IClientesFrecuentesBO {
     public abstract ClienteFrecuente registrarClienteFrecuente(NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO);
+    public abstract List<ClienteFrecuente> buscarClientes(String filtro);
 }

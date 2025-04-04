@@ -127,6 +127,37 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
         comboBoxDominios.setSelectedIndex(0);
     }
 
+    private void registrar() {
+        try {
+            String nombre = textFieldIngresarNombre.getText().trim();
+            String apellidoP = textFieldIngresarApellidoPaterno.getText().trim();
+            String apellidoM = textFieldIngresarApellidoMaterno.getText().trim();
+            String correoSinArroba = textFieldIngresarCorreoElectronico.getText().trim();
+            String dominio = (String) comboBoxDominios.getSelectedItem();
+            String telefono = textFieldIngresarTelefono.getText().trim();
+            String correoCompleto = correoSinArroba + dominio;
+
+            // Crear el DTO con los datos ingresados
+            NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO = new NuevoClienteFrecuenteDTO(
+                    nombre, apellidoP, apellidoM, correoCompleto, telefono
+            );
+
+            // Registrar el cliente
+            this.clientesFrecuentesBO.registrarClienteFrecuente(nuevoClienteFrecuenteDTO);
+
+            // Mensaje de éxito
+            JOptionPane.showMessageDialog(this, "Registro exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            limpiarFormulario();
+
+        } catch (IllegalArgumentException e) {
+            // Mostrar mensaje de error con JOptionPane
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Validación", JOptionPane.ERROR_MESSAGE);
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -286,34 +317,7 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxDominiosItemStateChanged
 
     private void botonRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarMouseClicked
-        try {
-            String nombre = textFieldIngresarNombre.getText().trim();
-            String apellidoP = textFieldIngresarApellidoPaterno.getText().trim();
-            String apellidoM = textFieldIngresarApellidoMaterno.getText().trim();
-            String correoSinArroba = textFieldIngresarCorreoElectronico.getText().trim();
-            String dominio = (String) comboBoxDominios.getSelectedItem();
-            String telefono = textFieldIngresarTelefono.getText().trim();
-            String correoCompleto = correoSinArroba + dominio;
-
-
-            // Crear el DTO con la fecha incluida
-            NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO = new NuevoClienteFrecuenteDTO(
-                    nombre, apellidoP, apellidoM, correoCompleto, telefono
-            );
-
-            // Registrar el cliente
-            this.clientesFrecuentesBO.registrarClienteFrecuente(nuevoClienteFrecuenteDTO);
-
-            // Mensaje de éxito
-            JOptionPane.showMessageDialog(background, "Registro exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            limpiarFormulario();
-
-        } catch (IllegalArgumentException e) {
-            JOptionPane.showMessageDialog(background, e.getMessage(), "Error de Validación", JOptionPane.ERROR_MESSAGE);
-
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(background, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        }
+        registrar();
     }//GEN-LAST:event_botonRegistrarMouseClicked
 
     /**
