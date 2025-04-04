@@ -2,6 +2,7 @@ package itson.sistemarestaurantedominio;
 
 import java.io.Serializable;
 import java.util.Calendar;
+import java.util.List;
 import javax.persistence.*;
 
 @Entity
@@ -29,10 +30,35 @@ public class ClienteFrecuente implements Serializable {
     private String correo;
     
     @Temporal(TemporalType.DATE)
-    @Column(name = "fechaRegistro", nullable = true)
+    @Column(name = "fechaRegistro", nullable = false)
     private Calendar fechaRegistro;
 
+    @Column(name = "puntosFidelidad", nullable = false)
+    private int puntosFidelidad = 0;
+    
+    @OneToMany(mappedBy = "clienteFrecuente", cascade = CascadeType.ALL)
+    List<Comanda> comandas;
+
+    public int getPuntosFidelidad() {
+        return puntosFidelidad;
+    }
+
+    public List<Comanda> getComandas() {
+        return comandas;
+    }
+
+    public void setComandas(List<Comanda> comandas) {
+        this.comandas = comandas;
+    }
+    
+    
+    
     public ClienteFrecuente() {}
+
+    public void setPuntosFidelidad(int puntosFidelidad) {
+        this.puntosFidelidad = puntosFidelidad;
+    }
+    
     
     public Long getId() {
         return id;
