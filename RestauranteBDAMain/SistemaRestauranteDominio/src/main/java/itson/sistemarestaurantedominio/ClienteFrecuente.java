@@ -16,28 +16,28 @@ public class ClienteFrecuente implements Serializable {
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
-    
+
     @Column(name = "apellidoPaterno", nullable = false, length = 75)
     private String apellidoPaterno;
-    
+
     @Column(name = "apellidoMaterno", length = 75)
     private String apellidoMaterno;
-    
+
     @Column(name = "telefono", nullable = false, length = 10, unique = true)
     private String telefono;
-    
+
     @Column(name = "correo", nullable = true, unique = true, length = 100)
     private String correo;
-    
+
     @Temporal(TemporalType.DATE)
     @Column(name = "fechaRegistro", nullable = false)
     private Calendar fechaRegistro;
 
     @Column(name = "puntosFidelidad", nullable = false)
     private int puntosFidelidad = 0;
-    
+
     @OneToMany(mappedBy = "clienteFrecuente", cascade = CascadeType.ALL)
-    List<Comanda> comandas;
+    private List<Comanda> comandas;
 
     public int getPuntosFidelidad() {
         return puntosFidelidad;
@@ -50,16 +50,33 @@ public class ClienteFrecuente implements Serializable {
     public void setComandas(List<Comanda> comandas) {
         this.comandas = comandas;
     }
-    
-    
-    
-    public ClienteFrecuente() {}
+
+    public ClienteFrecuente() {
+    }
+
+    public ClienteFrecuente(String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, String correo, Calendar fechaRegistro, List<Comanda> comandas) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.telefono = telefono;
+        this.correo = correo;
+        this.fechaRegistro = fechaRegistro;
+        this.comandas = comandas;
+    }
+
+    public ClienteFrecuente(String nombre, String apellidoPaterno, String apellidoMaterno, String telefono, Calendar fechaRegistro, List<Comanda> comandas) {
+        this.nombre = nombre;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.telefono = telefono;
+        this.fechaRegistro = fechaRegistro;
+        this.comandas = comandas;
+    }
 
     public void setPuntosFidelidad(int puntosFidelidad) {
         this.puntosFidelidad = puntosFidelidad;
     }
-    
-    
+
     public Long getId() {
         return id;
     }
@@ -115,7 +132,7 @@ public class ClienteFrecuente implements Serializable {
     public void setFechaRegistro(Calendar fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
-    
+
     @Override
     public int hashCode() {
         return (id != null ? id.hashCode() : 0);
@@ -123,8 +140,12 @@ public class ClienteFrecuente implements Serializable {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
         ClienteFrecuente other = (ClienteFrecuente) obj;
         return id != null && id.equals(other.id);
     }
