@@ -14,6 +14,7 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
      * Creates new form RegistrarProductoForm
      */
     public RegistrarProductoForm() {
+        int x = 0;
         initComponents();
     }
 
