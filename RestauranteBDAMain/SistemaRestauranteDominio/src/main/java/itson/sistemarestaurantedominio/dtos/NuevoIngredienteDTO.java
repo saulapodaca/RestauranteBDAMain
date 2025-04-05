@@ -8,9 +8,9 @@ import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
 public class NuevoIngredienteDTO {
     private String nombre;
     private UnidadMedidaIngrediente unidadMedidaIngrediente;
-    private float stock;
+    private Integer stock;
 
-    public NuevoIngredienteDTO(String nombre, UnidadMedidaIngrediente unidadMedidaIngrediente, float stock) {
+    public NuevoIngredienteDTO(String nombre, UnidadMedidaIngrediente unidadMedidaIngrediente, Integer stock) {
         this.nombre = nombre;
         this.unidadMedidaIngrediente = unidadMedidaIngrediente;
         this.stock = stock;
@@ -24,7 +24,7 @@ public class NuevoIngredienteDTO {
         return unidadMedidaIngrediente;
     }
 
-    public float getStock() {
+    public Integer getStock() {
         return stock;
     }
        

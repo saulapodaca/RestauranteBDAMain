@@ -30,7 +30,7 @@ public class Ingrediente implements Serializable {
     private UnidadMedidaIngrediente unidadMedida;
     
     @Column(name = "stock", nullable = false)
-    private float stock;
+    private Integer stock;
 
     public Ingrediente() {
     }
@@ -48,7 +48,7 @@ public class Ingrediente implements Serializable {
         return unidadMedida;
     }
     
-    public float getStock(){
+    public int getStock(){
         return stock;
     }
     
@@ -64,7 +64,7 @@ public class Ingrediente implements Serializable {
         this.unidadMedida = unidadMedida;
     }
 
-    public void setStock(float stock) {
+    public void setStock(int stock) {
         this.stock = stock;
     }
 

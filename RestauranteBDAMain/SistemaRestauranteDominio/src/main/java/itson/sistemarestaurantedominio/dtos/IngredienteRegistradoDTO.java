@@ -9,9 +9,9 @@ public class IngredienteRegistradoDTO {
     private Long id;
     private String nombre;
     private UnidadMedidaIngrediente unidadMedidaIngrediente;
-    private float stock;
+    private Integer stock;
 
-    public IngredienteRegistradoDTO(Long id, String nombre, UnidadMedidaIngrediente unidadMedidaIngrediente, float stock) {
+    public IngredienteRegistradoDTO(Long id, String nombre, UnidadMedidaIngrediente unidadMedidaIngrediente, Integer stock) {
         this.id = id;
         this.nombre = nombre;
         this.unidadMedidaIngrediente = unidadMedidaIngrediente;
@@ -22,7 +22,7 @@ public class IngredienteRegistradoDTO {
         return id;
     }
 
-    public float getStock() {
+    public Integer getStock() {
         return stock;
     }
     
