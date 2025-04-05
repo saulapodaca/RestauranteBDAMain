@@ -18,5 +18,6 @@ public interface IIngredientesDAO {
     public abstract Ingrediente registrar(NuevoIngredienteDTO nuevoIngredienteDTO);
     public abstract List<IngredienteRegistradoDTO> obtenerInventarioIngredientes();
     public abstract boolean existeIngrediente(String nombre, UnidadMedidaIngrediente unidadMedida);
+    public abstract List<IngredienteRegistradoDTO> buscarIngredientes(String filtroBusqueda, String unidadMedida);
 
 }

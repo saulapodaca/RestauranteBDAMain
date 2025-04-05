@@ -6,7 +6,9 @@ package itson.sistemarestaurantepersistencia.implementaciones;
 
 import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
+import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
+import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -62,4 +64,17 @@ public class IngredientesDAOTest {
     public void testObtenerInventarioIngredientes() {
     }
 
+    @Test
+    public void testbuscarIngredientes(){
+        IngredientesDAO ingredientesDAO = new IngredientesDAO();
+        String filtroBusqueda = "JaMoN";
+        String unidadMedida = "GRAMOS";
+        List<IngredienteRegistradoDTO> ingredientes
+                = ingredientesDAO.buscarIngredientes(filtroBusqueda, unidadMedida);
+        assertNotNull(ingredientes);
+        assertEquals(1, ingredientes.size());
+        for (IngredienteRegistradoDTO ing : ingredientes) {
+            System.out.println(ing.getNombre());
+        }
+    }
 }

@@ -48,4 +48,29 @@ public class IngredientesDAO implements IIngredientesDAO {
                 .getSingleResult();
         return count > 0;
     }
+    
+    @Override
+    public List<IngredienteRegistradoDTO> buscarIngredientes(String filtroBusqueda, String unidadMedida) {
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        StringBuilder jpql= new StringBuilder("""
+                                              SELECT 
+                                              new itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO(i.id, i.nombre, i.unidadMedida, i.stock) 
+                                              FROM Ingrediente i
+                                              WHERE 1 = 1"""
+        );
+        if (filtroBusqueda != null && !filtroBusqueda.trim().isEmpty()) 
+            jpql.append(" AND LOWER(i.nombre) LIKE :nombre");
+        if (!unidadMedida.equals("TODOS")) 
+            jpql.append(" AND LOWER(i.unidadMedida) = :unidadMedida");
+        
+        TypedQuery<IngredienteRegistradoDTO> query = entityManager.
+                createQuery(jpql.toString(), IngredienteRegistradoDTO.class);
+        
+        if (filtroBusqueda != null && !filtroBusqueda.trim().isEmpty()) 
+            query.setParameter("nombre", "%" + filtroBusqueda + "%");
+        if (!unidadMedida.equals("TODOS")) 
+            query.setParameter("unidadMedida", unidadMedida);
+        
+        return query.getResultList();
+    }
 }
