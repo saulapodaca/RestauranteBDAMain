@@ -23,7 +23,7 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
 
     @Override
     public ClienteFrecuente registrar(NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO) {
-        EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
 
         try {
             entityManager.getTransaction().begin();
@@ -69,7 +69,7 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
             return false; // Si es NULL, no validamos unicidad
         }
 
-        EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
         try {
             TypedQuery<Long> query = entityManager.createQuery(
                     "SELECT COUNT(c) FROM ClienteFrecuente c WHERE c.correo = :correo", Long.class
@@ -85,7 +85,7 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
 
     @Override
     public boolean existeTelefono(String telefono) {
-        EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
         try {
             TypedQuery<Long> query = entityManager.createQuery(
                     "SELECT COUNT(c) FROM ClienteFrecuente c WHERE c.telefono = :telefono", Long.class
@@ -101,7 +101,7 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
 
     @Override
     public List<ClienteFrecuente> buscarClientes(String filtro) {
-        EntityManager entityManager = ManejadorConexiones.getEntityManager(false);
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
         List<ClienteFrecuente> clientes = new ArrayList<>();
 
         try {

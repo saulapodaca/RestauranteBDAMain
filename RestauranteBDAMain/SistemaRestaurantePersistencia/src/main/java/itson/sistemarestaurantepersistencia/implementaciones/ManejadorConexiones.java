@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package itson.sistemarestaurantepersistencia.implementaciones;
 
 /**
@@ -14,33 +10,20 @@ import javax.persistence.Persistence;
 
 public class ManejadorConexiones {
 
-    private static EntityManagerFactory emFactoryReal;
-    private static EntityManagerFactory emFactoryTest;
+    public static boolean isTestMode = false;
 
-    private static final String PERSISTENCE_UNIT_REAL = "itson_SistemaRestaurantePersistencia_jar_1.0PU";
-    private static final String PERSISTENCE_UNIT_TEST = "itson_SistemaRestaurantePersistencia_jar_1.0PU_TEST";
+    public static EntityManager getEntityManager() {
+        //SOLICITAMOS UNA FABRICA DE ENTITY MANAGERS
+        EntityManagerFactory emFactory;
 
-    private static void initializeFactories() {
-        if (emFactoryReal == null) {
-            emFactoryReal = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_REAL);
+        if (isTestMode) {
+            emFactory = Persistence.createEntityManagerFactory("itson_SistemaRestaurantePersistencia_jar_1.0PU_TEST");
+        } else {
+            emFactory = Persistence.createEntityManagerFactory("itson_SistemaRestaurantePersistencia_jar_1.0PU");
         }
-        if (emFactoryTest == null) {
-            emFactoryTest = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_TEST);
-        }
+        //LA FABRICA CREA UN entityManager = base de datos
+        EntityManager entityManager = emFactory.createEntityManager();
+        return entityManager;
     }
 
-    public static EntityManager getEntityManager(boolean isTest) {
-        initializeFactories();
-        return isTest ? emFactoryTest.createEntityManager() : emFactoryReal.createEntityManager();
-    }
-
-    public static void closeFactories() {
-        if (emFactoryReal != null && emFactoryReal.isOpen()) {
-            emFactoryReal.close();
-        }
-        if (emFactoryTest != null && emFactoryTest.isOpen()) {
-            emFactoryTest.close();
-        }
-    }
 }
-

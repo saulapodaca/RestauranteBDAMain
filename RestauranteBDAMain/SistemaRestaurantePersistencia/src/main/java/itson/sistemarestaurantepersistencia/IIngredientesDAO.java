@@ -5,6 +5,7 @@
 package itson.sistemarestaurantepersistencia;
 
 import itson.sistemarestaurantedominio.Ingrediente;
+import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
 import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import java.util.List;
@@ -16,4 +17,6 @@ import java.util.List;
 public interface IIngredientesDAO {
     public abstract Ingrediente registrar(NuevoIngredienteDTO nuevoIngredienteDTO);
     public abstract List<IngredienteRegistradoDTO> obtenerInventarioIngredientes();
+    public abstract boolean existeIngrediente(String nombre, UnidadMedidaIngrediente unidadMedida);
+
 }
