@@ -48,7 +48,7 @@ public class Ingrediente implements Serializable {
         return unidadMedida;
     }
     
-    public int getStock(){
+    public Integer getStock(){
         return stock;
     }
     
@@ -64,7 +64,7 @@ public class Ingrediente implements Serializable {
         this.unidadMedida = unidadMedida;
     }
 
-    public void setStock(int stock) {
+    public void setStock(Integer stock) {
         this.stock = stock;
     }
 
