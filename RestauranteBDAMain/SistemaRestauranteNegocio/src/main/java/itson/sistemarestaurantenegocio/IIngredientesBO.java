@@ -15,5 +15,9 @@ import itson.sistemarestaurantenegocio.excepciones.StockInvalidoException;
  * @author saula
  */
 public interface IIngredientesBO {
-    public abstract Ingrediente registrar(NuevoIngredienteDTO nuevoIngredienteDTO) throws NombreInvalidoException, StockInvalidoException, IngredienteRegistradoException;
+    public abstract Ingrediente registrar(NuevoIngredienteDTO nuevoIngredienteDTO) 
+            throws NombreInvalidoException, StockInvalidoException, IngredienteRegistradoException;
+    public abstract void validacionesIniciales(String nombre,String nombreDefault, String stock, String stockDefault) 
+            throws NombreInvalidoException, StockInvalidoException;
+
 }

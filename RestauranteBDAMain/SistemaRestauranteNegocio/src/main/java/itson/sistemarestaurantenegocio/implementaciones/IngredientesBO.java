@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 
 public class IngredientesBO implements IIngredientesBO{
 
+    private static final String PATRON_TEXTO_VALIDO = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$";
     private IIngredientesDAO ingredientesDAO;
     
     public IngredientesBO (IIngredientesDAO ingredientesDAO){
@@ -32,22 +33,31 @@ public class IngredientesBO implements IIngredientesBO{
     }
 
     public void validarNombre(String nombre) throws NombreInvalidoException {
-        if(nombre == null || nombre.trim().isEmpty())
-            throw new NombreInvalidoException("El nombre del ingrediente no puede estar vacío.");
-        if(!Pattern.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$", nombre))
+        if(!Pattern.matches(PATRON_TEXTO_VALIDO, nombre))
             throw new NombreInvalidoException("El nombre del ingrediente no puede contener números ni carácteres especiales,");
     }
     
-    public void validarStock(float stock) throws StockInvalidoException{
+    public void validarStock(Integer stock) throws StockInvalidoException{
         if(stock<0)
             throw new StockInvalidoException("El stock no puede ser negativo");
     }
     
-    public void validarExistenciaInventario(String nombre, UnidadMedidaIngrediente unidadMedidaIngrediente) throws IngredienteRegistradoException{
-        List<IngredienteRegistradoDTO> ingredientesDTO = ingredientesDAO.obtenerInventarioIngredientes();
-        for(IngredienteRegistradoDTO ing: ingredientesDTO)
-            if(ing.getNombre().equalsIgnoreCase(nombre) && ing.getUnidadMedidaIngrediente().equals(unidadMedidaIngrediente))
-                throw new IngredienteRegistradoException("El ingrediente ya se encuentra registrado");
+    public void validarExistenciaInventario(String nombre, UnidadMedidaIngrediente unidadMedidaIngrediente) throws IngredienteRegistradoException {
+        if (ingredientesDAO.existeIngrediente(nombre, unidadMedidaIngrediente)) {
+            throw new IngredienteRegistradoException("El ingrediente ya se encuentra registrado");
+        }
     }
-    
+
+    @Override
+    public void validacionesIniciales(String nombre,String nombreDefault, String stock, String stockDefault) throws NombreInvalidoException, StockInvalidoException{
+        if (nombre.equals(nombreDefault) || nombre.isBlank() || nombre.isEmpty())
+            throw new NombreInvalidoException("El nombre no puede estar vacío");
+        if (stock.equals(stockDefault) || stock.isBlank())
+            throw new StockInvalidoException("El stock inicial no puede estar vacío");
+        try{
+            Integer s = Integer.valueOf(stock);
+        }catch(NumberFormatException e){
+            throw new StockInvalidoException("El stock solo admite números enteros");
+        }
+    }
 }
