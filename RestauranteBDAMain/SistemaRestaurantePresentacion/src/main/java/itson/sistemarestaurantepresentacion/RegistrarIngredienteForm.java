@@ -186,10 +186,13 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
     private void botonRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarMouseClicked
         try{
             String nombre = textFieldIngresarNombre.getText().trim();
-            float stock = Float.parseFloat(textFieldIngresarStock.getText());
-            String unidadSeleccionada = comboBoxUnidadMedida.getSelectedItem().toString();
-            UnidadMedidaIngrediente unidadMedida = UnidadMedidaIngrediente.valueOf(unidadSeleccionada);
-       
+            UnidadMedidaIngrediente unidadMedida = UnidadMedidaIngrediente
+                    .valueOf(comboBoxUnidadMedida.getSelectedItem().toString());
+            
+            String stockTexto = textFieldIngresarStock.getText(); 
+            ingredientesBO.validacionesIniciales(nombre, NOMBRE_DEFAULT, stockTexto, STOCK_DEFAULT);
+            
+            int stock = Integer.parseInt(stockTexto);
             NuevoIngredienteDTO ingredienteDTO = new NuevoIngredienteDTO(nombre, unidadMedida, stock);
             this.ingredientesBO.registrar(ingredienteDTO);
             
