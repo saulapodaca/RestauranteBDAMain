@@ -36,7 +36,7 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
     
    public void limpiarFormulario(){
        textFieldIngresarNombre.setText("");
-       comboBoxUnidadMedida.setSelectedIndex(0);
+       comboBoxUnidadMedida.setSelectedIndex(1);
        textFieldIngresarStock.setText("");
    }
    
@@ -192,7 +192,7 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
             String stockTexto = textFieldIngresarStock.getText(); 
             ingredientesBO.validacionesIniciales(nombre, NOMBRE_DEFAULT, stockTexto, STOCK_DEFAULT);
             
-            int stock = Integer.parseInt(stockTexto);
+            Integer stock = Integer.valueOf(stockTexto);
             NuevoIngredienteDTO ingredienteDTO = new NuevoIngredienteDTO(nombre, unidadMedida, stock);
             this.ingredientesBO.registrar(ingredienteDTO);
             
