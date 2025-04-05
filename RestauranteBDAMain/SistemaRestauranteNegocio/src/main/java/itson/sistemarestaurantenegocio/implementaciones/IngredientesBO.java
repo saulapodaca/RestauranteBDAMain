@@ -60,4 +60,8 @@ public class IngredientesBO implements IIngredientesBO{
             throw new StockInvalidoException("El stock solo admite números enteros");
         }
     }
+    @Override
+    public List<IngredienteRegistradoDTO> buscarIngredientePorFiltro(String filtroBusqueda, String unidadMedida) {
+        return ingredientesDAO.buscarIngredientes(filtroBusqueda, unidadMedida);
+    }
 }

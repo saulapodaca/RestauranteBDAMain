@@ -5,10 +5,12 @@
 package itson.sistemarestaurantenegocio;
 
 import itson.sistemarestaurantedominio.Ingrediente;
+import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
 import itson.sistemarestaurantenegocio.excepciones.IngredienteRegistradoException;
 import itson.sistemarestaurantenegocio.excepciones.NombreInvalidoException;
 import itson.sistemarestaurantenegocio.excepciones.StockInvalidoException;
+import java.util.List;
 
 /**
  *
@@ -19,5 +21,6 @@ public interface IIngredientesBO {
             throws NombreInvalidoException, StockInvalidoException, IngredienteRegistradoException;
     public abstract void validacionesIniciales(String nombre,String nombreDefault, String stock, String stockDefault) 
             throws NombreInvalidoException, StockInvalidoException;
+    public abstract List<IngredienteRegistradoDTO> buscarIngredientePorFiltro(String filtroBusqueda, String unidadMedida);
 
 }
