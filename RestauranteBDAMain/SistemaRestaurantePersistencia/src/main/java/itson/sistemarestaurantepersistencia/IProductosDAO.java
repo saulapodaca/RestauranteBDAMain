@@ -6,11 +6,13 @@ package itson.sistemarestaurantepersistencia;
 
 import itson.sistemarestaurantedominio.Producto;
 import itson.sistemarestaurantedominio.TipoProducto;
+import itson.sistemarestaurantedominio.dtos.NuevoProductoDTO;
 import java.util.List;
 /**
  *
- * @author 52644
+ * @author Felix isaac sanchez Quintero
  */
 public interface IProductosDAO  {
-    
+    Producto registrar(NuevoProductoDTO nuevoProductoDTO);
+    List<Producto> buscarProductos(String filtro);
 }
