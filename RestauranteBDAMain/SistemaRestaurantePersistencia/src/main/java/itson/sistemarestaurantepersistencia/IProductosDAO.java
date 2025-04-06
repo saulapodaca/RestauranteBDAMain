@@ -4,10 +4,13 @@
  */
 package itson.sistemarestaurantepersistencia;
 
+import itson.sistemarestaurantedominio.Producto;
+import itson.sistemarestaurantedominio.TipoProducto;
+import java.util.List;
 /**
  *
  * @author 52644
  */
-public interface IProductosDAO {
+public interface IProductosDAO  {
     
 }
