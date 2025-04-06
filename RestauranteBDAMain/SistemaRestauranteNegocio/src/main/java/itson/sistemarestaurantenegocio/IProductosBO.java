@@ -4,10 +4,15 @@
  */
 package itson.sistemarestaurantenegocio;
 
+import itson.sistemarestaurantedominio.Producto;
+import itson.sistemarestaurantedominio.dtos.NuevoProductoDTO;
+import java.util.List;
+
 /**
  *
- * @author 52644
+ * @author Felix isaac sanchez Quintero
  */
 public interface IProductosBO {
-   // public abstract  
+  Producto registrarProducto(NuevoProductoDTO nuevoProductoDTO);
+  List<Producto> buscarProductos(String filtro);
 }
