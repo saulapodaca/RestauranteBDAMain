@@ -17,6 +17,10 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void limpiarFormulario(){
+     //   textFieldingresarTipoDeProducto.setText(t);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,7 +33,7 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TablaRegistrarProductos = new javax.swing.JTable();
         botonRegistrarProducto = new javax.swing.JButton();
-        ingresarTipoDeProducto = new javax.swing.JTextField();
+        textFieldingresarTipoDeProducto = new javax.swing.JTextField();
         Lupa = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,7 +63,7 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(Lupa)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(ingresarTipoDeProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textFieldingresarTipoDeProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 15, Short.MAX_VALUE)
@@ -76,7 +80,7 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(Lupa)
-                    .addComponent(ingresarTipoDeProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(textFieldingresarTipoDeProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -129,7 +133,7 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
     private javax.swing.JLabel Lupa;
     private javax.swing.JTable TablaRegistrarProductos;
     private javax.swing.JButton botonRegistrarProducto;
-    private javax.swing.JTextField ingresarTipoDeProducto;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField textFieldingresarTipoDeProducto;
     // End of variables declaration//GEN-END:variables
 }
