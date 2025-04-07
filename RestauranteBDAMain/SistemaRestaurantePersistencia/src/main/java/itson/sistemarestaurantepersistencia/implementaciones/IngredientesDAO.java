@@ -61,7 +61,7 @@ public class IngredientesDAO implements IIngredientesDAO {
         if (filtroBusqueda != null && !filtroBusqueda.trim().isEmpty()) 
             jpql.append(" AND LOWER(i.nombre) LIKE :nombre");
         if (!unidadMedida.equals("TODOS")) 
-            jpql.append(" AND LOWER(i.unidadMedida) = :unidadMedida");
+            jpql.append(" AND i.unidadMedida = :unidadMedida");
         
         TypedQuery<IngredienteRegistradoDTO> query = entityManager.
                 createQuery(jpql.toString(), IngredienteRegistradoDTO.class);
