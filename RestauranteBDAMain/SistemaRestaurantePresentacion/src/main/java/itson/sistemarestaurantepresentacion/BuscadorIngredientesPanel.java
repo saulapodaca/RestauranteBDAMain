@@ -4,10 +4,12 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.util.List;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -15,17 +17,22 @@ import javax.swing.event.DocumentListener;
  *
  * @author saula
  */
-public class BuscadorIngredientesPanel extends javax.swing.JPanel {
+public class BuscadorIngredientesPanel extends javax.swing.JPanel implements IngredientesRegistradosListener{
 
     private static final String DEFAULT_BUSCADOR = "INGRESE EL INGREDIENTE QUE DESEA BUSCAR";
+    private IngredientesRegistradosListener listener;
     private IIngredientesBO ingredientesBO;
     /**
      * Creates new form BuscadorIngredientesPanel
+     * @param ingredientesBO
+     * @param listener
      */
-    public BuscadorIngredientesPanel(IIngredientesBO ingredientesBO) {
+    public BuscadorIngredientesPanel(IIngredientesBO ingredientesBO, IngredientesRegistradosListener listener) {
         initComponents();
         configurarPlaceholders();
+        configurarBusquedaEnTiempoReal();
         this.ingredientesBO = ingredientesBO;
+        this.listener = listener;
     }
 
     /**
@@ -40,6 +47,7 @@ public class BuscadorIngredientesPanel extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         textFieldBuscador = new javax.swing.JTextField();
         jSeparator2 = new javax.swing.JSeparator();
+        comboBoxUnidad = new javax.swing.JComboBox<>();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -53,8 +61,11 @@ public class BuscadorIngredientesPanel extends javax.swing.JPanel {
                 textFieldBuscadorActionPerformed(evt);
             }
         });
-        jPanel1.add(textFieldBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 10, 400, 20));
+        jPanel1.add(textFieldBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 310, 20));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 30, 400, 5));
+
+        comboBoxUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "PIEZAS", "GRAMOS", "MILILITROS" }));
+        jPanel1.add(comboBoxUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -119,7 +130,14 @@ public class BuscadorIngredientesPanel extends javax.swing.JPanel {
     }
     
     private void actualizarBusqueda(){
-        
+        String filtro = textFieldBuscador.getText().trim();
+        String unidad = comboBoxUnidad.getSelectedItem().toString();
+
+            List<IngredienteRegistradoDTO> resultados = ingredientesBO.buscarIngredientePorFiltro(filtro, unidad);
+
+            if (listener != null)
+                listener.onIngredientesRegistrados(resultados);
+            
     }
         
     private void textFieldBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscadorActionPerformed
@@ -128,8 +146,13 @@ public class BuscadorIngredientesPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> comboBoxUnidad;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextField textFieldBuscador;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void onIngredientesRegistrados(List<IngredienteRegistradoDTO> ingredientes) {
+    }
 }
