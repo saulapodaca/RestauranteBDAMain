@@ -23,10 +23,10 @@ public class ClienteFrecuente implements Serializable {
     @Column(name = "apellidoMaterno", length = 75)
     private String apellidoMaterno;
 
-    @Column(name = "telefono", nullable = false, length = 10, unique = true)
+    @Column(name = "telefono", nullable = false, length = 200, unique = true)
     private String telefono;
 
-    @Column(name = "correo", nullable = true, unique = true, length = 100)
+    @Column(name = "correo", nullable = true, unique = true, length = 200)
     private String correo;
 
     @Temporal(TemporalType.DATE)

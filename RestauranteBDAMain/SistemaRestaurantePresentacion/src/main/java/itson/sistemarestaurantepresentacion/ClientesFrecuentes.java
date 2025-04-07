@@ -4,9 +4,12 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.encriptacion.Desencriptador;
 import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -38,10 +41,14 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
     
     @Override
     public void onClientesFiltrados(List<ClienteFrecuente> clientes) {
-        actualizarTabla(clientes);
+        try {
+            actualizarTabla(clientes);
+        } catch (Exception ex) {
+            Logger.getLogger(ClientesFrecuentes.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    private void obtenerClientesDesdeBuscador(String filtro) {
+    private void obtenerClientesDesdeBuscador(String filtro) throws Exception {
         if (clientesFrecuentesBO != null) {
             List<ClienteFrecuente> clientes = clientesFrecuentesBO.buscarClientes(filtro);
             actualizarTabla(clientes);
@@ -54,10 +61,13 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
         jScrollPane1 = new JScrollPane(tablaResultados);
     }
 
-    public void actualizarTabla(List<ClienteFrecuente> clientes) {
+    public void actualizarTabla(List<ClienteFrecuente> clientes) throws Exception {
         modeloTabla.setRowCount(0);
         for (ClienteFrecuente cliente : clientes) {
-            modeloTabla.addRow(new Object[]{cliente.getNombre(), cliente.getTelefono(), cliente.getCorreo()});
+            // Desencriptar correo y teléfono antes de agregarlos a la tabla
+            String correoDesencriptado = Desencriptador.desencriptar(cliente.getCorreo());
+            String telefonoDesencriptado = Desencriptador.desencriptar(cliente.getTelefono());
+            modeloTabla.addRow(new Object[]{cliente.getNombre(), telefonoDesencriptado, correoDesencriptado});
         }
     }
 
