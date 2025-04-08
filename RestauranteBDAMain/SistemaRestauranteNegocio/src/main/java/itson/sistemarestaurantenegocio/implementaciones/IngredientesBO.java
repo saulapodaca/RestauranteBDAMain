@@ -65,7 +65,7 @@ public class IngredientesBO implements IIngredientesBO{
     public List<IngredienteRegistradoDTO> buscarIngredientePorFiltro(String filtroBusqueda, String unidadMedida) {
         if (filtroBusqueda.equals(DEFAULT_BUSCADOR) 
                 || filtroBusqueda.trim().isEmpty())
-            filtroBusqueda = "";
+            filtroBusqueda = null;
         if (unidadMedida.trim().equals("TODOS"))
                 unidadMedida = null;
         
