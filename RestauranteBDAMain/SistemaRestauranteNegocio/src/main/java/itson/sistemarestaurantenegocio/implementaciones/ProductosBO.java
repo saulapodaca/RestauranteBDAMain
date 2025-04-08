@@ -66,7 +66,7 @@ public class ProductosBO implements IProductosBO{
          return new ArrayList<>();
      }
      return productosDAO.buscarProductos(filtro.trim());
- 
+     
  }
  
 }
