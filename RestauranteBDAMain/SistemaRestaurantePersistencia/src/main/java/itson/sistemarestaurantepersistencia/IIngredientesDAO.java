@@ -15,9 +15,28 @@ import java.util.List;
  * @author saula
  */
 public interface IIngredientesDAO {
+    
+    /**
+     * Registra un ingrediente en el sistema
+     * @param nuevoIngredienteDTO contiene la información del ingrediente que se registrará
+     * @return el ingrediente con la información con la que se guardó
+     */
     public abstract Ingrediente registrar(NuevoIngredienteDTO nuevoIngredienteDTO);
-    public abstract List<IngredienteRegistradoDTO> obtenerInventarioIngredientes();
+    
+    /**
+     * verifica si el ingrediente a registrar ya existe en el sistema
+     * @param nombre del ingrediente
+     * @param unidadMedida del ingrediente
+     * @return true si el ingrediente existe en el sistema, false de lo contrario
+     */
     public abstract boolean existeIngrediente(String nombre, UnidadMedidaIngrediente unidadMedida);
-    public abstract List<IngredienteRegistradoDTO> buscarIngredientes(String filtroBusqueda, String unidadMedida);
+    
+    /**
+     * Busca los ingredientes registrados en el sistema por medio de su nombre y unidad de medida
+     * @param filtroBusqueda se refiere al nombre por el que se filtrará
+     * @param unidadMedida a la unidad de medida que tendrán los ingredientes a buscar
+     * @return una lista de los ingredientes registrados dto que cumplan con los criterios
+     */
+    public abstract List<IngredienteRegistradoDTO> buscarIngredientes(String filtroBusqueda, UnidadMedidaIngrediente unidadMedida);
 
 }
