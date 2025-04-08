@@ -4,12 +4,13 @@
  */
 package itson.sistemarestaurantepersistencia.implementaciones;
 
+import itson.encriptacion.Desencriptador;
+import itson.encriptacion.Encriptador;
 import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantedominio.dtos.NuevoClienteFrecuenteDTO;
 import itson.sistemarestaurantepersistencia.IClientesFrecuentesDAO;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -35,9 +36,11 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
                 }
             }
 
-            // Validar si el teléfono ya está registrado
-            if (existeTelefono(nuevoClienteFrecuenteDTO.getNumeroTelefono())) {
-                throw new IllegalArgumentException("El número de teléfono ingresado ya está registrado.");
+            // Validar si el teléfono ya está registrado SOLO SI NO ES NULL
+            if (nuevoClienteFrecuenteDTO.getNumeroTelefono() != null) {
+                if (existeTelefono(nuevoClienteFrecuenteDTO.getNumeroTelefono())) {
+                    throw new IllegalArgumentException("El número de teléfono ingresado ya está registrado.");
+                }
             }
 
             // Crear entidad ClienteFrecuente
@@ -45,8 +48,11 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
             cliente.setNombre(nuevoClienteFrecuenteDTO.getNombre());
             cliente.setApellidoPaterno(nuevoClienteFrecuenteDTO.getApellidoPaterno());
             cliente.setApellidoMaterno(nuevoClienteFrecuenteDTO.getApellidoMaterno());
-            cliente.setCorreo(nuevoClienteFrecuenteDTO.getCorreo());
-            cliente.setTelefono(nuevoClienteFrecuenteDTO.getNumeroTelefono());
+
+            // Encriptar datos sensibles antes de guardarlos
+            cliente.setCorreo(Encriptador.encriptar(nuevoClienteFrecuenteDTO.getCorreo()));
+            cliente.setTelefono(Encriptador.encriptar(nuevoClienteFrecuenteDTO.getNumeroTelefono()));
+
             Calendar fechaRegistro = Calendar.getInstance();
             cliente.setFechaRegistro(fechaRegistro);
 
@@ -57,7 +63,7 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
             return cliente;
         } catch (Exception e) {
             entityManager.getTransaction().rollback();
-            throw e;
+            throw new RuntimeException("Error al registrar cliente frecuente", e);
         } finally {
             entityManager.close();
         }
@@ -71,12 +77,16 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
 
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
         try {
+            String correoEncriptado = Encriptador.encriptar(correo); // Encriptar antes de consultar
             TypedQuery<Long> query = entityManager.createQuery(
                     "SELECT COUNT(c) FROM ClienteFrecuente c WHERE c.correo = :correo", Long.class
             );
-            query.setParameter("correo", correo);
+            query.setParameter("correo", correoEncriptado);
             return query.getSingleResult() > 0;
         } catch (NoResultException e) {
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         } finally {
             entityManager.close();
@@ -85,14 +95,20 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
 
     @Override
     public boolean existeTelefono(String telefono) {
+        if (telefono == null) {
+            return false;
+        }
+
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
         try {
+            String telefonoEncriptado = Encriptador.encriptar(telefono); // Encriptar para buscarlo
             TypedQuery<Long> query = entityManager.createQuery(
                     "SELECT COUNT(c) FROM ClienteFrecuente c WHERE c.telefono = :telefono", Long.class
             );
-            query.setParameter("telefono", telefono);
+            query.setParameter("telefono", telefonoEncriptado);
             return query.getSingleResult() > 0;
-        } catch (NoResultException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         } finally {
             entityManager.close();
@@ -102,26 +118,45 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
     @Override
     public List<ClienteFrecuente> buscarClientes(String filtro) {
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
-        List<ClienteFrecuente> clientes = new ArrayList<>();
+        List<ClienteFrecuente> clientesFiltrados = new ArrayList<>();
 
         try {
-            String jpql = "SELECT c FROM ClienteFrecuente c WHERE "
-                    + "LOWER(c.nombre) LIKE LOWER(:filtro) OR "
-                    + "LOWER(c.apellidoPaterno) LIKE LOWER(:filtro) OR "
-                    + "LOWER(c.apellidoMaterno) LIKE LOWER(:filtro) OR "
-                    + "LOWER(c.correo) LIKE LOWER(:filtro) OR "
-                    + "c.telefono LIKE :filtro";
-
-            clientes = entityManager.createQuery(jpql, ClienteFrecuente.class)
-                    .setParameter("filtro", "%" + filtro + "%")
+            // Obtener todos los clientes
+            List<ClienteFrecuente> clientes = entityManager
+                    .createQuery("SELECT c FROM ClienteFrecuente c", ClienteFrecuente.class)
                     .getResultList();
+
+            for (ClienteFrecuente cliente : clientes) {
+                try {
+                    String nombre = cliente.getNombre() != null ? cliente.getNombre().toLowerCase() : "";
+                    String apellidoPaterno = cliente.getApellidoPaterno() != null ? cliente.getApellidoPaterno().toLowerCase() : "";
+                    String apellidoMaterno = cliente.getApellidoMaterno() != null ? cliente.getApellidoMaterno().toLowerCase() : "";
+
+                    String correo = cliente.getCorreo() != null ? Desencriptador.desencriptar(cliente.getCorreo()).toLowerCase() : "";
+                    String telefono = cliente.getTelefono() != null ? Desencriptador.desencriptar(cliente.getTelefono()) : "";
+
+                    String filtroLower = filtro.toLowerCase();
+
+                    if (nombre.contains(filtroLower)
+                            || apellidoPaterno.contains(filtroLower)
+                            || apellidoMaterno.contains(filtroLower)
+                            || correo.contains(filtroLower)
+                            || telefono.contains(filtroLower)) {
+                        clientesFiltrados.add(cliente);
+                    }
+                } catch (Exception e) {
+                    // Si falla la desencriptación de algún cliente, simplemente lo ignoramos.
+                    System.err.println("Error al desencriptar cliente: " + e.getMessage());
+                }
+            }
+
         } finally {
             if (entityManager != null && entityManager.isOpen()) {
                 entityManager.close();
             }
         }
-        System.out.println(clientes);
-        return clientes;
+
+        return clientesFiltrados;
     }
 
 }

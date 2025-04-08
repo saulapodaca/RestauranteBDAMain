@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
@@ -6,7 +7,6 @@ package itson.sistemarestaurantepresentacion;
 
 
 import itson.sistemarestaurantenegocio.fabrica.FabricaObjNegocio;
-import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
 
 /**
