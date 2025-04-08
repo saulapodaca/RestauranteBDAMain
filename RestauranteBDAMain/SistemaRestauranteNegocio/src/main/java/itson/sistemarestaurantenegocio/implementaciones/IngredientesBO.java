@@ -19,6 +19,7 @@ public class IngredientesBO implements IIngredientesBO{
 
     private static final String PATRON_TEXTO_VALIDO = "^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$";
     private IIngredientesDAO ingredientesDAO;
+    private static final String DEFAULT_BUSCADOR = "INGRESE EL INGREDIENTE QUE DESEA BUSCAR";
     
     public IngredientesBO (IIngredientesDAO ingredientesDAO){
         this.ingredientesDAO = ingredientesDAO;
@@ -62,8 +63,13 @@ public class IngredientesBO implements IIngredientesBO{
     }
     @Override
     public List<IngredienteRegistradoDTO> buscarIngredientePorFiltro(String filtroBusqueda, String unidadMedida) {
-        if (unidadMedida.equals("TODOS"))
-                return ingredientesDAO.buscarIngredientes(filtroBusqueda, null);
-        return ingredientesDAO.buscarIngredientes(filtroBusqueda, UnidadMedidaIngrediente.valueOf(unidadMedida));
+        if (filtroBusqueda.equals(DEFAULT_BUSCADOR) 
+                || filtroBusqueda.trim().isEmpty())
+            filtroBusqueda = "";
+        if (unidadMedida.trim().equals("TODOS"))
+                unidadMedida = null;
+        
+        return ingredientesDAO.buscarIngredientes(filtroBusqueda, unidadMedida);
+        
     }
 }

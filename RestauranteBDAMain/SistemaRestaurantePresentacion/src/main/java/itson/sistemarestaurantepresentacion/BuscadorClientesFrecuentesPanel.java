@@ -152,6 +152,5 @@ public class BuscadorClientesFrecuentesPanel extends javax.swing.JPanel implemen
 
     @Override
     public void onClientesFiltrados(List<ClienteFrecuente> clientes) {
-    
     }
 }

@@ -135,14 +135,11 @@ public class BuscadorIngredientesPanel extends javax.swing.JPanel implements Ing
             }
         });
 
-        comboBoxUnidad.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                actualizarBusqueda();
-
-                // Volver a enfocar el campo de texto
-                textFieldBuscador.requestFocusInWindow();
-            }
+        comboBoxUnidad.addActionListener((ActionEvent e) -> {
+            actualizarBusqueda();
+            
+            // Volver a enfocar el campo de texto
+            textFieldBuscador.requestFocusInWindow();
         });
     }
 

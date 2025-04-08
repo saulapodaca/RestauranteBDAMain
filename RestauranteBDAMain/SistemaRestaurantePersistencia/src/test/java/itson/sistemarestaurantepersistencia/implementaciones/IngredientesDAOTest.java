@@ -70,7 +70,7 @@ public class IngredientesDAOTest {
         String filtroBusqueda = "JaMoN";
         String unidadMedida = "GRAMOS";
         List<IngredienteRegistradoDTO> ingredientes
-                = ingredientesDAO.buscarIngredientes(filtroBusqueda, UnidadMedidaIngrediente.valueOf(unidadMedida));
+                = ingredientesDAO.buscarIngredientes(filtroBusqueda, unidadMedida);
         assertNotNull(ingredientes);
         assertEquals(1, ingredientes.size());
         for (IngredienteRegistradoDTO ing : ingredientes) {

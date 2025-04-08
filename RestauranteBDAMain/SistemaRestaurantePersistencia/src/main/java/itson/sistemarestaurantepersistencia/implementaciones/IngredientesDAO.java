@@ -51,39 +51,25 @@ public class IngredientesDAO implements IIngredientesDAO {
     
     /**
      * Método que busca el inventario de ingredientes a la base de datos
-     * @param filtroBusqueda por el nombre que se buscará, si es null mandará todos los ingredientes
+     * @param nombre por el nombre que se buscará, si es null mandará todos los ingredientes
      * @param unidadMedida por la unidad de medida por la que se filtrará, si es null mandará todos
      * @return regresa la lista de ingredientes filtrados DTO
      */
     @Override
-    public List<IngredienteRegistradoDTO> buscarIngredientes(String filtroBusqueda, UnidadMedidaIngrediente unidadMedida) {
+    public List<IngredienteRegistradoDTO> buscarIngredientes(String nombre, String unidadMedida) {
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
-        // El where es para que siempre se cumpla la condición y poder concatenar los otros filtros sin problemas
-        StringBuilder jpql= new StringBuilder("""
-                                              SELECT 
-                                              new itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO(i.id, i.nombre, i.unidadMedida, i.stock) 
-                                              FROM Ingrediente i
-                                              WHERE 1 = 1"""
-        );
-        
-        //Si el filtro de busqueda contiene información concatenará la siguiente parte de la consulta
-        if (filtroBusqueda != null && !filtroBusqueda.trim().isEmpty()) 
-            jpql.append(" AND LOWER(i.nombre) LIKE :nombre");
-        //si la unidad de medida contiene información concatenará la siguiente parte de la consulta
-        if (unidadMedida != null) 
-            jpql.append(" AND i.unidadMedida = :unidadMedida");
-        
-        TypedQuery<IngredienteRegistradoDTO> query = entityManager.
-                createQuery(jpql.toString(), IngredienteRegistradoDTO.class);
-        
-        //Cuando se cumplen los filtros pasados y construir el query es necesario mandarle por lo que filtrará
-        //Entonces si el filtro de busqueda contiene información, reemplazará el filtro de busqueda por lo que se mandó
-        if (filtroBusqueda != null && !filtroBusqueda.trim().isEmpty()) 
-            query.setParameter("nombre", "%" + filtroBusqueda + "%");
-        //Si la undidad de medida contiene información, se reemplazará la unidad que se busca
-        if (unidadMedida != null) 
-            query.setParameter("unidadMedida", unidadMedida);
-        
+        String jpql = """
+                      SELECT 
+                      new itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO(
+                      i.id, i.nombre, i.unidadMedida, i.stock) 
+                      FROM Ingrediente i
+                      WHERE (:nombre IS NULL OR i.nombre LIKE :nombre)
+                      AND (:unidadMedida IS NULL OR i.unidadMedida LIKE :unidadMedida)
+                      """;
+        TypedQuery<IngredienteRegistradoDTO> query = 
+                entityManager.createQuery(jpql, IngredienteRegistradoDTO.class);
+        query.setParameter("nombre", nombre != null ? "%" + nombre + "%" : null);
+        query.setParameter("unidadMedida", unidadMedida != null ? "%" + unidadMedida + "%" : null);
         return query.getResultList();
     }
 }

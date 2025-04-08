@@ -33,10 +33,10 @@ public interface IIngredientesDAO {
     
     /**
      * Busca los ingredientes registrados en el sistema por medio de su nombre y unidad de medida
-     * @param filtroBusqueda se refiere al nombre por el que se filtrará
+     * @param nombre se refiere al nombre por el que se filtrará
      * @param unidadMedida a la unidad de medida que tendrán los ingredientes a buscar
      * @return una lista de los ingredientes registrados dto que cumplan con los criterios
      */
-    public abstract List<IngredienteRegistradoDTO> buscarIngredientes(String filtroBusqueda, UnidadMedidaIngrediente unidadMedida);
+    public abstract List<IngredienteRegistradoDTO> buscarIngredientes(String nombre, String unidadMedida);
 
 }
