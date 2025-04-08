@@ -4,17 +4,34 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
+import itson.sistemarestaurantenegocio.IIngredientesBO;
+import java.util.List;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author saula
  */
-public class InventarioIngredientesForm extends javax.swing.JFrame {
+public class InventarioIngredientesForm extends javax.swing.JFrame implements IngredientesRegistradosListener {
 
+    private DefaultTableModel modeloTabla;
+    private JTable tablaResultados;
+    private JScrollPane jScrollPane1;
+    private IIngredientesBO ingredientesBO;
+    private IngredientesRegistradosListener listener;
+    
     /**
      * Creates new form InventarioIngredientesForm
      */
-    public InventarioIngredientesForm() {
+    public InventarioIngredientesForm(IIngredientesBO ingredientesBO) {
+        this.ingredientesBO = ingredientesBO;
         initComponents();
+        crearTabla();
+        buscadorIngredientesPanel1.iniciarBusqueda(ingredientesBO, this);
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 600, 350)); 
     }
 
     /**
@@ -26,57 +43,50 @@ public class InventarioIngredientesForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        buscadorIngredientesPanel1 = new itson.sistemarestaurantepresentacion.BuscadorIngredientesPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel1.add(buscadorIngredientesPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 800, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 490, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InventarioIngredientesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InventarioIngredientesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InventarioIngredientesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InventarioIngredientesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new InventarioIngredientesForm().setVisible(true);
-            }
-        });
+    @Override
+    public void onIngredientesRegistrados(List<IngredienteRegistradoDTO> ingredientes) {
+        actualizarTabla(ingredientes);
     }
-
+    
+    private void crearTabla() {
+        modeloTabla = new DefaultTableModel(new String[]{"Nombre", "Stock", "Unidad"}, 0);
+        tablaResultados = new JTable(modeloTabla);
+        jScrollPane1 = new JScrollPane(tablaResultados);
+    }
+    
+    public void actualizarTabla(List<IngredienteRegistradoDTO> ingredientes) {
+        modeloTabla.setRowCount(0);
+        for (IngredienteRegistradoDTO ing : ingredientes) 
+            modeloTabla.addRow(new Object[]{
+                ing.getNombre(), ing.getStock(), ing.getUnidadMedidaIngrediente().toString()
+            });    
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private itson.sistemarestaurantepresentacion.BuscadorIngredientesPanel buscadorIngredientesPanel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

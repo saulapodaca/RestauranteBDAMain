@@ -7,9 +7,13 @@ package itson.sistemarestaurantepresentacion;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.List;
+import javax.swing.Action;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -17,22 +21,25 @@ import javax.swing.event.DocumentListener;
  *
  * @author saula
  */
-public class BuscadorIngredientesPanel extends javax.swing.JPanel implements IngredientesRegistradosListener{
+public class BuscadorIngredientesPanel extends javax.swing.JPanel implements IngredientesRegistradosListener {
 
     private static final String DEFAULT_BUSCADOR = "INGRESE EL INGREDIENTE QUE DESEA BUSCAR";
     private IngredientesRegistradosListener listener;
     private IIngredientesBO ingredientesBO;
+
     /**
      * Creates new form BuscadorIngredientesPanel
-     * @param ingredientesBO
-     * @param listener
      */
-    public BuscadorIngredientesPanel(IIngredientesBO ingredientesBO, IngredientesRegistradosListener listener) {
+    public BuscadorIngredientesPanel() {
         initComponents();
         configurarPlaceholders();
-        configurarBusquedaEnTiempoReal();
+    }
+
+    public void iniciarBusqueda(IIngredientesBO ingredientesBO, IngredientesRegistradosListener listener) {
         this.ingredientesBO = ingredientesBO;
         this.listener = listener;
+        configurarBusquedaEnTiempoReal();
+        SwingUtilities.invokeLater(() -> textFieldBuscador.requestFocusInWindow());
     }
 
     /**
@@ -62,10 +69,10 @@ public class BuscadorIngredientesPanel extends javax.swing.JPanel implements Ing
             }
         });
         jPanel1.add(textFieldBuscador, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 310, 20));
-        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 30, 400, 5));
+        jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 310, 10));
 
         comboBoxUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "TODOS", "PIEZAS", "GRAMOS", "MILILITROS" }));
-        jPanel1.add(comboBoxUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 10, 110, -1));
+        jPanel1.add(comboBoxUnidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, 110, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,8 +116,8 @@ public class BuscadorIngredientesPanel extends javax.swing.JPanel implements Ing
     private void configurarPlaceholders() {
         configurarPlaceholder(textFieldBuscador, DEFAULT_BUSCADOR);
     }
-    
-        private void configurarBusquedaEnTiempoReal() {
+
+    private void configurarBusquedaEnTiempoReal() {
         textFieldBuscador.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -127,19 +134,37 @@ public class BuscadorIngredientesPanel extends javax.swing.JPanel implements Ing
                 actualizarBusqueda();
             }
         });
+
+        comboBoxUnidad.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarBusqueda();
+
+                // Volver a enfocar el campo de texto
+                textFieldBuscador.requestFocusInWindow();
+            }
+        });
     }
-    
-    private void actualizarBusqueda(){
+
+    private void actualizarBusqueda() {
+        if (ingredientesBO == null) {
+            return;
+        }
+
         String filtro = textFieldBuscador.getText().trim();
         String unidad = comboBoxUnidad.getSelectedItem().toString();
-
+        try {
             List<IngredienteRegistradoDTO> resultados = ingredientesBO.buscarIngredientePorFiltro(filtro, unidad);
 
-            if (listener != null)
+            if (listener != null) {
                 listener.onIngredientesRegistrados(resultados);
-            
+            }
+        } catch (Exception e) {
+            System.err.println("Error al buscar ingredientes: " + e.getMessage());
+
+        }
     }
-        
+
     private void textFieldBuscadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textFieldBuscadorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textFieldBuscadorActionPerformed
