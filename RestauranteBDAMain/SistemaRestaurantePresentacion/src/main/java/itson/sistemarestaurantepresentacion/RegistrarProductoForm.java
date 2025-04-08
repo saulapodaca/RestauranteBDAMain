@@ -4,6 +4,12 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantedominio.Ingrediente;
+import itson.sistemarestaurantedominio.TipoProducto;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /**
  *
  * @author 52644
@@ -96,7 +102,12 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarProductoActionPerformed
-        // TODO add your handling code here:
+        // Mostrar un formulario para capturar los datos del producto
+        JTextField campoNombre = new JTextField();
+        JTextField campoPrecio = new JTextField();
+        JComboBox<TipoProducto> comboTipo = new JComboBox<>(TipoProducto.values());
+        
+        // List<Ingrediente> ingredientesDisponibles = obtener();
     }//GEN-LAST:event_botonRegistrarProductoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
