@@ -1,6 +1,7 @@
 package itson.sistemarestaurantepersistencia.implementaciones;
 
 import itson.sistemarestaurantedominio.Producto;
+import itson.sistemarestaurantedominio.TipoProducto;
 import itson.sistemarestaurantedominio.dtos.NuevoProductoDTO;
 import itson.sistemarestaurantepersistencia.IProductosDAO;
 import java.sql.PreparedStatement;
@@ -9,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.TypedQuery;
 //import java.sql.Connection;
 
@@ -38,6 +40,7 @@ public class ProductosDAO implements IProductosDAO{
     return producto;
    }
   
+   @Override
    public List<Producto> buscarProductos(String filtro){
        if (filtro == null || filtro.trim().isEmpty()) {
            return new ArrayList<>();
@@ -47,5 +50,20 @@ public class ProductosDAO implements IProductosDAO{
        query.setParameter("filtro", "%" + filtro.trim() + "%");
        return query.getResultList();
    }
+   
+  @Override
+    public boolean existenteProducto(String nombre, TipoProducto tipoProducto) {
+        String jpql = "SELECT p FROM Producto p WHERE p.nombre = :nombre AND p.tipoProducto = :tipoProducto";
+        TypedQuery<Producto> query = entityManager.createQuery(jpql, Producto.class);
+        query.setParameter("nombre", nombre);
+        query.setParameter("tipoProducto", tipoProducto);
+
+        try {
+            query.getSingleResult();
+            return true; // Si encontramos un producto, significa que ya existe
+        } catch (NoResultException e) {
+            return false; // Si no hay resultados, el producto no existe
+        }
+    }
     
 }

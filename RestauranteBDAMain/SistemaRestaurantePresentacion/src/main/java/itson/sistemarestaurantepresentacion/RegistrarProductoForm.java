@@ -4,6 +4,12 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantedominio.Ingrediente;
+import itson.sistemarestaurantedominio.TipoProducto;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+
 /**
  *
  * @author 52644
@@ -52,6 +58,11 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(TablaRegistrarProductos);
 
         botonRegistrarProducto.setText("Registrar Producto");
+        botonRegistrarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonRegistrarProductoActionPerformed(evt);
+            }
+        });
 
         Lupa.setIcon(new javax.swing.ImageIcon(getClass().getResource("/lupa2.png"))); // NOI18N
 
@@ -89,6 +100,16 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarProductoActionPerformed
+        // Mostrar un formulario para capturar los datos del producto
+        JTextField campoNombre = new JTextField();
+        JTextField campoPrecio = new JTextField();
+        JComboBox<TipoProducto> comboTipo = new JComboBox<>(TipoProducto.values());
+        
+        // List<Ingrediente> ingredientesDisponibles = obtener();
+    }//GEN-LAST:event_botonRegistrarProductoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lupa;
     private javax.swing.JTable TablaRegistrarProductos;
