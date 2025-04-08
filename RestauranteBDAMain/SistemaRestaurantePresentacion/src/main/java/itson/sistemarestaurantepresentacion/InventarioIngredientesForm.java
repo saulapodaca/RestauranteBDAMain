@@ -73,6 +73,7 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
     
     private void crearTabla() {
         modeloTabla = new DefaultTableModel(new String[]{"Nombre", "Stock", "Unidad"}, 0);
+        //TODO me falta poner que se pueda modificar la seccion del stock
         tablaResultados = new JTable(modeloTabla);
         jScrollPane1 = new JScrollPane(tablaResultados);
     }
