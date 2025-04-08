@@ -23,7 +23,7 @@ public class IngredientesBO implements IIngredientesBO{
     public IngredientesBO (IIngredientesDAO ingredientesDAO){
         this.ingredientesDAO = ingredientesDAO;
     }
-    
+
     @Override
     public Ingrediente registrar(NuevoIngredienteDTO nuevoIngredienteDTO) throws NombreInvalidoException, StockInvalidoException, IngredienteRegistradoException{
         validarNombre(nuevoIngredienteDTO.getNombre());
@@ -62,6 +62,8 @@ public class IngredientesBO implements IIngredientesBO{
     }
     @Override
     public List<IngredienteRegistradoDTO> buscarIngredientePorFiltro(String filtroBusqueda, String unidadMedida) {
-        return ingredientesDAO.buscarIngredientes(filtroBusqueda, unidadMedida);
+        if (unidadMedida.equals("TODOS"))
+                return ingredientesDAO.buscarIngredientes(filtroBusqueda, null);
+        return ingredientesDAO.buscarIngredientes(filtroBusqueda, UnidadMedidaIngrediente.valueOf(unidadMedida));
     }
 }

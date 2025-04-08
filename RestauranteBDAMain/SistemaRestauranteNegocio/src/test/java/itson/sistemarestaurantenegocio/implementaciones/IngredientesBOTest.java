@@ -78,7 +78,7 @@ public class IngredientesBOTest {
     public void testRegistrarIngredienteRepetido() throws IngredienteRegistradoException, NombreInvalidoException, StockInvalidoException {
         IIngredientesDAO ingredientesDAO = new IngredientesDAO();
         IngredientesBO ingredientesBO = new IngredientesBO(ingredientesDAO);
-        List<IngredienteRegistradoDTO> ingredientes = ingredientesDAO.obtenerInventarioIngredientes();
+        List<IngredienteRegistradoDTO> ingredientes = ingredientesDAO.buscarIngredientes(null,null);
         NuevoIngredienteDTO nuevoIngredienteDTO = new NuevoIngredienteDTO(ingredientes.get(0).getNombre(), ingredientes.get(0).getUnidadMedidaIngrediente(), ingredientes.get(0).getStock());
         IngredienteRegistradoException thrown = assertThrows(IngredienteRegistradoException.class,() -> {ingredientesBO.registrar(nuevoIngredienteDTO);});
         assertEquals("El ingrediente ya se encuentra registrado", thrown.getMessage());
