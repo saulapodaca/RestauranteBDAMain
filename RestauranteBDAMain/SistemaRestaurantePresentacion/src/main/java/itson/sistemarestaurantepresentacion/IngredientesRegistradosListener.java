@@ -1,16 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package itson.sistemarestaurantepresentacion;
 
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import java.util.List;
 
 /**
- *
- * @author saula
+ * Interfaz que define un listener para recibir una lista de ingredientes registrados.
+ * 
+ * Esta interfaz es útil para desacoplar la lógica de presentación de la lógica de negocio.
+ * Permite que diferentes componentes (como paneles de búsqueda o formularios) reaccionen
+ * cuando se obtienen los resultados de una consulta de ingredientes.
  */
 public interface IngredientesRegistradosListener {
-    void onIngredientesRegistrados (List<IngredienteRegistradoDTO> ingredientes);
+    /**
+     * Método que se ejecuta cuando se obtiene la lista de ingredientes registrados.
+     *
+     * @param ingredientes lista de ingredientes que cumplen con los criterios de búsqueda
+     */
+    public abstract void onIngredientesRegistrados (List<IngredienteRegistradoDTO> ingredientes);
 }

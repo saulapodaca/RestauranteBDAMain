@@ -21,8 +21,8 @@ public class SistemaRestaurantePresentacion {
 //        prueba.setVisible(true);
 
         IIngredientesBO ingredientesBO = FabricaObjNegocio.crearIngredienteBO();
-//        RegistrarIngredienteForm pruebaRegistrarIngrediente = new RegistrarIngredienteForm(ingredientesBO);
-//        pruebaRegistrarIngrediente.setVisible(true);
+        RegistrarIngredienteForm pruebaRegistrarIngrediente = new RegistrarIngredienteForm(ingredientesBO);
+        pruebaRegistrarIngrediente.setVisible(true);
         InventarioIngredientesForm pruebaInventario = new InventarioIngredientesForm(ingredientesBO);
         pruebaInventario.setVisible(true);
 //      
