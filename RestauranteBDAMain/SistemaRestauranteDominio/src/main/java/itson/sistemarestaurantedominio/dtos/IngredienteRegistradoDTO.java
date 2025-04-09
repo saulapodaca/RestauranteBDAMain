@@ -33,5 +33,9 @@ public class IngredienteRegistradoDTO {
     public UnidadMedidaIngrediente getUnidadMedidaIngrediente() {
         return unidadMedidaIngrediente;
     }
+    
+    public void setStock(Integer stock){
+        this.stock = stock;
+    }
 
 }
