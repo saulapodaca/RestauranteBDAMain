@@ -5,10 +5,23 @@
 package itson.sistemarestaurantepresentacion;
 
 import itson.sistemarestaurantedominio.Ingrediente;
+import itson.sistemarestaurantedominio.Producto;
 import itson.sistemarestaurantedominio.TipoProducto;
+import itson.sistemarestaurantedominio.dtos.NuevoProductoDTO;
+import itson.sistemarestaurantenegocio.implementaciones.ProductosBO;
+import itson.sistemarestaurantepersistencia.IIngredientesDAO;
+import itson.sistemarestaurantepersistencia.implementaciones.IngredientesDAO;
+import itson.sistemarestaurantepersistencia.implementaciones.ManejadorConexiones;
+import itson.sistemarestaurantepersistencia.implementaciones.ProductosDAO;
+import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -16,16 +29,87 @@ import javax.swing.JTextField;
  */
 public class RegistrarProductoForm extends javax.swing.JFrame {
 
+    private ProductosBO productosBO;
     /**
      * Creates new form RegistrarProductoForm
      */
     public RegistrarProductoForm() {
         initComponents();
+        cargarProductos(); // Cargar los productos al iniciar
+        configurarBusqueda(); // Configurar la búsqueda dinámica
     }
 
-    public void limpiarFormulario(){
-     //   textFieldingresarTipoDeProducto.setText(t);
+    public void limpiarFormulario() {
+        textFieldingresarTipoDeProducto.setText("");
     }
+    
+    private void cargarProductos() {
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        try {
+            productosBO = new ProductosBO(new ProductosDAO(entityManager));
+            List<Producto> productos = productosBO.buscarProductos("");
+            DefaultTableModel modelo = (DefaultTableModel) TablaRegistrarProductos.getModel();
+            modelo.setRowCount(0);
+            for (Producto producto : productos) {
+                modelo.addRow(new Object[]{
+                    producto.getNombre(),
+                    producto.getPrecio(),
+                    producto.getTipoProducto()
+                });
+            }
+        } finally {
+            entityManager.close();
+        }
+    }
+
+    private void buscarProductos(String filtro) {
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        try {
+            productosBO = new ProductosBO(new ProductosDAO(entityManager));
+            List<Producto> productos = productosBO.buscarProductos(filtro);
+            DefaultTableModel modelo = (DefaultTableModel) TablaRegistrarProductos.getModel();
+            modelo.setRowCount(0);
+            for (Producto producto : productos) {
+                modelo.addRow(new Object[]{
+                    producto.getNombre(),
+                    producto.getPrecio(),
+                    producto.getTipoProducto()
+                });
+            }
+        } finally {
+            entityManager.close();
+        }
+    }
+    
+    private void configurarBusqueda() {
+        textFieldingresarTipoDeProducto.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                buscarProductos(textFieldingresarTipoDeProducto.getText());
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                buscarProductos(textFieldingresarTipoDeProducto.getText());
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                buscarProductos(textFieldingresarTipoDeProducto.getText());
+            }
+        });
+    }
+    /*
+    private List<Ingrediente> obtenerIngredientesDisponibles() {
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        try {
+            IIngredientesDAO ingredientesDAO = new IngredientesDAO(entityManager);
+            return ingredientesDAO.buscarIngredientes(nombre, unidadMedida);
+        } finally {
+            entityManager.close();
+        }
+    }
+    */
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -70,18 +154,19 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonRegistrarProducto)
-                .addGap(209, 209, 209))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(Lupa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textFieldingresarTipoDeProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Lupa)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textFieldingresarTipoDeProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(botonRegistrarProducto)))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -93,23 +178,60 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
                     .addComponent(textFieldingresarTipoDeProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addGap(18, 18, 18)
                 .addComponent(botonRegistrarProducto)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonRegistrarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonRegistrarProductoActionPerformed
-        // Mostrar un formulario para capturar los datos del producto
+    // Mostrar un formulario para capturar los datos del producto
         JTextField campoNombre = new JTextField();
         JTextField campoPrecio = new JTextField();
         JComboBox<TipoProducto> comboTipo = new JComboBox<>(TipoProducto.values());
-        
-        // List<Ingrediente> ingredientesDisponibles = obtener();
-    }//GEN-LAST:event_botonRegistrarProductoActionPerformed
 
+        Object[] campos = {
+            "Nombre:", campoNombre,
+            "Precio:", campoPrecio,
+            "Tipo de producto:", comboTipo
+        };
+
+        int opcion = JOptionPane.showConfirmDialog(this, campos, "Registrar Producto", JOptionPane.OK_CANCEL_OPTION);
+        if (opcion != JOptionPane.OK_OPTION) {
+            return;
+        }
+
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        try {
+            productosBO = new ProductosBO(new ProductosDAO(entityManager));
+            String nombre = campoNombre.getText();
+            float precio = Float.parseFloat(campoPrecio.getText());
+            TipoProducto tipoProducto = (TipoProducto) comboTipo.getSelectedItem();
+
+            NuevoProductoDTO nuevoProductoDTO = new NuevoProductoDTO(nombre, precio, tipoProducto);
+            Producto producto = productosBO.registrarProducto(nuevoProductoDTO);
+
+            JOptionPane.showMessageDialog(this, "Producto registrado: " + producto.getNombre());
+            cargarProductos();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Error: El precio debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            entityManager.close();
+        }
+    }//GEN-LAST:event_botonRegistrarProductoActionPerformed
+    /*
+    public static void main(String[] args) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+               new RegistrarProductoForm().setVisible(true);
+            }
+        });
+    }
+  */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Lupa;
     private javax.swing.JTable TablaRegistrarProductos;
