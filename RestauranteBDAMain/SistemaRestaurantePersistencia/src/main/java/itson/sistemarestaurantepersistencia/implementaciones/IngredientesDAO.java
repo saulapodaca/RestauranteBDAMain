@@ -6,6 +6,7 @@ import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
+import itson.sistemarestaurantedominio.dtos.StockIngredienteActualizadoDTO;
 import itson.sistemarestaurantepersistencia.IIngredientesDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -71,5 +72,17 @@ public class IngredientesDAO implements IIngredientesDAO {
         query.setParameter("nombre", nombre != null ? "%" + nombre + "%" : null);
         query.setParameter("unidadMedida", unidadMedida != null ? "%" + unidadMedida + "%" : null);
         return query.getResultList();
+    }
+    
+    @Override
+    public Ingrediente actualizarStock(StockIngredienteActualizadoDTO ingrediente){
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        entityManager.getTransaction().begin();
+        Ingrediente ingredienteExistente = 
+                entityManager.find(Ingrediente.class, 
+                        ingrediente.getId());
+        ingredienteExistente.setStock(ingrediente.getStock());
+        entityManager.getTransaction().commit();
+        return ingredienteExistente;
     }
 }

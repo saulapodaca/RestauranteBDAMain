@@ -8,6 +8,7 @@ import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
 import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
+import itson.sistemarestaurantedominio.dtos.StockIngredienteActualizadoDTO;
 import java.util.List;
 
 /**
@@ -38,5 +39,7 @@ public interface IIngredientesDAO {
      * @return una lista de los ingredientes registrados dto que cumplan con los criterios
      */
     public abstract List<IngredienteRegistradoDTO> buscarIngredientes(String nombre, String unidadMedida);
+    
+    public abstract Ingrediente actualizarStock(StockIngredienteActualizadoDTO ingrediente);
 
 }
