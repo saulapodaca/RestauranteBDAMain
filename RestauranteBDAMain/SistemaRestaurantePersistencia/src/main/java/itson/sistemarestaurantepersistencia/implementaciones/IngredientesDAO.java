@@ -1,7 +1,5 @@
 package itson.sistemarestaurantepersistencia.implementaciones;
 
-//@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-
 import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
@@ -12,13 +10,16 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-
+/**
+ * Implementación de la interfaz IIngredientesDAO que maneja el acceso
+ * a datos para la entidad Ingrediente utilizando JPA.
+ */
 public class IngredientesDAO implements IIngredientesDAO {
 
     /**
-     * Método que registra el ingrediente en la base de datos
-     * @param nuevoIngredienteDTO
-     * @return ingrediente registrado
+     * Registra un nuevo ingrediente en la base de datos.
+     * @param nuevoIngredienteDTO DTO que contiene la información del nuevo ingrediente a registrar
+     * @return ingrediente el ingrediente persistido
      */
     @Override
     public Ingrediente registrar(NuevoIngredienteDTO nuevoIngredienteDTO) {
@@ -34,10 +35,10 @@ public class IngredientesDAO implements IIngredientesDAO {
     }
 
     /**
-     * Método que regresa un boleano si es que el ingrediente a registrar existe ya dentro de la base de datos
-     * @param nombre del ingrediente
-     * @param unidadMedida del ingrediente
-     * @return true si es que ya éxiste dentro de la base de datos, false de lo contrario
+     * Verifica si ya existe un ingrediente con el mismo nombre y unidad de medida en la base de datos.
+     * @param nombre nombre del ingrediente
+     * @param unidadMedida unidad de medida del ingrediente
+     * @return true si el ingrediente ya está registrado, false en caso contrario
      */
     @Override
     public boolean existeIngrediente(String nombre, UnidadMedidaIngrediente unidadMedida) {
@@ -50,11 +51,12 @@ public class IngredientesDAO implements IIngredientesDAO {
         return count > 0;
     }
     
-    /**
-     * Método que busca el inventario de ingredientes a la base de datos
-     * @param nombre por el nombre que se buscará, si es null mandará todos los ingredientes
-     * @param unidadMedida por la unidad de medida por la que se filtrará, si es null mandará todos
-     * @return regresa la lista de ingredientes filtrados DTO
+     /**
+     * Busca ingredientes filtrando por nombre y unidad de medida.
+     *
+     * @param nombre texto parcial del nombre del ingrediente a buscar; si es null, no se filtra por nombre
+     * @param unidadMedida unidad de medida a filtrar; si es null, no se filtra por unidad
+     * @return lista de ingredientes que coinciden con los filtros, en forma de IngredienteRegistradoDTO
      */
     @Override
     public List<IngredienteRegistradoDTO> buscarIngredientes(String nombre, String unidadMedida) {
@@ -74,6 +76,12 @@ public class IngredientesDAO implements IIngredientesDAO {
         return query.getResultList();
     }
     
+    /**
+     * Actualiza el stock de un ingrediente existente en la base de datos.
+     *
+     * @param ingrediente DTO con el ID del ingrediente y el nuevo valor de stock
+     * @return el objeto Ingrediente actualizado
+     */
     @Override
     public Ingrediente actualizarStock(StockIngredienteActualizadoDTO ingrediente){
         EntityManager entityManager = ManejadorConexiones.getEntityManager();

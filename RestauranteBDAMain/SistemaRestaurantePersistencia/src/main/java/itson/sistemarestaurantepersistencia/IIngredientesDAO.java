@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package itson.sistemarestaurantepersistencia;
 
 import itson.sistemarestaurantedominio.Ingrediente;
@@ -12,34 +8,43 @@ import itson.sistemarestaurantedominio.dtos.StockIngredienteActualizadoDTO;
 import java.util.List;
 
 /**
- *
- * @author saula
+ * Interfaz que define las operaciones de acceso a datos para la entidad Ingrediente.
+ * Encapsula las interacciones con la base de datos relacionadas con ingredientes.
  */
 public interface IIngredientesDAO {
     
     /**
-     * Registra un ingrediente en el sistema
-     * @param nuevoIngredienteDTO contiene la información del ingrediente que se registrará
-     * @return el ingrediente con la información con la que se guardó
+     * Registra un nuevo ingrediente en la base de datos.
+     *
+     * @param nuevoIngredienteDTO DTO con los datos del ingrediente a registrar
+     * @return el objeto Ingrediente persistido con su información almacenada
      */
     public abstract Ingrediente registrar(NuevoIngredienteDTO nuevoIngredienteDTO);
     
     /**
-     * verifica si el ingrediente a registrar ya existe en el sistema
-     * @param nombre del ingrediente
-     * @param unidadMedida del ingrediente
-     * @return true si el ingrediente existe en el sistema, false de lo contrario
+     * Verifica si ya existe un ingrediente con el mismo nombre y unidad de medida.
+     *
+     * @param nombre nombre del ingrediente
+     * @param unidadMedida unidad de medida del ingrediente
+     * @return true si el ingrediente ya existe, false en caso contrario
      */
     public abstract boolean existeIngrediente(String nombre, UnidadMedidaIngrediente unidadMedida);
     
-    /**
-     * Busca los ingredientes registrados en el sistema por medio de su nombre y unidad de medida
-     * @param nombre se refiere al nombre por el que se filtrará
-     * @param unidadMedida a la unidad de medida que tendrán los ingredientes a buscar
-     * @return una lista de los ingredientes registrados dto que cumplan con los criterios
+     /**
+     * Busca ingredientes registrados filtrando por nombre y unidad de medida.
+     *
+     * @param nombre texto de búsqueda para el nombre; si es null, no se aplica filtro por nombre
+     * @param unidadMedida unidad de medida a filtrar; si es null, no se aplica filtro por unidad
+     * @return lista de ingredientes registrados que coinciden con los filtros, como IngredienteRegistradoDTO   
      */
     public abstract List<IngredienteRegistradoDTO> buscarIngredientes(String nombre, String unidadMedida);
     
+     /**
+     * Actualiza el stock de un ingrediente existente.
+     *
+     * @param ingrediente DTO que contiene el ID del ingrediente y el nuevo stock
+     * @return el objeto Ingrediente con el stock actualizado
+     */
     public abstract Ingrediente actualizarStock(StockIngredienteActualizadoDTO ingrediente);
 
 }
