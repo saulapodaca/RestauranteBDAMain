@@ -1,20 +1,10 @@
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package itson.sistemarestaurantepresentacion.control;
-
 
 import itson.sistemarestaurantenegocio.fabrica.FabricaObjNegocio;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
 import itson.sistemarestaurantepresentacion.InventarioIngredientesForm;
 import itson.sistemarestaurantepresentacion.RegistrarIngredienteForm;
 
-/**
- *
- * @author saula
- */
 public class SistemaRestaurantePresentacion {
 
     public static void main(String[] args) {
