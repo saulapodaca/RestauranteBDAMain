@@ -6,6 +6,7 @@ import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.UnidadMedidaIngrediente;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantedominio.dtos.NuevoIngredienteDTO;
+import itson.sistemarestaurantedominio.dtos.StockIngredienteActualizadoDTO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
 import itson.sistemarestaurantenegocio.excepciones.IngredienteRegistradoException;
 import itson.sistemarestaurantenegocio.excepciones.NombreInvalidoException;
@@ -67,9 +68,21 @@ public class IngredientesBO implements IIngredientesBO{
                 || filtroBusqueda.trim().isEmpty())
             filtroBusqueda = null;
         if (unidadMedida.trim().equals("TODOS"))
-                unidadMedida = null;
-        
-        return ingredientesDAO.buscarIngredientes(filtroBusqueda, unidadMedida);
-        
+                unidadMedida = null;       
+        return ingredientesDAO.buscarIngredientes(filtroBusqueda, unidadMedida);  
     }
+    
+    @Override
+    public void actualizarStockIngrediente(Long id, String nuevoStockTexto) throws StockInvalidoException{
+        try {
+            Integer nuevoStock = Integer.valueOf(nuevoStockTexto);
+            StockIngredienteActualizadoDTO ingredienteActualizado
+                    = new StockIngredienteActualizadoDTO(id, nuevoStock);
+            validarStock(nuevoStock);
+            ingredientesDAO.actualizarStock(ingredienteActualizado);
+        }catch(StockInvalidoException | NumberFormatException e){
+            throw new StockInvalidoException("El stock solo admite números enteros positivos.");
+        }
+    }
+
 }

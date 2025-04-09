@@ -22,5 +22,6 @@ public interface IIngredientesBO {
     public abstract void validacionesIniciales(String nombre,String nombreDefault, String stock, String stockDefault) 
             throws NombreInvalidoException, StockInvalidoException;
     public abstract List<IngredienteRegistradoDTO> buscarIngredientePorFiltro(String filtroBusqueda, String unidadMedida);
-
+    public abstract void actualizarStockIngrediente(Long id, String nuevoStockTexto) 
+            throws StockInvalidoException;
 }
