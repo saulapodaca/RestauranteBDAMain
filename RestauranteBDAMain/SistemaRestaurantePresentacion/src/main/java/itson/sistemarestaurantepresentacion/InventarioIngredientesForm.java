@@ -6,9 +6,13 @@ package itson.sistemarestaurantepresentacion;
 
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
+import itson.sistemarestaurantenegocio.excepciones.StockInvalidoException;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -70,19 +74,50 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
     public void onIngredientesRegistrados(List<IngredienteRegistradoDTO> ingredientes) {
         actualizarTabla(ingredientes);
     }
-    
+
     private void crearTabla() {
-        modeloTabla = new DefaultTableModel(new String[]{"Nombre", "Stock", "Unidad"}, 0);
-        //TODO me falta poner que se pueda modificar la seccion del stock
+        modeloTabla = new DefaultTableModel(new String[]{"ID", "Nombre", "Stock", "Unidad"}, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // solo la columna 2 (stock) se puede editar, la 1 es el id pero está escondido
+                return column == 2; 
+            }
+        };
         tablaResultados = new JTable(modeloTabla);
         jScrollPane1 = new JScrollPane(tablaResultados);
+        
+        //escondo la columna del id
+        tablaResultados.getColumnModel().getColumn(0).setMinWidth(0);
+        tablaResultados.getColumnModel().getColumn(0).setMaxWidth(0);
+        tablaResultados.getColumnModel().getColumn(0).setWidth(0);
+        
+        modeloTabla.addTableModelListener((TableModelEvent e) -> {
+            if (e.getType() == TableModelEvent.UPDATE) {
+                int fila = e.getFirstRow();
+                int columna = e.getColumn();
+                
+                if (columna == 2) {
+                    Long id = (Long) modeloTabla.getValueAt(fila, 0);
+                    String nuevoStockTexto = modeloTabla.getValueAt(fila, columna).toString();
+                    
+                    try {
+                        ingredientesBO.actualizarStockIngrediente(id, nuevoStockTexto);
+                    } catch (StockInvalidoException ex) {
+                        JOptionPane.showMessageDialog(jPanel1, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+            }
+        });
     }
     
     public void actualizarTabla(List<IngredienteRegistradoDTO> ingredientes) {
         modeloTabla.setRowCount(0);
         for (IngredienteRegistradoDTO ing : ingredientes) 
             modeloTabla.addRow(new Object[]{
-                ing.getNombre(), ing.getStock(), ing.getUnidadMedidaIngrediente().toString()
+                ing.getId(),
+                ing.getNombre(), 
+                ing.getStock(), 
+                ing.getUnidadMedidaIngrediente().toString()
             });    
     }
     
