@@ -5,8 +5,8 @@ import itson.sistemarestaurantenegocio.IIngredientesBO;
 import itson.sistemarestaurantenegocio.fabrica.FabricaObjNegocio;
 import itson.sistemarestaurantepresentacion.ClientesFrecuentes;
 import itson.sistemarestaurantepresentacion.InventarioIngredientesForm;
-import itson.sistemarestaurantepresentacion.RegistrarClienteFrecuenteForm;
-import itson.sistemarestaurantepresentacion.RegistrarIngredienteForm;
+import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarClienteFrecuenteForm;
+import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarIngredienteForm;
 
 public class Control {
 

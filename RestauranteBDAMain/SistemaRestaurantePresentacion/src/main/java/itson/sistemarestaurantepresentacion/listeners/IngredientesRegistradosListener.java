@@ -1,4 +1,4 @@
-package itson.sistemarestaurantepresentacion;
+package itson.sistemarestaurantepresentacion.listeners;
 
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import java.util.List;

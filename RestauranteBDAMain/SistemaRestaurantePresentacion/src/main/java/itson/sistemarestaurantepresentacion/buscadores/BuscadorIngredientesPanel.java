@@ -1,7 +1,8 @@
-package itson.sistemarestaurantepresentacion;
+package itson.sistemarestaurantepresentacion.buscadores;
 
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
+import itson.sistemarestaurantepresentacion.listeners.IngredientesRegistradosListener;
 import itson.sistemarestaurantepresentacion.utilidades.FormularioUtilidades;
 import java.util.List;
 import javax.swing.JTextField;

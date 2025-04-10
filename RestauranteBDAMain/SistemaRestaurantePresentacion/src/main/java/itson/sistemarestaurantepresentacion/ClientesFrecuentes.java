@@ -4,6 +4,7 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantepresentacion.listeners.ClientesFiltradosListener;
 import itson.encriptacion.Desencriptador;
 import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
@@ -81,7 +82,7 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        buscadorClientesFrecuentesPanel1 = new itson.sistemarestaurantepresentacion.BuscadorClientesFrecuentesPanel();
+        buscadorClientesFrecuentesPanel1 = new itson.sistemarestaurantepresentacion.buscadores.BuscadorClientesFrecuentesPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -95,7 +96,7 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private itson.sistemarestaurantepresentacion.BuscadorClientesFrecuentesPanel buscadorClientesFrecuentesPanel1;
+    private itson.sistemarestaurantepresentacion.buscadores.BuscadorClientesFrecuentesPanel buscadorClientesFrecuentesPanel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

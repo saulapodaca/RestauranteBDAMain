@@ -1,5 +1,6 @@
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantepresentacion.listeners.IngredientesRegistradosListener;
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
 import itson.sistemarestaurantenegocio.excepciones.StockInvalidoException;
@@ -47,7 +48,7 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        buscadorIngredientesPanel1 = new itson.sistemarestaurantepresentacion.BuscadorIngredientesPanel();
+        buscadorIngredientesPanel1 = new itson.sistemarestaurantepresentacion.buscadores.BuscadorIngredientesPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,7 +138,7 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private itson.sistemarestaurantepresentacion.BuscadorIngredientesPanel buscadorIngredientesPanel1;
+    private itson.sistemarestaurantepresentacion.buscadores.BuscadorIngredientesPanel buscadorIngredientesPanel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

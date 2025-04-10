@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package itson.sistemarestaurantepresentacion;
+package itson.sistemarestaurantepresentacion.buscadores;
 
 import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
+import itson.sistemarestaurantepresentacion.listeners.ClientesFiltradosListener;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;

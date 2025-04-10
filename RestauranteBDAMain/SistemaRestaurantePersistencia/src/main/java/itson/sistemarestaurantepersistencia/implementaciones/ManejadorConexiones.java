@@ -25,25 +25,4 @@ public class ManejadorConexiones {
         EntityManager entityManager = emFactory.createEntityManager();
         return entityManager;
     }
-
-    /*
-    private static EntityManagerFactory emFactory;
-
-    public static EntityManager getEntityManager() {
-        if (emFactory == null) {
-            // Forzar el uso de la unidad de persistencia de prueba
-            System.out.println("Usando unidad de persistencia de prueba: itson_SistemaRestaurantePersistencia_jar_1.0PU_TEST");
-            emFactory = Persistence.createEntityManagerFactory("itson_SistemaRestaurantePersistencia_jar_1.0PU_TEST");
-        }
-        return emFactory.createEntityManager();
-    }
-
-    public static void close() {
-        if (emFactory != null && emFactory.isOpen()) {
-            emFactory.close();
-            emFactory = null;
-        }
-    }
-    */
-    
 }
