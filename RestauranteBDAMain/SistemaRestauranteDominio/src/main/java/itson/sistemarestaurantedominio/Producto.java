@@ -95,6 +95,14 @@ public class Producto implements Serializable {
         hash += (id != null ? id.hashCode() : 0);
         return hash;
     }
+    
+    public void addIngrediente(Ingrediente ingrediente, float cantidad) {
+        ProductoIngrediente productoIngrediente = new ProductoIngrediente();
+        productoIngrediente.setProducto(this);
+        productoIngrediente.setIngrediente(ingrediente);
+        //productoIngrediente.setCantidad(cantidad);
+        ingredientes.add(productoIngrediente);
+    }
 
     @Override
     public boolean equals(Object object) {
