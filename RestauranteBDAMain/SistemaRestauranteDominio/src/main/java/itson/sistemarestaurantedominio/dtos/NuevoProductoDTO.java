@@ -5,7 +5,8 @@
 package itson.sistemarestaurantedominio.dtos;
 
 import itson.sistemarestaurantedominio.TipoProducto;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  *
  * @author FELIX ISAAC SANCHEZ QUINTERO
@@ -14,7 +15,7 @@ public class NuevoProductoDTO {
     private String nombre;
     private float precio;
     private TipoProducto tipoProducto;
-
+    
     public NuevoProductoDTO(String nombre, float precio, TipoProducto tipoProducto) {
         this.nombre = nombre;
         this.precio = precio;
