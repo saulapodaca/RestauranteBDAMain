@@ -17,7 +17,7 @@ import javax.swing.event.DocumentListener;
  *
  * @author rauln
  */
-public class BuscadorClientesFrecuentesPanel extends javax.swing.JPanel implements ClientesFiltradosListener{
+public class BuscadorClientesFrecuentesPanel extends javax.swing.JPanel {
 
     private IClientesFrecuentesBO clientesFrecuentesBO;
     private ClientesFiltradosListener listener;
@@ -150,7 +150,5 @@ public class BuscadorClientesFrecuentesPanel extends javax.swing.JPanel implemen
     private javax.swing.JTextField textFieldBuscador;
     // End of variables declaration//GEN-END:variables
 
-    @Override
-    public void onClientesFiltrados(List<ClienteFrecuente> clientes) {
-    }
+
 }
