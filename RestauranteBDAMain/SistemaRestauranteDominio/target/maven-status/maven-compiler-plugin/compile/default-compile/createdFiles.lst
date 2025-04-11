@@ -10,6 +10,7 @@ itson\sistemarestaurantedominio\dtos\NuevoClienteFrecuenteDTO.class
 itson\sistemarestaurantedominio\dtos\StockIngredienteActualizadoDTO.class
 itson\sistemarestaurantedominio\dtos\ProductoRegistradoDTO.class
 itson\sistemarestaurantedominio\EstadoMesa.class
+itson\sistemarestaurantedominio\dtos\RelacionProductoIngredienteRegistradaDTO.class
 itson\sistemarestaurantedominio\UnidadMedidaIngrediente.class
 itson\sistemarestaurantedominio\dtos\ProductoActualizadoDTO.class
 itson\sistemarestaurantedominio\Comanda.class
