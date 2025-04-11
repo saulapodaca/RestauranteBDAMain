@@ -14,6 +14,7 @@ itson\sistemarestaurantepresentacion\pantallaregistros\RegistrarIngredienteForm$
 itson\sistemarestaurantepresentacion\MesasForm.class
 itson\sistemarestaurantepresentacion\utilidades\TablaUtilidades$2.class
 itson\sistemarestaurantepresentacion\pantallaregistros\RegistrarIngredienteForm.class
+itson\sistemarestaurantepresentacion\Inicio.class
 itson\sistemarestaurantepresentacion\pantallaregistros\RegistrarClienteFrecuenteForm$1.class
 itson\sistemarestaurantepresentacion\pantallaregistros\RegistrarClienteFrecuenteForm$5.class
 itson\sistemarestaurantepresentacion\pantallaregistros\RegistrarProductoForm$2.class
@@ -35,3 +36,4 @@ itson\sistemarestaurantepresentacion\utilidades\UIUtilidades.class
 itson\sistemarestaurantepresentacion\utilidades\FormularioUtilidades.class
 itson\sistemarestaurantepresentacion\pantallaregistros\RegistrarIngredienteForm$3.class
 itson\sistemarestaurantepresentacion\utilidades\FormularioUtilidades$1.class
+itson\sistemarestaurantepresentacion\Inicio$1.class
