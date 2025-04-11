@@ -1,7 +1,5 @@
 package itson.sistemarestaurantedominio;
 
-//@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.CascadeType;
@@ -34,21 +32,12 @@ public class Producto implements Serializable {
     @Column(name = "precio", nullable = false)
     private float precio;
 
-    @OneToMany(mappedBy = "producto", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "producto", cascade = CascadeType.PERSIST)
     private List<ProductoIngrediente> ingredientes;
 
-    public List<ProductoIngrediente> getIngredientes() {
-        return ingredientes;
-    }
-
-    public void setIngredientes(List<ProductoIngrediente> ingredientes) {
-        this.ingredientes = ingredientes;
-    }
 
     public Producto() {
     }
-    
-    
 
     public Producto(String nombre, TipoProducto tipoProducto, float precio, List<ProductoIngrediente> ingredientes) {
         this.nombre = nombre;
@@ -56,37 +45,45 @@ public class Producto implements Serializable {
         this.precio = precio;
         this.ingredientes = ingredientes;
     }
-
+    
     public Long getId() {
         return id;
     }
-
+    
     public String getNombre() {
         return nombre;
     }
-
+    
     public TipoProducto getTipoProducto() {
         return tipoProducto;
     }
-
+    
     public float getPrecio() {
         return precio;
+    }
+    
+    public List<ProductoIngrediente> getIngredientes() {
+        return ingredientes;
     }
 
     public void setId(Long id) {
         this.id = id;
     }
-
+    
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-
+    
     public void setTipoProducto(TipoProducto tipoProducto) {
         this.tipoProducto = tipoProducto;
     }
-
+    
     public void setPrecio(float precio) {
         this.precio = precio;
+    }
+    
+    public void setIngredientes(List<ProductoIngrediente> ingredientes) {
+        this.ingredientes = ingredientes;
     }
 
     @Override

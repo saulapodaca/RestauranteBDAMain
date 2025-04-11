@@ -1,7 +1,5 @@
 package itson.sistemarestaurantedominio;
 
-//@author SAUL ISAAC APODACA BALDENEGRO 00000252020
-
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,47 +21,55 @@ public class ProductoIngrediente implements Serializable {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "idProducto")
+    @JoinColumn(name = "idProducto", nullable = false)
     private Producto producto;
     
     @ManyToOne
-    @JoinColumn(name = "idIngrediente")
+    @JoinColumn(name = "idIngrediente", nullable = false)
     private Ingrediente ingrediente;
     
     @Column(name = "cantidad", nullable = false)
+    private Integer cantidad;
     
-    
-    public Long getId() {
-        return id;
+    public ProductoIngrediente() {
     }
-
-    public ProductoIngrediente(Long id, Producto producto, Ingrediente ingrediente) {
-        this.id = id;
+    
+    public ProductoIngrediente(Long id, Producto producto, Ingrediente ingrediente, Integer cantidad) {
         this.producto = producto;
         this.ingrediente = ingrediente;
+        this.cantidad = cantidad;
     }
 
-    public ProductoIngrediente() {
+    public Long getId() {
+        return id;
     }
 
     public Producto getProducto() {
         return producto;
     }
 
-    public void setProducto(Producto producto) {
-        this.producto = producto;
-    }
-
     public Ingrediente getIngrediente() {
         return ingrediente;
+    }
+    
+    public Integer getCantidad(){
+        return cantidad;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public void setProducto(Producto producto) {
+        this.producto = producto;
     }
 
     public void setIngrediente(Ingrediente ingrediente) {
         this.ingrediente = ingrediente;
     }
-
-    public void setId(Long id) {
-        this.id = id;
+    
+    public void setCantidad(Integer cantidad){
+        this.cantidad = cantidad;
     }
 
     @Override
