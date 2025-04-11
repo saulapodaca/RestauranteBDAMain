@@ -10,10 +10,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 
-/**
- * Implementación de la interfaz IIngredientesDAO que maneja el acceso
- * a datos para la entidad Ingrediente utilizando JPA.
- */
 public class IngredientesDAO implements IIngredientesDAO {
 
     /**

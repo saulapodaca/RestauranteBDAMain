@@ -13,14 +13,47 @@ import java.util.List;
 
 public interface IProductosDAO {
 
-    public Producto registrar(NuevoProductoDTO nuevoProductoDTO);
+    /**
+     * Registra un nuevo producto en la base de datos.
+     *
+     * @param nuevoProductoDTO Objeto con la información del producto a registrar.
+     * @return El producto registrado con su ID generado.
+     */
+    public abstract Producto registrar(NuevoProductoDTO nuevoProductoDTO);
 
-    public List<ProductoRegistradoDTO> buscarProductos(String nombre, String tipoProducto);
+    /**
+     * Busca productos que coincidan con el nombre y/o tipo proporcionados.
+     * Los filtros son opcionales, por lo que si alguno es null, no se considera.
+     *
+     * @param nombre       Parte del nombre del producto a buscar (puede ser null).
+     * @param tipoProducto Tipo de producto a buscar (puede ser null).
+     * @return Lista de productos que cumplen con los filtros.
+     */
+    public abstract List<ProductoRegistradoDTO> buscarProductos(String nombre, String tipoProducto);
 
-    public boolean existenteProducto(String nombre, TipoProducto tipo);
+    /**
+     * Verifica si ya existe un producto con un nombre y tipo determinados.
+     *
+     * @param nombre Nombre del producto a buscar.
+     * @param tipo   Tipo del producto a buscar.
+     * @return true si existe un producto con ese nombre y tipo, false en caso contrario.
+     */
+    public abstract boolean existenteProducto(String nombre, TipoProducto tipo);
 
-    public Producto actualizarProducto(ProductoActualizadoDTO productoActualizadoDTO);
+    /**
+     * Actualiza los datos de un producto existente. Solo se modifican los campos no nulos.
+     *
+     * @param productoActualizadoDTO DTO con la información a actualizar.
+     * @return El producto actualizado.
+     */
+    public abstract Producto actualizarProducto(ProductoActualizadoDTO productoActualizadoDTO);
 
-    public Producto obtenerProducto(Long id);
+    /**
+     * Recupera un producto por su ID.
+     *
+     * @param id ID del producto a buscar.
+     * @return El producto correspondiente, o null si no se encuentra.
+     */
+    public abstract Producto obtenerProducto(Long id);
 
 }
