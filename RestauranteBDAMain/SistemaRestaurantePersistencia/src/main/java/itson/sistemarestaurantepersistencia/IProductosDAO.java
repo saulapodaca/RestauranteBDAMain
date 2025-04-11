@@ -29,7 +29,7 @@ public interface IProductosDAO {
      * @param tipoProducto Tipo de producto a buscar (puede ser null).
      * @return Lista de productos que cumplen con los filtros.
      */
-    public abstract List<Producto> buscarProductos(String nombre, String tipoProducto);
+    public abstract List<ProductoRegistradoDTO> buscarProductos(String nombre, String tipoProducto);
 
     /**
      * Verifica si ya existe un producto con un nombre y tipo determinados.
@@ -56,6 +56,4 @@ public interface IProductosDAO {
      */
     public abstract Producto obtenerProducto(Long id);
 
-    boolean existeProductoConNombre(String nombre);
-    
 }

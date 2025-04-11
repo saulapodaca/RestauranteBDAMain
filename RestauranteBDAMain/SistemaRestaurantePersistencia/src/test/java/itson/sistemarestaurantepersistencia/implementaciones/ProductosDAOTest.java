@@ -69,7 +69,7 @@ public class ProductosDAOTest {
         String filtro = "queso";
         String tipo = "";
         ProductosDAO productosDAO = new ProductosDAO();
-        List<Producto> productos = productosDAO.buscarProductos(filtro, tipo);
+        List<ProductoRegistradoDTO> productos = productosDAO.buscarProductos(filtro, tipo);
         assertEquals(productos.size(), 1);
     }
 
