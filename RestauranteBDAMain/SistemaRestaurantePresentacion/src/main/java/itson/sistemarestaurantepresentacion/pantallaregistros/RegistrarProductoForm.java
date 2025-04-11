@@ -8,7 +8,6 @@ import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.Producto;
 import itson.sistemarestaurantedominio.TipoProducto;
 import itson.sistemarestaurantedominio.dtos.NuevoProductoDTO;
-import itson.sistemarestaurantenegocio.IProductosBO;
 import itson.sistemarestaurantenegocio.excepciones.ProductoDuplicadoException;
 import itson.sistemarestaurantenegocio.implementaciones.ProductosBO;
 import itson.sistemarestaurantepersistencia.IIngredientesDAO;
@@ -17,8 +16,6 @@ import itson.sistemarestaurantepersistencia.implementaciones.ManejadorConexiones
 import itson.sistemarestaurantepersistencia.implementaciones.ProductosDAO;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -32,15 +29,14 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RegistrarProductoForm extends javax.swing.JFrame {
 
-    private IProductosBO productosBO;
+    private ProductosBO productosBO;
     /**
      * Creates new form RegistrarProductoForm
      */
-    public RegistrarProductoForm(IProductosBO productosBO) {
+    public RegistrarProductoForm() {
         initComponents();
         cargarProductos(); // Cargar los productos al iniciar
         configurarBusqueda(); // Configurar la búsqueda dinámica
-        this.productosBO = productosBO;
     }
 
     public void limpiarFormulario() {
@@ -166,8 +162,8 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
                     .addComponent(Lupa)
                     .addComponent(textFieldingresarTipoDeProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(142, 142, 142)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(botonRegistrarProducto)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
@@ -206,8 +202,6 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: El precio debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } catch (ProductoDuplicadoException ex) {
-            Logger.getLogger(RegistrarProductoForm.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_botonRegistrarProductoActionPerformed
     /*
