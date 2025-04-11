@@ -4,10 +4,22 @@
  */
 package itson.sistemarestaurantepersistencia;
 
+import itson.sistemarestaurantedominio.ProductoIngrediente;
+import itson.sistemarestaurantedominio.dtos.NuevaRelacionProductoIngredienteDTO;
+import itson.sistemarestaurantedominio.dtos.RelacionProductoIngredienteRegistradaDTO;
+import itson.sistemarestaurantepersistencia.excepciones.PersistenciaException;
+
 /**
  *
  * @author saula
  */
 public interface IProductosIngredientesDAO {
-    
+
+    public ProductoIngrediente registrar(NuevaRelacionProductoIngredienteDTO relacionProductoIngrediente)
+            throws PersistenciaException;
+
+    public void eliminarRelacion(RelacionProductoIngredienteRegistradaDTO relacionProductoIngrediente);
+
+    public boolean existeRelacion(Long idProducto, Long idIngrediente);
+
 }
