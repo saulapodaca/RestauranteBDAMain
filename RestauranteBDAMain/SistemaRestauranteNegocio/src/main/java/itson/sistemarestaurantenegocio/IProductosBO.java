@@ -15,4 +15,5 @@ import java.util.List;
 public interface IProductosBO {
   Producto registrarProducto(NuevoProductoDTO nuevoProductoDTO);
   List<Producto> buscarProductos(String filtro);
+  //boolean verificarDisponibilidad(Producto producto);
 }

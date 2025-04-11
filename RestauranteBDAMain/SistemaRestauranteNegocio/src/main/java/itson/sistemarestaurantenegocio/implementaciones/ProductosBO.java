@@ -4,10 +4,13 @@
  */
 package itson.sistemarestaurantenegocio.implementaciones;
 
+import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.Producto;
+import itson.sistemarestaurantedominio.ProductoIngrediente;
 import itson.sistemarestaurantedominio.TipoProducto;
 import itson.sistemarestaurantedominio.dtos.NuevoProductoDTO;
 import itson.sistemarestaurantenegocio.IProductosBO;
+import itson.sistemarestaurantepersistencia.IIngredientesDAO;
 import itson.sistemarestaurantepersistencia.IProductosDAO;
 import itson.sistemarestaurantepersistencia.implementaciones.ProductosDAO;
 import java.util.ArrayList;
@@ -22,8 +25,9 @@ public class ProductosBO implements IProductosBO{
  private static final float DEFUALT_PRECIO = 0.0f; 
  //public static final TipoProducto DEFAULT_TIPO = null ;
 
- private ProductosDAO productosDAO;
-
+    private ProductosDAO productosDAO;
+    private IIngredientesDAO ingredientesDAO;
+ 
     public ProductosBO(ProductosDAO productosDAO) {
         this.productosDAO = productosDAO;
     }
@@ -53,6 +57,15 @@ public class ProductosBO implements IProductosBO{
      
  }
  
+ /*public boolean verificarDisponibilidad(Producto producto){
+     for (ProductoIngrediente productoIngrediente : producto.getIngredientes()) {
+        Ingrediente ingrediente = productoIngrediente.getIngrediente();
+        float cantidadRequerida = productoIngrediente.get
+     }
+ 
+ }
+ 
+ */
  private boolean esTextoPorDefecto(String texto, String placeholder){
      return texto.isEmpty() || texto.equals(placeholder);
  }

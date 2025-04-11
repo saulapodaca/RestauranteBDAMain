@@ -8,6 +8,7 @@ import itson.sistemarestaurantedominio.Ingrediente;
 import itson.sistemarestaurantedominio.Producto;
 import itson.sistemarestaurantedominio.TipoProducto;
 import itson.sistemarestaurantedominio.dtos.NuevoProductoDTO;
+import itson.sistemarestaurantenegocio.excepciones.ProductoDuplicadoException;
 import itson.sistemarestaurantenegocio.implementaciones.ProductosBO;
 import itson.sistemarestaurantepersistencia.IIngredientesDAO;
 import itson.sistemarestaurantepersistencia.implementaciones.IngredientesDAO;
@@ -15,7 +16,6 @@ import itson.sistemarestaurantepersistencia.implementaciones.ManejadorConexiones
 import itson.sistemarestaurantepersistencia.implementaciones.ProductosDAO;
 import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.EntityManager;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -43,43 +43,39 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
         textFieldingresarTipoDeProducto.setText("");
     }
     
-    private void cargarProductos() {
-        EntityManager entityManager = ManejadorConexiones.getEntityManager();
-        try {
-            productosBO = new ProductosBO(new ProductosDAO(entityManager));
-            List<Producto> productos = productosBO.buscarProductos("");
-            DefaultTableModel modelo = (DefaultTableModel) TablaRegistrarProductos.getModel();
-            modelo.setRowCount(0);
-            for (Producto producto : productos) {
-                modelo.addRow(new Object[]{
-                    producto.getNombre(),
-                    producto.getPrecio(),
-                    producto.getTipoProducto()
-                });
-            }
-        } finally {
-            entityManager.close();
+   private void cargarProductos() {
+    try {
+        List<Producto> productos = productosBO.buscarProductos("");
+        DefaultTableModel modelo = (DefaultTableModel) TablaRegistrarProductos.getModel();
+        modelo.setRowCount(0);
+        for (Producto producto : productos) {
+            modelo.addRow(new Object[]{
+                producto.getNombre(),
+                producto.getPrecio(),
+                producto.getTipoProducto()
+            });
         }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error al cargar los productos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
 
     private void buscarProductos(String filtro) {
-        EntityManager entityManager = ManejadorConexiones.getEntityManager();
-        try {
-            productosBO = new ProductosBO(new ProductosDAO(entityManager));
-            List<Producto> productos = productosBO.buscarProductos(filtro);
-            DefaultTableModel modelo = (DefaultTableModel) TablaRegistrarProductos.getModel();
-            modelo.setRowCount(0);
-            for (Producto producto : productos) {
-                modelo.addRow(new Object[]{
-                    producto.getNombre(),
-                    producto.getPrecio(),
-                    producto.getTipoProducto()
-                });
-            }
-        } finally {
-            entityManager.close();
+    try {
+        List<Producto> productos = productosBO.buscarProductos(filtro);
+        DefaultTableModel modelo = (DefaultTableModel) TablaRegistrarProductos.getModel();
+        modelo.setRowCount(0);
+        for (Producto producto : productos) {
+            modelo.addRow(new Object[]{
+                producto.getNombre(),
+                producto.getPrecio(),
+                producto.getTipoProducto()
+            });
         }
+    } catch (Exception ex) {
+        JOptionPane.showMessageDialog(this, "Error al buscar los productos: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
+}
     
     private void configurarBusqueda() {
         textFieldingresarTipoDeProducto.getDocument().addDocumentListener(new DocumentListener() {
@@ -99,17 +95,6 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
             }
         });
     }
-    /*
-    private List<Ingrediente> obtenerIngredientesDisponibles() {
-        EntityManager entityManager = ManejadorConexiones.getEntityManager();
-        try {
-            IIngredientesDAO ingredientesDAO = new IngredientesDAO(entityManager);
-            return ingredientesDAO.buscarIngredientes(nombre, unidadMedida);
-        } finally {
-            entityManager.close();
-        }
-    }
-    */
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -203,9 +188,7 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
             return;
         }
 
-        EntityManager entityManager = ManejadorConexiones.getEntityManager();
         try {
-            productosBO = new ProductosBO(new ProductosDAO(entityManager));
             String nombre = campoNombre.getText();
             float precio = Float.parseFloat(campoPrecio.getText());
             TipoProducto tipoProducto = (TipoProducto) comboTipo.getSelectedItem();
@@ -219,8 +202,6 @@ public class RegistrarProductoForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: El precio debe ser un número válido.", "Error", JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        } finally {
-            entityManager.close();
         }
     }//GEN-LAST:event_botonRegistrarProductoActionPerformed
     /*
