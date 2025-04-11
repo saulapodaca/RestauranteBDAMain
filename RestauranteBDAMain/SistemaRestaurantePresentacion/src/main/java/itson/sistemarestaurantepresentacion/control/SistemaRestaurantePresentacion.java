@@ -6,6 +6,7 @@ import itson.sistemarestaurantenegocio.IIngredientesBO;
 import itson.sistemarestaurantenegocio.IMesasBO;
 import itson.sistemarestaurantepersistencia.implementaciones.MesasDAO;
 import itson.sistemarestaurantepresentacion.ClientesFrecuentes;
+import itson.sistemarestaurantepresentacion.Comandas;
 import itson.sistemarestaurantepresentacion.InventarioIngredientesForm;
 import itson.sistemarestaurantepresentacion.MesasForm;
 import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarClienteFrecuenteForm;
@@ -27,7 +28,8 @@ public class SistemaRestaurantePresentacion {
 //        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
 //        ClientesFrecuentes prueba2 = new ClientesFrecuentes(clientesFrecuentesBO);
 //        prueba 2.setVisible(true);
-            
+          Comandas comanda = new Comandas();
+          comanda.setVisible(true);
         
         
     }
