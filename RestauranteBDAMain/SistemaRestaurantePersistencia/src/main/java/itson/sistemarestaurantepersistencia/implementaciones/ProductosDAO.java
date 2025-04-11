@@ -51,24 +51,29 @@ public class ProductosDAO implements IProductosDAO {
      * @param tipoProducto El tipo de producto a buscar. Puede ser null.
      * @return Lista de productos que coinciden con los filtros proporcionados.
      */
-    @Override
-    public List<ProductoRegistradoDTO> buscarProductos(String nombre, String tipoProducto) {
+    public List<Producto> buscarProductos(String nombre, String tipoProducto) {
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
-        String jpql = """
-                      SELECT 
-                      new itson.sistemarestaurantedominio.dtos.ProductoRegistradoDTO(
-                      p.id, p.nombre, p.tipoProducto, p.precio) 
-                      FROM Producto p
-                      WHERE (:nombre IS NULL OR p.nombre LIKE :nombre)
-                      AND (:tipoProducto IS NULL OR p.tipoProducto LIKE :tipoProducto)
-                      """;
-        TypedQuery<ProductoRegistradoDTO> query
-                = entityManager.createQuery(jpql, ProductoRegistradoDTO.class);
-        query.setParameter("nombre", 
-                nombre != null ? "%" + nombre + "%" : null);
-        query.setParameter("tipoProducto", 
-                tipoProducto != null ? "%" + tipoProducto + "%" : null);
-        return query.getResultList();
+        try {
+            StringBuilder jpql = new StringBuilder("SELECT p FROM Producto p WHERE 1=1");
+            if (nombre != null && !nombre.isEmpty()) {
+                jpql.append(" AND p.nombre LIKE :nombre");
+            }
+            if (tipoProducto != null && !tipoProducto.isEmpty() && !tipoProducto.equals("TODOS")) {
+                jpql.append(" AND p.tipoProducto = :tipoProducto");
+            }
+
+            TypedQuery<Producto> query = entityManager.createQuery(jpql.toString(), Producto.class);
+            if (nombre != null && !nombre.isEmpty()) {
+                query.setParameter("nombre", "%" + nombre + "%");
+            }
+            if (tipoProducto != null && !tipoProducto.isEmpty() && !tipoProducto.equals("TODOS")) {
+                query.setParameter("tipoProducto", tipoProducto);
+            }
+
+            return query.getResultList();
+        } finally {
+            entityManager.close();
+        }
     }
 
     /**
@@ -103,6 +108,21 @@ public class ProductosDAO implements IProductosDAO {
         return count > 0;
     }
 
+    public boolean existeProductoConNombre(String nombre) {
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        try {
+            String jpql = "SELECT p FROM Producto p WHERE p.nombre = :nombre";
+            TypedQuery<Producto> query = entityManager.createQuery(jpql, Producto.class);
+            query.setParameter("nombre", nombre);
+            query.getSingleResult();
+            return true;
+        } catch (Exception e) {
+            return false;
+        } finally {
+            entityManager.close();
+        }
+    }
+
     /**
      * Actualiza un producto existente con los valores proporcionados en el DTO.
      * Solo se actualizan los campos que no son null en el DTO.
@@ -116,12 +136,14 @@ public class ProductosDAO implements IProductosDAO {
         entityManager.getTransaction().begin();
         Producto productoExistente = entityManager
                 .find(Producto.class, productoActualizadoDTO.getId());
-        
-        if (productoActualizadoDTO.getNombre() != null) 
-            productoExistente.setNombre(productoActualizadoDTO.getNombre());        
-        if (productoActualizadoDTO.getPrecio() != null)
+
+        if (productoActualizadoDTO.getNombre() != null) {
+            productoExistente.setNombre(productoActualizadoDTO.getNombre());
+        }
+        if (productoActualizadoDTO.getPrecio() != null) {
             productoExistente.setPrecio(productoActualizadoDTO.getPrecio());
-        
+        }
+
         entityManager.getTransaction().commit();
         return productoExistente;
     }
@@ -137,4 +159,8 @@ public class ProductosDAO implements IProductosDAO {
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
         return entityManager.find(Producto.class, id);
     }
+
+ 
+
+    
 }
