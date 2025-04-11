@@ -2,12 +2,14 @@ itson\sistemarestaurantedominio\dtos\IngredienteRegistradoDTO.class
 itson\sistemarestaurantedominio\DetalleComanda.class
 itson\sistemarestaurantedominio\dtos\NuevoIngredienteDTO.class
 itson\sistemarestaurantedominio\Producto.class
+itson\sistemarestaurantedominio\dtos\MesaRegistradaDTO.class
 itson\sistemarestaurantedominio\EstadoComanda.class
 itson\sistemarestaurantedominio\ProductoIngrediente.class
 itson\sistemarestaurantedominio\TipoProducto.class
 itson\sistemarestaurantedominio\Ingrediente.class
 itson\sistemarestaurantedominio\dtos\NuevoClienteFrecuenteDTO.class
 itson\sistemarestaurantedominio\dtos\StockIngredienteActualizadoDTO.class
+itson\sistemarestaurantedominio\dtos\NuevaMesaDTO.class
 itson\sistemarestaurantedominio\dtos\ProductoRegistradoDTO.class
 itson\sistemarestaurantedominio\EstadoMesa.class
 itson\sistemarestaurantedominio\dtos\RelacionProductoIngredienteRegistradaDTO.class

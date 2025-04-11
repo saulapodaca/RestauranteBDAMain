@@ -31,8 +31,11 @@ public class Mesa implements Serializable {
 
     public Mesa() {
     }
-    
-    
+
+    public Mesa(int numeroMesa, EstadoMesa estadoMesa) {
+        this.numeroMesa = numeroMesa;
+        this.estadoMesa = estadoMesa;
+    }    
     
     public Long getId() {
         return id;
