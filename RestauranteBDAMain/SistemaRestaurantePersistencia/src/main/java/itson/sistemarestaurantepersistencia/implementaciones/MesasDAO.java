@@ -5,6 +5,7 @@ import itson.sistemarestaurantedominio.Mesa;
 import itson.sistemarestaurantedominio.dtos.MesaRegistradaDTO;
 import itson.sistemarestaurantedominio.dtos.NuevaMesaDTO;
 import itson.sistemarestaurantepersistencia.IMesasDAO;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -42,8 +43,9 @@ public class MesasDAO implements IMesasDAO {
     public MesaRegistradaDTO obtenerMesa(Integer numMesa){
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
         String jpql = """
+                      SELECT
                       new itson.sistemarestaurantedominio.dtos.MesaRegistradaDTO(
-                      SELECT m.id, m.numeroMesa, m.estadoMesa)
+                      m.id, m.numeroMesa, m.estadoMesa)
                       FROM Mesa m 
                       WHERE m.numeroMesa = :numMesa
                       """;
@@ -77,5 +79,19 @@ public class MesasDAO implements IMesasDAO {
             entityManager.persist(new Mesa(i, EstadoMesa.DISPONIBLE));        
 
         entityManager.getTransaction().commit();
+    }
+    
+    @Override
+    public List<MesaRegistradaDTO> obtenerMesas(){
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        String jpql = """
+                      SELECT
+                      new itson.sistemarestaurantedominio.dtos.MesaRegistradaDTO(
+                      m.numeroMesa, m.estadoMesa)
+                      FROM Mesa m
+                      """;
+        return entityManager.createQuery(jpql, 
+                MesaRegistradaDTO.class).getResultList();
+                
     }
 }
