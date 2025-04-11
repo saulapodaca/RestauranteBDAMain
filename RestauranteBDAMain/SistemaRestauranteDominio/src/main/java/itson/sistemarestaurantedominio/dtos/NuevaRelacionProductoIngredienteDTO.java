@@ -4,13 +4,15 @@ public class NuevaRelacionProductoIngredienteDTO {
 
     private Long idProducto;
     private Long idIngrediente;
+    private Integer cantidad;
 
     public NuevaRelacionProductoIngredienteDTO() {
     }
 
-    public NuevaRelacionProductoIngredienteDTO(Long idProducto, Long idIngrediente) {
+    public NuevaRelacionProductoIngredienteDTO(Long idProducto, Long idIngrediente, Integer cantidad) {
         this.idProducto = idProducto;
         this.idIngrediente = idIngrediente;
+        this.cantidad = cantidad;
     }
 
     public Long getIdProducto() {
@@ -20,7 +22,15 @@ public class NuevaRelacionProductoIngredienteDTO {
     public Long getIdIngrediente() {
         return idIngrediente;
     }
+    
+    public Integer getCantidad(){
+        return cantidad;
+    }
 
+    public void setCantidad(Integer cantidad){
+        this.cantidad = cantidad;
+    }
+    
     public void setIdProducto(Long idProducto) {
         this.idProducto = idProducto;
     }

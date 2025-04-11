@@ -5,11 +5,13 @@ public class RelacionProductoIngredienteRegistradaDTO {
     private Long idRelacion;
     private Long idIngrediente;
     private Long idProducto;
+    private Integer cantidad;
 
-    public RelacionProductoIngredienteRegistradaDTO(Long idRelacion, Long idIngrediente, Long idProducto) {
+    public RelacionProductoIngredienteRegistradaDTO(Long idRelacion, Long idIngrediente, Long idProducto, Integer cantidad) {
         this.idRelacion = idRelacion;
         this.idIngrediente = idIngrediente;
         this.idProducto = idProducto;
+        this.cantidad = cantidad;
     }
 
     public Long getIdRelacion() {
@@ -22,6 +24,10 @@ public class RelacionProductoIngredienteRegistradaDTO {
 
     public Long getIdProducto() {
         return idProducto;
+    }
+    
+    public Integer getCantidad(){
+        return cantidad;
     }
        
 }
