@@ -14,6 +14,10 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Predicate;
 
+/**
+ * Implementación de la interfaz IProductosDAO para el manejo de la persistencia de
+ * entidades Productro en la base de datos.
+ */
 public class ProductosDAO implements IProductosDAO {
 
     /**

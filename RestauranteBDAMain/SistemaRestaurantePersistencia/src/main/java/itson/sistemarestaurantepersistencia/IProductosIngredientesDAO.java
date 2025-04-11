@@ -6,8 +6,10 @@ package itson.sistemarestaurantepersistencia;
 
 import itson.sistemarestaurantedominio.ProductoIngrediente;
 import itson.sistemarestaurantedominio.dtos.NuevaRelacionProductoIngredienteDTO;
+import itson.sistemarestaurantedominio.dtos.ProductoRegistradoDTO;
 import itson.sistemarestaurantedominio.dtos.RelacionProductoIngredienteRegistradaDTO;
 import itson.sistemarestaurantepersistencia.excepciones.PersistenciaException;
+import java.util.List;
 
 /**
  *
@@ -21,5 +23,7 @@ public interface IProductosIngredientesDAO {
     public void eliminarRelacion(RelacionProductoIngredienteRegistradaDTO relacionProductoIngrediente);
 
     public boolean existeRelacion(Long idProducto, Long idIngrediente);
+    
+    public List<ProductoIngrediente> obtenerListaIngredientesDeProducto(ProductoRegistradoDTO producto);
 
 }

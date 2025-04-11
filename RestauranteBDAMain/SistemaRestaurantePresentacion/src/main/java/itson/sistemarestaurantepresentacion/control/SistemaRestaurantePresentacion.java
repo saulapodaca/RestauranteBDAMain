@@ -26,7 +26,7 @@ public class SistemaRestaurantePresentacion {
 //      
 //        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
 //        ClientesFrecuentes prueba2 = new ClientesFrecuentes(clientesFrecuentesBO);
-//        prueba2.setVisible(true);
+//        prueba 2.setVisible(true);
             
         
         
