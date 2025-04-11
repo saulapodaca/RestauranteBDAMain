@@ -93,4 +93,5 @@ public class IngredientesDAO implements IIngredientesDAO {
         entityManager.getTransaction().commit();
         return ingredienteExistente;
     }
+    
 }
