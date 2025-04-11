@@ -78,8 +78,8 @@ public class ProductosBO implements IProductosBO{
      if (filtro == null || filtro.trim().isEmpty()) {
          return new ArrayList<>();
      }
-     return productosDAO.buscarProductos(filtro.trim());
-     
+     //return productosDAO.buscarProductos(filtro.trim());
+     return null;
  }
  
 }
