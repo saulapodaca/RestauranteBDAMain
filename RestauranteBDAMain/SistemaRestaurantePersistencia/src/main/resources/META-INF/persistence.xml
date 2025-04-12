@@ -14,7 +14,7 @@
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="ITSON"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="validate"/>
     </properties>
   </persistence-unit>
   <persistence-unit name="itson_SistemaRestaurantePersistencia_jar_1.0PU_TEST" transaction-type="RESOURCE_LOCAL">
@@ -31,7 +31,7 @@
       <property name="javax.persistence.jdbc.user" value="root"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
       <property name="javax.persistence.jdbc.password" value="ITSON"/>
-      <property name="javax.persistence.schema-generation.database.action" value="create"/>
+      <property name="javax.persistence.schema-generation.database.action" value="validate"/> 
     </properties>
   </persistence-unit>
 </persistence>
