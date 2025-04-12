@@ -41,6 +41,7 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
         crearTabla();
         buscadorIngredientesPanel1.iniciarBusqueda(ingredientesBO, this);
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 600, 350));
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

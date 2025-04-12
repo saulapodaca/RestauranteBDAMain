@@ -27,6 +27,7 @@ public class MesasForm extends javax.swing.JFrame {
 
         configurarVentana();
         cargarPanelMesas();
+        setLocationRelativeTo(null);
     }
 
     /**

@@ -4,17 +4,27 @@
  */
 package itson.sistemarestaurantepresentacion;
 
+import itson.sistemarestaurantepresentacion.control.Control;
+
 /**
  *
  * @author rauln
  */
 public class Inicio extends javax.swing.JFrame {
 
+    private final Control controlador;
+    
     /**
      * Creates new form Inicio
      */
     public Inicio() {
+        controlador = new Control();
         initComponents();
+        setTitle("Elige tu rol");
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLayout(null);
+
     }
 
     /**
@@ -43,15 +53,35 @@ public class Inicio extends javax.swing.JFrame {
         jPanel1.add(labelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 40, 180, -1));
 
         iconAdministrador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconAdministrador.png"))); // NOI18N
+        iconAdministrador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iconAdministradorMouseClicked(evt);
+            }
+        });
         jPanel1.add(iconAdministrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 150, 150, 150));
 
         iconMesero.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconMesero.png"))); // NOI18N
+        iconMesero.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                iconMeseroMouseClicked(evt);
+            }
+        });
         jPanel1.add(iconMesero, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, 150, 150));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 600, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void iconAdministradorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconAdministradorMouseClicked
+        controlador.abrirPantallaAdministrador();
+    }//GEN-LAST:event_iconAdministradorMouseClicked
+
+    private void iconMeseroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_iconMeseroMouseClicked
+        dispose();
+        controlador.abrirPantallaMesero();
+    }//GEN-LAST:event_iconMeseroMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel iconAdministrador;
     private javax.swing.JLabel iconMesero;

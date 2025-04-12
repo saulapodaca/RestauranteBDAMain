@@ -2,9 +2,14 @@ package itson.sistemarestaurantepresentacion.control;
 
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
+import itson.sistemarestaurantenegocio.IMesasBO;
 import itson.sistemarestaurantenegocio.fabrica.FabricaObjNegocio;
 import itson.sistemarestaurantepresentacion.ClientesFrecuentes;
+import itson.sistemarestaurantepresentacion.Inicio;
 import itson.sistemarestaurantepresentacion.InventarioIngredientesForm;
+import itson.sistemarestaurantepresentacion.MesasForm;
+import itson.sistemarestaurantepresentacion.PantallaAdministradorForm;
+import itson.sistemarestaurantepresentacion.PantallaMeseroForm;
 import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarClienteFrecuenteForm;
 import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarIngredienteForm;
 
@@ -13,11 +18,9 @@ public class Control {
     private static Control instance;
     IIngredientesBO ingredientesBO = FabricaObjNegocio.crearIngredienteBO();
     IClientesFrecuentesBO clientesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
+    IMesasBO mesasBO = FabricaObjNegocio.crearMesasBO();
 
-    /**
-     * Constructor privado para evitar la creación externa de instancias.
-     */
-    private Control() {
+    public Control() {
     }
 
     /**
@@ -32,6 +35,25 @@ public class Control {
         return instance;
     }
 
+    public void abrirPantallaMesero(){
+        PantallaMeseroForm meseroForm = new PantallaMeseroForm(this);
+        meseroForm.setVisible(true);
+    }
+    
+    public void abrirPantallaAdministrador(){
+        PantallaAdministradorForm administradorForm = new PantallaAdministradorForm(this);
+        administradorForm.setVisible(true);
+    }
+    
+    public void abrirPantallaInicio(){
+        Inicio inicio = new Inicio();
+        inicio.setVisible(true);
+    }
+    
+    public void abrirMesas(){
+        MesasForm mesas = new MesasForm(mesasBO);
+        mesas.setVisible(true);
+    }
     /**
      * Método que abre la pantalla del inventario de ingredientes.
      */
@@ -64,4 +86,5 @@ public class Control {
         registrarClienteFrecuenteForm.setVisible(true);
     }
 
+    
 }
