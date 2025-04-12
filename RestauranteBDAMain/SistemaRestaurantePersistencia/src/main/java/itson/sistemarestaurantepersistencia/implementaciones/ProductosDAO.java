@@ -70,6 +70,17 @@ public class ProductosDAO implements IProductosDAO {
                 tipoProducto != null ? "%" + tipoProducto + "%" : null);
         return query.getResultList();
     }
+<<<<<<< HEAD
+       
+   
+    public List<Producto> cargaInicial(){
+       String jpql = "SELECT p FROM Producto p";
+       TypedQuery<Producto> query = entityManager.createQuery(jpql,Producto.class);
+       return query.getResultList();
+   }
+    
+    
+=======
 
     /**
      * Verifica si ya existe un producto con el nombre y tipo especificados.
@@ -138,4 +149,5 @@ public class ProductosDAO implements IProductosDAO {
         return entityManager.find(Producto.class, id);
     }
     //
+>>>>>>> master
 }

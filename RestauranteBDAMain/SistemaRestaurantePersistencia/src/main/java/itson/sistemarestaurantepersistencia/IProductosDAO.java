@@ -10,6 +10,18 @@ import itson.sistemarestaurantedominio.dtos.NuevoProductoDTO;
 import itson.sistemarestaurantedominio.dtos.ProductoActualizadoDTO;
 import itson.sistemarestaurantedominio.dtos.ProductoRegistradoDTO;
 import java.util.List;
+<<<<<<< HEAD
+/**
+ *
+ * @author Felix isaac sanchez Quintero
+ */
+public interface IProductosDAO  {
+    Producto registrar(NuevoProductoDTO nuevoProductoDTO);
+    List<Producto> buscarProductos(String filtro);
+    boolean existenteProducto(String nombre, TipoProducto tipoProducto);
+    List<Producto> cargaInicial();
+    
+=======
 
 public interface IProductosDAO {
 
@@ -57,4 +69,5 @@ public interface IProductosDAO {
     public abstract Producto obtenerProducto(Long id);
 
     //
+>>>>>>> master
 }
