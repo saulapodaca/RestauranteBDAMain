@@ -73,13 +73,17 @@ public class ProductosBO implements IProductosBO{
  private boolean validarNombreProducto(String nombre){
      return nombre.matches("^[a-zA-Z0-9 ]+$");
  }
-    
- public List<Producto> buscarProductos(String filtro){
+
+public List<Producto> buscarProductos(String filtro){
      if (filtro == null || filtro.trim().isEmpty()) {
          return new ArrayList<>();
      }
      return productosDAO.buscarProductos(filtro.trim());
      
+ }
+ 
+ public List<Producto> cargaInicial() {
+     return productosDAO.cargaInicial();
  }
  
 }

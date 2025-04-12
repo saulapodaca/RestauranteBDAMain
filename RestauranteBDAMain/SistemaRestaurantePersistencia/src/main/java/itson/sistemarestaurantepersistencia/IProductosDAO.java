@@ -16,4 +16,6 @@ public interface IProductosDAO  {
     Producto registrar(NuevoProductoDTO nuevoProductoDTO);
     List<Producto> buscarProductos(String filtro);
     boolean existenteProducto(String nombre, TipoProducto tipoProducto);
+    List<Producto> cargaInicial();
+    
 }

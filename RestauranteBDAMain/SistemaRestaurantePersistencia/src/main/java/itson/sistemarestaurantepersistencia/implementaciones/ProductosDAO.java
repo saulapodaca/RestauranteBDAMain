@@ -65,5 +65,13 @@ public class ProductosDAO implements IProductosDAO{
             return false; // Si no hay resultados, el producto no existe
         }
     }
+       
+   
+    public List<Producto> cargaInicial(){
+       String jpql = "SELECT p FROM Producto p";
+       TypedQuery<Producto> query = entityManager.createQuery(jpql,Producto.class);
+       return query.getResultList();
+   }
+    
     
 }
