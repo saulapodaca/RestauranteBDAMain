@@ -1,7 +1,9 @@
 C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\implementaciones\ClientesFrecuentesBO.java
 C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\IIngredientesBO.java
 C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\excepciones\CampoObligatorioException.java
+C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\excepciones\DatoDuplicadoException.java
 C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\excepciones\NombreInvalidoException.java
+C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\excepciones\EncriptadoException.java
 C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\implementaciones\MesasBO.java
 C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\IProductosBO.java
 C:\Users\rauln\Documents\GitHub\RestauranteBDAMain\RestauranteBDAMain\SistemaRestauranteNegocio\src\main\java\itson\sistemarestaurantenegocio\implementaciones\IngredientesBO.java

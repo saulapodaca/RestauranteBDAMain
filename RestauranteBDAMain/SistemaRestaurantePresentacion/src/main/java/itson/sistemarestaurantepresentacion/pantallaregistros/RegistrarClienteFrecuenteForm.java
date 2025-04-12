@@ -6,6 +6,8 @@ package itson.sistemarestaurantepresentacion.pantallaregistros;
 
 import itson.sistemarestaurantedominio.dtos.NuevoClienteFrecuenteDTO;
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
+import itson.sistemarestaurantenegocio.excepciones.DatoDuplicadoException;
+import itson.sistemarestaurantenegocio.excepciones.EncriptadoException;
 import java.awt.Color;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -129,37 +131,55 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
 
     private void registrar() {
         try {
+            // Capturar datos del formulario
             String nombre = textFieldIngresarNombre.getText().trim();
             String apellidoP = textFieldIngresarApellidoPaterno.getText().trim();
             String apellidoM = textFieldIngresarApellidoMaterno.getText().trim();
             String correoSinArroba = textFieldIngresarCorreoElectronico.getText().trim();
             String dominio = (String) comboBoxDominios.getSelectedItem();
             String telefono = textFieldIngresarTelefono.getText().trim();
+
+            if (dominio == null) {
+                throw new IllegalArgumentException("Debe seleccionar un dominio para el correo.");
+            }
+
             String correoCompleto = correoSinArroba + dominio;
-            
-            if (correoCompleto.equals("INGRESE EL CORREO@gmail.com")) {
+
+            if ("INGRESE EL CORREO@gmail.com".equals(correoCompleto)) {
                 correoCompleto = null;
             }
 
-            // Crear el DTO con los datos ingresados
+            // Crear DTO
             NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO = new NuevoClienteFrecuenteDTO(
                     nombre, apellidoP, apellidoM, correoCompleto, telefono
             );
 
-            // Registrar el cliente
+            // Registrar cliente
             this.clientesFrecuentesBO.registrarClienteFrecuente(nuevoClienteFrecuenteDTO);
 
-            // Mensaje de éxito
-            JOptionPane.showMessageDialog(this, "Registro exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            // Éxito
+            JOptionPane.showMessageDialog(this, "¡Registro exitoso!", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             limpiarFormulario();
 
+        } catch (DatoDuplicadoException e) {
+            // Capturamos la excepción de dato duplicado (teléfono ya registrado)
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Dato duplicado", JOptionPane.WARNING_MESSAGE);
+
+        } catch (EncriptadoException e) {
+            // Capturamos la excepción de encriptado (fallo en desencriptar los datos)
+            JOptionPane.showMessageDialog(this, "Error al procesar los datos del cliente. "
+                    + "Por favor, intente nuevamente.", "Error de Encriptado", JOptionPane.ERROR_MESSAGE);
+
         } catch (IllegalArgumentException e) {
-            // Mostrar mensaje de error con JOptionPane
+            // Errores de validación del formulario
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error de Validación", JOptionPane.ERROR_MESSAGE);
 
         } catch (Exception e) {
+            // Cualquier otro error inesperado
             JOptionPane.showMessageDialog(this, "Ocurrió un error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            e.printStackTrace();
         }
+
     }
 
     /**

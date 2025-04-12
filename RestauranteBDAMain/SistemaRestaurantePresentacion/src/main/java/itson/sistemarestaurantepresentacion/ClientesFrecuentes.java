@@ -19,14 +19,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author rauln
  */
-public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFiltradosListener{
+public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFiltradosListener {
 
     private DefaultTableModel modeloTabla;
     private JTable tablaResultados;
     private JScrollPane jScrollPane1;
     private IClientesFrecuentesBO clientesFrecuentesBO;
     private ClientesFiltradosListener listener;
-
 
     public ClientesFrecuentes(IClientesFrecuentesBO clientesFrecuentesBO) {
         this.clientesFrecuentesBO = clientesFrecuentesBO;
@@ -39,20 +38,12 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 600, 350));
     }
 
-    
     @Override
     public void onClientesFiltrados(List<ClienteFrecuente> clientes) {
         try {
             actualizarTabla(clientes);
         } catch (Exception ex) {
             Logger.getLogger(ClientesFrecuentes.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private void obtenerClientesDesdeBuscador(String filtro) throws Exception {
-        if (clientesFrecuentesBO != null) {
-            List<ClienteFrecuente> clientes = clientesFrecuentesBO.buscarClientes(filtro);
-            actualizarTabla(clientes);
         }
     }
 
@@ -66,9 +57,10 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
         modeloTabla.setRowCount(0);
         for (ClienteFrecuente cliente : clientes) {
             // Desencriptar correo y teléfono antes de agregarlos a la tabla
-            String correoDesencriptado = Desencriptador.desencriptar(cliente.getCorreo());
-            String telefonoDesencriptado = Desencriptador.desencriptar(cliente.getTelefono());
-            modeloTabla.addRow(new Object[]{cliente.getNombre(), telefonoDesencriptado, correoDesencriptado});
+//            String correoDesencriptado = Desencriptador.desencriptar(cliente.getCorreo());
+//            String telefonoDesencriptado = Desencriptador.desencriptar(cliente.getTelefono());
+//            modeloTabla.addRow(new Object[]{cliente.getNombre(), telefonoDesencriptado, correoDesencriptado});
+            modeloTabla.addRow(new Object[]{cliente.getNombre(), cliente.getTelefono(), cliente.getCorreo()});
         }
     }
 

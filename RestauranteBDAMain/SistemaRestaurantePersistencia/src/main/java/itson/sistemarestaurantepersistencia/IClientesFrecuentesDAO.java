@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface IClientesFrecuentesDAO {
     public abstract ClienteFrecuente registrar(NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO);
-    public abstract boolean existeCorreo(String correo);
-    public abstract boolean existeTelefono(String telefono);
     public abstract List<ClienteFrecuente> buscarClientes(String query);
+    public abstract List<ClienteFrecuente> obtenerTodosLosClientes();
+    
     
     
 }

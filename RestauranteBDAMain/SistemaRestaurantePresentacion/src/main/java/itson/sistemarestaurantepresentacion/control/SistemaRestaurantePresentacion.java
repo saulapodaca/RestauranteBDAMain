@@ -14,9 +14,9 @@ import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarIngredien
 public class SistemaRestaurantePresentacion {
 
     public static void main(String[] args) {
-//        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
-//        RegistrarClienteFrecuenteForm prueba = new RegistrarClienteFrecuenteForm(clientesFrecuentesBO);
-//        prueba.setVisible(true);
+        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
+        RegistrarClienteFrecuenteForm prueba = new RegistrarClienteFrecuenteForm(clientesFrecuentesBO);
+        prueba.setVisible(true);
 //
 //        IIngredientesBO ingredientesBO = FabricaObjNegocio.crearIngredienteBO();
 //        RegistrarIngredienteForm pruebaRegistrarIngrediente = new RegistrarIngredienteForm(ingredientesBO);
@@ -25,8 +25,8 @@ public class SistemaRestaurantePresentacion {
 //        pruebaInventario.setVisible(true);
 //      
 //        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
-//        ClientesFrecuentes prueba2 = new ClientesFrecuentes(clientesFrecuentesBO);
-//        prueba 2.setVisible(true);
+        ClientesFrecuentes prueba2 = new ClientesFrecuentes(clientesFrecuentesBO);
+        prueba2.setVisible(true);
             
         
         
