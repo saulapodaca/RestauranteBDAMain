@@ -10,8 +10,8 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -34,7 +34,7 @@ public class Comandas extends javax.swing.JFrame {
         initComponents();
         inicializarTabla();
         setLocationRelativeTo(null);
-      
+
     }
 
     private void inicializarTabla() {
@@ -59,13 +59,12 @@ public class Comandas extends javax.swing.JFrame {
         JTable table = new JTable(model);
 
         try {
-            // Cargar la fuente Montserrat
-            Font montserrat = Font.createFont(Font.TRUETYPE_FONT, new File("resources/Montserrat-Medium.ttf")).deriveFont(12f);
-            Font montserratHeader = montserrat.deriveFont(Font.BOLD, 30f); // Tamaño de header 30
+            InputStream is = getClass().getResourceAsStream("/Montserrat-Medium.ttf");
+            Font montserrat = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(12f);
 
             // Aplicar al header
             JTableHeader header = table.getTableHeader();
-            header.setFont(montserratHeader);
+            header.setFont(montserrat);
             header.setBackground(Color.WHITE); // Fondo blanco
             header.setForeground(Color.BLACK); // Letra negra (o el color que quieras)
             header.setBorder(BorderFactory.createEmptyBorder()); // Opcional: Sin bordes
@@ -109,7 +108,7 @@ public class Comandas extends javax.swing.JFrame {
 
         // Crear scroll y agregarlo al panel principal (fondo)
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(20, 70, 760, 320); // <- Cambié la altura de 460 a 320 para dejar espacio para tu botón
+        scrollPane.setBounds(20, 70, 760, 300); // <- Cambié la altura de 460 a 320 para dejar espacio para tu botón
         fondo.setLayout(null); // Layout absoluto para posicionar manualmente
         fondo.add(scrollPane);
 
@@ -141,6 +140,7 @@ public class Comandas extends javax.swing.JFrame {
 
         fondo = new javax.swing.JPanel();
         labelTexto = new javax.swing.JLabel();
+        botonAgregarComanda = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -150,13 +150,17 @@ public class Comandas extends javax.swing.JFrame {
 
         labelTexto.setFont(new java.awt.Font("Montserrat Medium", 1, 24)); // NOI18N
         labelTexto.setText("COMANDAS");
-        fondo.add(labelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 40, 160, -1));
+        fondo.add(labelTexto, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 160, -1));
+
+        botonAgregarComanda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/botonAgregarComanda.png"))); // NOI18N
+        fondo.add(botonAgregarComanda, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 300, 40));
 
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 500));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel botonAgregarComanda;
     private javax.swing.JPanel fondo;
     private javax.swing.JLabel labelTexto;
     // End of variables declaration//GEN-END:variables
