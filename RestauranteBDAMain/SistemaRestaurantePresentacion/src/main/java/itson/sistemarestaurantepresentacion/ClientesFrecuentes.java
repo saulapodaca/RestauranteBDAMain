@@ -112,7 +112,7 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
         jPanel1 = new javax.swing.JPanel();
         buscadorClientesFrecuentesPanel1 = new itson.sistemarestaurantepresentacion.buscadores.BuscadorClientesFrecuentesPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));

@@ -43,7 +43,7 @@ public class MesasForm extends javax.swing.JFrame {
         botonInsertar = new javax.swing.JLabel();
         botonInsertarMesasBloqueado = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
         backround.setBackground(new java.awt.Color(255, 255, 255));

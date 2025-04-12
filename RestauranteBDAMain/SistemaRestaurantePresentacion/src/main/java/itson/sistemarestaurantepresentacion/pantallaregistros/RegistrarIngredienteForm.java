@@ -97,7 +97,7 @@ public class RegistrarIngredienteForm extends javax.swing.JFrame {
         comboBoxUnidadMedida = new javax.swing.JComboBox<>();
         textFieldIngresarNombre = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         background.setBackground(new java.awt.Color(255, 255, 255));
         background.setMinimumSize(new java.awt.Dimension(300, 400));
