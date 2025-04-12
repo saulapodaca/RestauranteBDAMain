@@ -57,44 +57,6 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
     }
 
     /**
-     * Busca clientes frecuentes en la base de datos utilizando un filtro de
-     * búsqueda.
-     *
-     * @param filtro El texto a buscar en los campos nombre, apellido, correo o
-     * teléfono del cliente. El filtro no distingue entre mayúsculas y
-     * minúsculas.
-     * @return Una lista de clientes que coinciden con el filtro proporcionado.
-     * @throws RuntimeException Si ocurre un error al ejecutar la consulta.
-     */
-    @Override
-    public List<ClienteFrecuente> buscarClientes(String filtro) {
-        EntityManager entityManager = ManejadorConexiones.getEntityManager();
-        try {
-            // Crear la consulta JPQL para buscar clientes por nombre, apellido, correo o teléfono
-            TypedQuery<ClienteFrecuente> query = entityManager.createQuery(
-                    "SELECT c FROM ClienteFrecuente c "
-                    + "WHERE LOWER(c.nombre) LIKE :filtro "
-                    + "OR LOWER(c.apellidoPaterno) LIKE :filtro "
-                    + "OR LOWER(c.apellidoMaterno) LIKE :filtro "
-                    + "OR LOWER(c.correo) LIKE :filtro "
-                    + "OR c.telefono LIKE :filtro",
-                    ClienteFrecuente.class
-            );
-            query.setParameter("filtro", "%" + filtro.toLowerCase() + "%");
-
-            // Retornar la lista de clientes que coinciden con el filtro
-            return query.getResultList();
-        } finally {
-            if (entityManager != null && entityManager.isOpen()) {
-                entityManager.close();
-            }
-        }
-    }
-
-
-
-
-    /**
      * Obtiene todos los clientes frecuentes registrados en la base de datos.
      *
      * @return Una lista con todos los clientes frecuentes registrados.

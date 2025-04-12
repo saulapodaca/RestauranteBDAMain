@@ -75,23 +75,6 @@ public class ClientesFrecuentesDAOTest {
     }
     
     @Test
-    public void testBuscarClientes(){
-        String filtro = "ari";
-        ClientesFrecuentesDAO dao = new ClientesFrecuentesDAO();
-        List listaClientes = dao.buscarClientes(filtro);
-        assertNotNull(listaClientes);
-    }
-    
-    @Test
-    public void testBuscarClientesSinCoincidencias(){
-        String filtro = "z";
-        ClientesFrecuentesDAO dao = new ClientesFrecuentesDAO();
-        List listaClientes = dao.buscarClientes(filtro);
-        assertNotNull(listaClientes);
-    }
-    
-    
-    @Test
     public void testObtenerTodosLosClientes(){
         ClientesFrecuentesDAO dao = new ClientesFrecuentesDAO();
         List listaClientes = dao.obtenerTodosLosClientes();

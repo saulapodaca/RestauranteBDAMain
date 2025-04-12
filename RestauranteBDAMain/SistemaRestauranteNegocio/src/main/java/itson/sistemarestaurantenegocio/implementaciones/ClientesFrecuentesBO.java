@@ -78,7 +78,7 @@ public class ClientesFrecuentesBO implements IClientesFrecuentesBO {
         String correo = nuevoClienteFrecuenteDTO.getCorreo();
         String telefono = nuevoClienteFrecuenteDTO.getNumeroTelefono();
 
-// Verificar si el correo no es null ni vacío antes de intentar encriptarlo
+        // Verificar si el correo no es null ni vacío antes de intentar encriptarlo
         String correoEncriptado = null;
         if (correo != null && !correo.trim().isEmpty()) {
             try {
@@ -89,7 +89,7 @@ public class ClientesFrecuentesBO implements IClientesFrecuentesBO {
             }
         }
 
-// Encriptar el teléfono (sin comprobación adicional porque el teléfono nunca debería ser null o vacío)
+        // Encriptar el teléfono (sin comprobación adicional porque el teléfono nunca debería ser null o vacío)
         String telefonoEncriptado;
         try {
             telefonoEncriptado = Encriptador.encriptar(telefono);
