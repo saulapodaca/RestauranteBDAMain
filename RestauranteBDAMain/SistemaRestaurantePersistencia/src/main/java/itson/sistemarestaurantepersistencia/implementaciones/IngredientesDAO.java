@@ -9,10 +9,14 @@ import itson.sistemarestaurantepersistencia.IIngredientesDAO;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
- * Implementación de la interfaz IIngredientesDAO que maneja el acceso
- * a datos para la entidad Ingrediente utilizando JPA.
+ * Implementación de la interfaz IIngredentesDAO para el manejo de la persistencia de
+ * entidades Ingrediente en la base de datos.
  */
 public class IngredientesDAO implements IIngredientesDAO {
 
@@ -93,4 +97,26 @@ public class IngredientesDAO implements IIngredientesDAO {
         entityManager.getTransaction().commit();
         return ingredienteExistente;
     }
+
+    /**
+     * Obtiene un ingrediente desde la base de datos utilizando su ID.
+     *
+     * @param id El identificador único del ingrediente.
+     * @return El objeto Ingrediente correspondiente al ID proporcionado.
+     */
+    @Override
+    public Ingrediente obtenerIngredientePorID(Long id) {
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Ingrediente> cq = cb.createQuery(Ingrediente.class);
+        Root<Ingrediente> ingrediente = cq.from(Ingrediente.class);
+        cq.select(ingrediente);
+        Predicate idIngrediente = cb.equal(
+                ingrediente.get("idIngrediente"), id);
+        cq.where(idIngrediente);
+
+        Ingrediente ingredienteRecuperado = entityManager.createQuery(cq).getSingleResult();
+        return ingredienteRecuperado;
+    }
+    
 }

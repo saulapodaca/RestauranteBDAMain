@@ -46,5 +46,8 @@ public interface IIngredientesDAO {
      * @return el objeto Ingrediente con el stock actualizado
      */
     public abstract Ingrediente actualizarStock(StockIngredienteActualizadoDTO ingrediente);
+    
+    
+    public Ingrediente obtenerIngredientePorID(Long id);
 
 }

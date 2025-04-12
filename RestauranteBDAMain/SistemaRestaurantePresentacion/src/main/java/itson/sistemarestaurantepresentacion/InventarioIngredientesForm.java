@@ -4,6 +4,7 @@ import itson.sistemarestaurantepresentacion.listeners.IngredientesRegistradosLis
 import itson.sistemarestaurantedominio.dtos.IngredienteRegistradoDTO;
 import itson.sistemarestaurantenegocio.IIngredientesBO;
 import itson.sistemarestaurantenegocio.excepciones.StockInvalidoException;
+import itson.sistemarestaurantepresentacion.control.Control;
 import itson.sistemarestaurantepresentacion.utilidades.TablaUtilidades;
 import itson.sistemarestaurantepresentacion.utilidades.UIUtilidades;
 import java.util.List;
@@ -41,6 +42,7 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
         crearTabla();
         buscadorIngredientesPanel1.iniciarBusqueda(ingredientesBO, this);
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 100, 600, 350));
+        setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")
@@ -49,12 +51,23 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
 
         jPanel1 = new javax.swing.JPanel();
         buscadorIngredientesPanel1 = new itson.sistemarestaurantepresentacion.buscadores.BuscadorIngredientesPanel();
+        botonRegistrar = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(buscadorIngredientesPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+
+        botonRegistrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/REGISTRAR.png"))); // NOI18N
+        botonRegistrar.setText("jLabel1");
+        botonRegistrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonRegistrarMouseClicked(evt);
+            }
+        });
+        jPanel1.add(botonRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 430, 100, 50));
+        botonRegistrar.getAccessibleContext().setAccessibleName("botonRegistrar");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -69,6 +82,10 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonRegistrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarMouseClicked
+        Control.getInstancia().abrirRegistrarIngredientes();
+    }//GEN-LAST:event_botonRegistrarMouseClicked
 
     /**
      * Método que se llama cuando se reciben los ingredientes filtrados desde el
@@ -138,6 +155,7 @@ public class InventarioIngredientesForm extends javax.swing.JFrame implements In
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel botonRegistrar;
     private itson.sistemarestaurantepresentacion.buscadores.BuscadorIngredientesPanel buscadorIngredientesPanel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

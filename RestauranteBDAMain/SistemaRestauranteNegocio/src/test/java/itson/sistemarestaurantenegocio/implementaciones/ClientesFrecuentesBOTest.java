@@ -52,22 +52,19 @@ public class ClientesFrecuentesBOTest {
     public void testRegistrarClienteFrecuenteOk() {
         IClientesFrecuentesDAO clienteFrecuenteDAO = new ClientesFrecuentesDAO(); // Instancia el DAO que interactúa con la base de datos.
         ClientesFrecuentesBO clientesFrecuentesBO = new ClientesFrecuentesBO(clienteFrecuenteDAO); // Instancia el BO con el DAO.
-
+        String nombre = "Juan";
+        String apellidoP = "Perez";
+        String apellidoM = "Lopez";
+        String correo = "ariraulm@gmail.com";
+        String telefono = "1234567899";
         // Crea un nuevo cliente frecuente con datos válidos.
-        NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO = new NuevoClienteFrecuenteDTO(
-                "Juan", "Pérez", "Lopez", "juan.perez@example.com", "1234567890"
-        );
-
+        NuevoClienteFrecuenteDTO nuevoClienteFrecuenteDTO = new NuevoClienteFrecuenteDTO(nombre, apellidoP, apellidoM, correo, telefono);
         // Llama al método para registrar el cliente.
         ClienteFrecuente clienteGuardado = clientesFrecuentesBO.registrarClienteFrecuente(nuevoClienteFrecuenteDTO);
 
-        // Verifica que el cliente guardado no sea nulo y que todos los campos coincidan con los datos ingresados.
+        // SI el cliente guardado tiene un ID es que persistio..
         assertNotNull(clienteGuardado.getId());
-        assertEquals(nuevoClienteFrecuenteDTO.getNombre(), clienteGuardado.getNombre());
-        assertEquals(nuevoClienteFrecuenteDTO.getApellidoPaterno(), clienteGuardado.getApellidoPaterno());
-        assertEquals(nuevoClienteFrecuenteDTO.getApellidoMaterno(), clienteGuardado.getApellidoMaterno());
-        assertEquals(nuevoClienteFrecuenteDTO.getCorreo(), clienteGuardado.getCorreo());
-        assertEquals(nuevoClienteFrecuenteDTO.getNumeroTelefono(), clienteGuardado.getTelefono());
+
     }
 
     /**

@@ -42,4 +42,14 @@ public class NuevoClienteFrecuenteDTO {
     public String getNumeroTelefono() {
         return numeroTelefono;
     }  
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+
+    public void setNumeroTelefono(String numeroTelefono) {
+        this.numeroTelefono = numeroTelefono;
+    }
+    
+    
 }
