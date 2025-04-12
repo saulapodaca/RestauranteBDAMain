@@ -4,6 +4,7 @@
  */
 package itson.sistemarestaurantenegocio;
 
+import itson.sistemarestaurantedominio.EstadoMesa;
 import itson.sistemarestaurantedominio.dtos.MesaRegistradaDTO;
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface IMesasBO {
     public abstract void insertarMesasIniciales();
 
     public abstract List<MesaRegistradaDTO> obtenerMesas();
+    
+    public void cambiarEstadoMesa(EstadoMesa estado, MesaRegistradaDTO mesaRegistrada);
 
 }

@@ -24,4 +24,8 @@ public class MesaRegistradaDTO {
     public EstadoMesa getEstadoMesa() {
         return estadoMesa;
     }
+    
+    public void setEstadoMesa(EstadoMesa estadoMesa){
+        this.estadoMesa = estadoMesa;
+    }
 }
