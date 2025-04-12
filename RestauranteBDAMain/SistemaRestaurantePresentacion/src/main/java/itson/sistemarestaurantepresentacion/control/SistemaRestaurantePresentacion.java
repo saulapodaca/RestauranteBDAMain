@@ -2,21 +2,15 @@ package itson.sistemarestaurantepresentacion.control;
 
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
 import itson.sistemarestaurantenegocio.fabrica.FabricaObjNegocio;
-import itson.sistemarestaurantenegocio.IIngredientesBO;
-import itson.sistemarestaurantenegocio.IMesasBO;
-import itson.sistemarestaurantepersistencia.implementaciones.MesasDAO;
-import itson.sistemarestaurantepresentacion.ClientesFrecuentes;
-import itson.sistemarestaurantepresentacion.InventarioIngredientesForm;
-import itson.sistemarestaurantepresentacion.MesasForm;
+import itson.sistemarestaurantepresentacion.Comandas;
 import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarClienteFrecuenteForm;
-import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarIngredienteForm;
 
 public class SistemaRestaurantePresentacion {
 
     public static void main(String[] args) {
-        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
-        RegistrarClienteFrecuenteForm prueba = new RegistrarClienteFrecuenteForm(clientesFrecuentesBO);
-        prueba.setVisible(true);
+//        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
+//        RegistrarClienteFrecuenteForm prueba = new RegistrarClienteFrecuenteForm(clientesFrecuentesBO);
+//        prueba.setVisible(true);
 //
 //        IIngredientesBO ingredientesBO = FabricaObjNegocio.crearIngredienteBO();
 //        RegistrarIngredienteForm pruebaRegistrarIngrediente = new RegistrarIngredienteForm(ingredientesBO);
@@ -26,10 +20,13 @@ public class SistemaRestaurantePresentacion {
 //      
 //        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
 //        ClientesFrecuentes prueba2 = new ClientesFrecuentes(clientesFrecuentesBO);
-//        prueba 2.setVisible(true);
+////        prueba 2.setVisible(true);
+//
+//        IMesasBO mesasBO = FabricaObjNegocio.crearMesasBO();
+//        MesasForm pruebaMesas = new MesasForm(mesasBO);
+//        pruebaMesas.setVisible(true);
 
-        IMesasBO mesasBO = FabricaObjNegocio.crearMesasBO();
-        MesasForm pruebaMesas = new MesasForm(mesasBO);
-        pruebaMesas.setVisible(true);
+          Comandas comandasForm = new Comandas();
+          comandasForm.setVisible(true);
     }
 }
