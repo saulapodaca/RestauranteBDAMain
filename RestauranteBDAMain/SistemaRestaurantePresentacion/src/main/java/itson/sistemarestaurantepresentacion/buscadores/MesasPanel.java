@@ -6,22 +6,30 @@ package itson.sistemarestaurantepresentacion.buscadores;
 
 import itson.sistemarestaurantedominio.EstadoMesa;
 import itson.sistemarestaurantedominio.dtos.MesaRegistradaDTO;
+import itson.sistemarestaurantenegocio.IMesasBO;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
  * @author saula
  */
-public class MesasPanel extends javax.swing.JPanel {
+public class MesasPanel extends JPanel {
 
-    public MesasPanel(List<MesaRegistradaDTO> mesas) {
-        initComponents();
-        setLayout(new GridLayout(4, 5, 15, 15)); // 4 filas, 5 columnas, espacio entre celdas
+    private IMesasBO mesasBO;
+    
+    public MesasPanel(List<MesaRegistradaDTO> mesas, IMesasBO mesasBO) {
+        this.mesasBO = mesasBO;
+        setLayout(new GridLayout(4, 5, 15, 15));
+        setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
 
         for (MesaRegistradaDTO mesa : mesas) {
             JButton botonMesa = new JButton(String.valueOf(mesa.getNumeroMesa()));
@@ -31,15 +39,33 @@ public class MesasPanel extends javax.swing.JPanel {
             botonMesa.setBorderPainted(false);
             botonMesa.setForeground(Color.WHITE);
 
-            if (mesa.getEstadoMesa() == EstadoMesa.DISPONIBLE) {
-                botonMesa.setBackground(Color.GREEN.darker());
-            } else {
-                botonMesa.setBackground(Color.GRAY);
-            }
+            actualizarColorBoton(botonMesa, mesa.getEstadoMesa());
+
+            // Listener para cambiar estado visual
+            botonMesa.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    EstadoMesa nuevoEstado = (mesa.getEstadoMesa() == EstadoMesa.DISPONIBLE)
+                            ? EstadoMesa.OCUPADA
+                            : EstadoMesa.DISPONIBLE;
+                    mesa.setEstadoMesa(nuevoEstado); // Cambiamos en el DTO
+                    mesasBO.cambiarEstadoMesa(nuevoEstado, mesa);
+                    actualizarColorBoton(botonMesa, nuevoEstado); // Cambiamos visualmente
+                }
+            });
 
             add(botonMesa);
         }
     }
+
+    private void actualizarColorBoton(JButton boton, EstadoMesa estado) {
+        if (estado == EstadoMesa.DISPONIBLE) {
+            boton.setBackground(Color.GREEN.darker());
+        } else {
+            boton.setBackground(Color.GRAY);
+        }
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.

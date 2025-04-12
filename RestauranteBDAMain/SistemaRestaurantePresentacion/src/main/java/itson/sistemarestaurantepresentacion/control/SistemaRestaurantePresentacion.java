@@ -25,10 +25,11 @@ public class SistemaRestaurantePresentacion {
 //        pruebaInventario.setVisible(true);
 //      
 //        IClientesFrecuentesBO clientesFrecuentesBO = FabricaObjNegocio.crearClientesFrecuentesBO();
-        ClientesFrecuentes prueba2 = new ClientesFrecuentes(clientesFrecuentesBO);
-        prueba2.setVisible(true);
-            
-        
-        
+//        ClientesFrecuentes prueba2 = new ClientesFrecuentes(clientesFrecuentesBO);
+//        prueba 2.setVisible(true);
+
+        IMesasBO mesasBO = FabricaObjNegocio.crearMesasBO();
+        MesasForm pruebaMesas = new MesasForm(mesasBO);
+        pruebaMesas.setVisible(true);
     }
 }
