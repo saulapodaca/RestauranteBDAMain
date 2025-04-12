@@ -6,12 +6,12 @@ package itson.sistemarestaurantepersistencia.implementaciones;
 
 import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantedominio.dtos.NuevoClienteFrecuenteDTO;
+import itson.sistemarestaurantedominio.dtos.ReporteClienteFrecuenteDTO;
 import itson.sistemarestaurantepersistencia.IClientesFrecuentesDAO;
 import java.util.Calendar;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-
 
 /**
  *
@@ -70,6 +70,32 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
             return entityManager
                     .createQuery("SELECT c FROM ClienteFrecuente c", ClienteFrecuente.class)
                     .getResultList();
+        } finally {
+            if (entityManager != null && entityManager.isOpen()) {
+                entityManager.close();
+            }
+        }
+    }
+
+    @Override
+    public List<ReporteClienteFrecuenteDTO> obtenerReporteClientesFrecuentes(String nombreFiltro, Integer minimoVisitas) {
+        EntityManager entityManager = ManejadorConexiones.getEntityManager();
+        try {
+            // Corregir la consulta JPQL
+            String jpql = "SELECT new itson.sistemarestaurantedominio.dtos.ReporteClienteFrecuenteDTO("
+                    + "c.nombre, c.apellidoPaterno, c.apellidoMaterno, "
+                    + "COUNT(co), SUM(co.totalAcumulado), MAX(co.fechaCreacion), c.puntosFidelidad) "
+                    + "FROM ClienteFrecuente c "
+                    + "LEFT JOIN c.comandas co "
+                    + "WHERE (:nombreFiltro IS NULL OR CONCAT(c.nombre, ' ', c.apellidoPaterno, ' ', c.apellidoMaterno) LIKE CONCAT('%', :nombreFiltro, '%')) "
+                    + "GROUP BY c.id "
+                    + "HAVING (:minimoVisitas IS NULL OR COUNT(co) >= :minimoVisitas)";
+
+            TypedQuery<ReporteClienteFrecuenteDTO> query = entityManager.createQuery(jpql, ReporteClienteFrecuenteDTO.class);
+            query.setParameter("nombreFiltro", nombreFiltro);
+            query.setParameter("minimoVisitas", minimoVisitas);
+
+            return query.getResultList();
         } finally {
             if (entityManager != null && entityManager.isOpen()) {
                 entityManager.close();

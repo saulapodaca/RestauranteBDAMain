@@ -1,0 +1,44 @@
+-------------------------------------------------------------------------------
+Test set: itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAOTest
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 1.387 s <<< FAILURE! - in itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAOTest
+testRegistrarClienteOk  Time elapsed: 0.404 s  <<< ERROR!
+javax.persistence.RollbackException: 
+Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.7.12.v20230209-e5c4074ef3): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1451451451' for key 'clientesfrecuentes.telefono'
+Error Code: 1062
+Call: INSERT INTO clientesFrecuentes (apellidoMaterno, apellidoPaterno, correo, fechaRegistro, nombre, puntosFidelidad, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [7 parameters bound]
+Query: InsertObjectQuery(ClienteFrecuente{id=null, nombre='Carlos', apellidoPaterno='Moreno', apellidoMaterno='Lopez', telefono='1451451451', correo='ari@gmail.com', fechaRegistro=Fri Apr 11 21:52:22 MST 2025})
+	at itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAOTest.testRegistrarClienteOk(ClientesFrecuentesDAOTest.java:50)
+Caused by: org.eclipse.persistence.exceptions.DatabaseException: 
+
+Internal Exception: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1451451451' for key 'clientesfrecuentes.telefono'
+Error Code: 1062
+Call: INSERT INTO clientesFrecuentes (apellidoMaterno, apellidoPaterno, correo, fechaRegistro, nombre, puntosFidelidad, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [7 parameters bound]
+Query: InsertObjectQuery(ClienteFrecuente{id=null, nombre='Carlos', apellidoPaterno='Moreno', apellidoMaterno='Lopez', telefono='1451451451', correo='ari@gmail.com', fechaRegistro=Fri Apr 11 21:52:22 MST 2025})
+	at itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAOTest.testRegistrarClienteOk(ClientesFrecuentesDAOTest.java:50)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1451451451' for key 'clientesfrecuentes.telefono'
+	at itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAOTest.testRegistrarClienteOk(ClientesFrecuentesDAOTest.java:50)
+
+testRegistrarClienteCorreoNull  Time elapsed: 0.018 s  <<< ERROR!
+javax.persistence.RollbackException: 
+Exception [EclipseLink-4002] (Eclipse Persistence Services - 2.7.12.v20230209-e5c4074ef3): org.eclipse.persistence.exceptions.DatabaseException
+Internal Exception: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1111111111' for key 'clientesfrecuentes.telefono'
+Error Code: 1062
+Call: INSERT INTO clientesFrecuentes (apellidoMaterno, apellidoPaterno, correo, fechaRegistro, nombre, puntosFidelidad, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [7 parameters bound]
+Query: InsertObjectQuery(ClienteFrecuente{id=null, nombre='Carlos', apellidoPaterno='Moreno', apellidoMaterno='Lopez', telefono='1111111111', correo='null', fechaRegistro=Fri Apr 11 21:52:23 MST 2025})
+	at itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAOTest.testRegistrarClienteCorreoNull(ClientesFrecuentesDAOTest.java:68)
+Caused by: org.eclipse.persistence.exceptions.DatabaseException: 
+
+Internal Exception: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1111111111' for key 'clientesfrecuentes.telefono'
+Error Code: 1062
+Call: INSERT INTO clientesFrecuentes (apellidoMaterno, apellidoPaterno, correo, fechaRegistro, nombre, puntosFidelidad, telefono) VALUES (?, ?, ?, ?, ?, ?, ?)
+	bind => [7 parameters bound]
+Query: InsertObjectQuery(ClienteFrecuente{id=null, nombre='Carlos', apellidoPaterno='Moreno', apellidoMaterno='Lopez', telefono='1111111111', correo='null', fechaRegistro=Fri Apr 11 21:52:23 MST 2025})
+	at itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAOTest.testRegistrarClienteCorreoNull(ClientesFrecuentesDAOTest.java:68)
+Caused by: java.sql.SQLIntegrityConstraintViolationException: Duplicate entry '1111111111' for key 'clientesfrecuentes.telefono'
+	at itson.sistemarestaurantepersistencia.implementaciones.ClientesFrecuentesDAOTest.testRegistrarClienteCorreoNull(ClientesFrecuentesDAOTest.java:68)
+

@@ -81,6 +81,13 @@ public class ClientesFrecuentesDAOTest {
         assertNotNull(listaClientes);
     }
     
+    @Test
+    public void testObtenerReporteClientesFrecuentes(){
+        ClientesFrecuentesDAO dao = new ClientesFrecuentesDAO();
+        List listaClientesReporte = dao.obtenerReporteClientesFrecuentes("Carlos", 3);
+        System.out.println(listaClientesReporte);
+        assertNotNull(listaClientesReporte);
+    }
 
 
 

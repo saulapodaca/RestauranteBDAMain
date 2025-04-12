@@ -19,4 +19,5 @@ itson\sistemarestaurantedominio\Comanda.class
 itson\sistemarestaurantedominio\dtos\NuevoProductoDTO.class
 itson\sistemarestaurantedominio\ClienteFrecuente.class
 itson\sistemarestaurantedominio\dtos\NuevaRelacionProductoIngredienteDTO.class
+itson\sistemarestaurantedominio\dtos\ReporteClienteFrecuenteDTO.class
 itson\sistemarestaurantedominio\Mesa.class
