@@ -36,12 +36,12 @@ public class Control {
     }
 
     public void abrirPantallaMesero(){
-        PantallaMeseroForm meseroForm = new PantallaMeseroForm(this);
+        PantallaMeseroForm meseroForm = new PantallaMeseroForm();
         meseroForm.setVisible(true);
     }
     
     public void abrirPantallaAdministrador(){
-        PantallaAdministradorForm administradorForm = new PantallaAdministradorForm(this);
+        PantallaAdministradorForm administradorForm = new PantallaAdministradorForm();
         administradorForm.setVisible(true);
     }
     

@@ -14,12 +14,10 @@ import javax.swing.SwingConstants;
  */
 public class PantallaAdministradorForm extends javax.swing.JFrame {
 
-    private Control controlador;
     /**
      * Creates new form PantallaAdministradorForm
      */
-    public PantallaAdministradorForm(Control controlador) {
-        this.controlador = controlador;
+    public PantallaAdministradorForm() {
         initComponents();
         setTitle("ADMINISTRADOR");
         setLocationRelativeTo(null);
@@ -44,7 +42,7 @@ public class PantallaAdministradorForm extends javax.swing.JFrame {
         botonIngredientes = new javax.swing.JLabel();
         botonReportes = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         backround.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -154,7 +152,7 @@ public class PantallaAdministradorForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botonMesasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonMesasMouseClicked
-        controlador.abrirMesas();
+        Control.getInstancia().abrirMesas();
     }//GEN-LAST:event_botonMesasMouseClicked
 
     private void botonComandasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonComandasMouseClicked
@@ -162,7 +160,7 @@ public class PantallaAdministradorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_botonComandasMouseClicked
 
     private void botonClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonClientesMouseClicked
-        controlador.abrirClientesFrecuentes();
+        Control.getInstancia().abrirClientesFrecuentes();
     }//GEN-LAST:event_botonClientesMouseClicked
 
     private void botonProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonProductosMouseClicked
@@ -170,7 +168,7 @@ public class PantallaAdministradorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_botonProductosMouseClicked
 
     private void botonIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonIngredientesMouseClicked
-        controlador.abrirInventarioIngredientes();
+        Control.getInstancia().abrirInventarioIngredientes();
     }//GEN-LAST:event_botonIngredientesMouseClicked
 
     private void botonReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonReportesMouseClicked

@@ -191,6 +191,7 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         background = new javax.swing.JPanel();
         labelDominios = new javax.swing.JLabel();
         registrarClienteFrecuenteTxt2 = new javax.swing.JLabel();
@@ -213,7 +214,18 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         botonRegistrar = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Registrar Cliente Frecuente");
         setResizable(false);
         setSize(new java.awt.Dimension(300, 400));
@@ -351,6 +363,7 @@ public class RegistrarClienteFrecuenteForm extends javax.swing.JFrame {
     private javax.swing.JPanel background;
     private javax.swing.JLabel botonRegistrar;
     private javax.swing.JComboBox<String> comboBoxDominios;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;

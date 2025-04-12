@@ -4,7 +4,6 @@
  */
 package itson.sistemarestaurantepresentacion;
 
-import itson.sistemarestaurantepresentacion.control.Control;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 
@@ -14,12 +13,10 @@ import javax.swing.SwingConstants;
  */
 public class PantallaMeseroForm extends javax.swing.JFrame {
     
-    private Control controlador;
     /**
      * Creates new form PantallaMeseroForm
      */
-    public PantallaMeseroForm(Control controlador) {
-        this.controlador = controlador;
+    public PantallaMeseroForm() {
         initComponents();
         setTitle("Mesero");
         setLocationRelativeTo(null);
@@ -39,7 +36,7 @@ public class PantallaMeseroForm extends javax.swing.JFrame {
         backround = new javax.swing.JPanel();
         ComandaBoton = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         backround.setBackground(new java.awt.Color(255, 255, 255));
 
