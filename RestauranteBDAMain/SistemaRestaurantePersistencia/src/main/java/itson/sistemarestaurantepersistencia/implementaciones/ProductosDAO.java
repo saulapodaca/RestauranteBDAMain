@@ -137,4 +137,5 @@ public class ProductosDAO implements IProductosDAO {
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
         return entityManager.find(Producto.class, id);
     }
+    //
 }
