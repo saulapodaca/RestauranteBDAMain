@@ -77,6 +77,21 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
         }
     }
 
+    /**
+     * Obtiene un reporte de clientes frecuentes filtrados por nombre y/o número mínimo de visitas.
+     * Este método ejecuta una consulta JPQL para obtener los datos de los clientes frecuentes, 
+     * incluyendo su nombre, apellido, número de comandas realizadas, total acumulado, fecha de la última comanda 
+     * y puntos de fidelidad. Los resultados se agrupan por cliente y se filtran según el nombre y el número mínimo de visitas.
+     * 
+     * @param nombreFiltro Filtro opcional para buscar clientes por su nombre completo. Si es {@code null}, 
+     *                     no se aplicará filtro por nombre.
+     * @param minimoVisitas Filtro opcional para obtener solo los clientes con un número mínimo de visitas. 
+     *                      Si es {@code null}, no se aplicará este filtro.
+     * @return Una lista de objetos {@link ReporteClienteFrecuenteDTO} con la información de los clientes frecuentes 
+     *         que cumplen con los filtros aplicados.
+     * @throws Exception Si ocurre algún error durante la ejecución de la consulta.
+     * @see ReporteClienteFrecuenteDTO
+     */
     @Override
     public List<ReporteClienteFrecuenteDTO> obtenerReporteClientesFrecuentes(String nombreFiltro, Integer minimoVisitas) {
         EntityManager entityManager = ManejadorConexiones.getEntityManager();
@@ -102,5 +117,6 @@ public class ClientesFrecuentesDAO implements IClientesFrecuentesDAO {
             }
         }
     }
+
 
 }

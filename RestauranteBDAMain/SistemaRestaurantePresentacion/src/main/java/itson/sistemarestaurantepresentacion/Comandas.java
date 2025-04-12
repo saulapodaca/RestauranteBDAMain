@@ -28,20 +28,39 @@ import javax.swing.table.JTableHeader;
 public class Comandas extends javax.swing.JFrame {
 
     /**
-     * Creates new form Comandas
+     * Crea una nueva instancia del formulario "Comandas".
+     * Este constructor inicializa los componentes gráficos de la interfaz de usuario, 
+     * configura la tabla que se mostrará con las comandas y ajusta la ubicación 
+     * de la ventana para que se centre en la pantalla.
+     * 
+     * @see initComponents()
+     * @see inicializarTabla()
      */
     public Comandas() {
         initComponents();
         inicializarTabla();
         setLocationRelativeTo(null);
-
     }
 
+
+    /**
+     * Inicializa y configura la tabla que se usará para mostrar las comandas.
+     * La tabla contiene las columnas: "Comanda", "Mesa", "Estado" y "Revisar".
+     * Además, se configura un renderizador para mostrar un icono de lupa en la
+     * columna "Revisar". También se establece una fuente personalizada para la
+     * tabla y su cabecera, y se configuran los estilos visuales.
+     *
+     * @see JTable
+     * @see DefaultTableModel
+     * @see JTableHeader
+     * @see Font
+     * @see InputStream
+     */
     private void inicializarTabla() {
         // Cargar la imagen de lupa
         ImageIcon lupaIcon = new ImageIcon(getClass().getResource("/lupa2.png"));
 
-        // Modelo de la tabla
+        // Modelo de la tabla: Define las columnas y las filas (inicialmente vacías)
         DefaultTableModel model = new DefaultTableModel(
                 new Object[]{"Comanda", "Mesa", "Estado", "Revisar"}, 0
         ) {
@@ -51,41 +70,43 @@ public class Comandas extends javax.swing.JFrame {
             }
         };
 
-        // Datos de ejemplo
+        // Datos de ejemplo: Agrega filas con información de las comandas
         model.addRow(new Object[]{"C001", "Mesa 1", "Pendiente", lupaIcon});
         model.addRow(new Object[]{"C002", "Mesa 3", "En proceso", lupaIcon});
         model.addRow(new Object[]{"C003", "Mesa 5", "Entregado", lupaIcon});
 
+        // Crear la tabla con el modelo de datos
         JTable table = new JTable(model);
 
         try {
+            // Cargar la fuente personalizada desde un archivo .ttf
             InputStream is = getClass().getResourceAsStream("/Montserrat-Medium.ttf");
             Font montserrat = Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(12f);
 
-            // Aplicar al header
+            // Aplicar la fuente a la cabecera de la tabla
             JTableHeader header = table.getTableHeader();
             header.setFont(montserrat);
             header.setBackground(Color.WHITE); // Fondo blanco
-            header.setForeground(Color.BLACK); // Letra negra (o el color que quieras)
+            header.setForeground(Color.BLACK); // Letra negra
             header.setBorder(BorderFactory.createEmptyBorder()); // Opcional: Sin bordes
 
-            // Aplicar fuente a las filas
+            // Aplicar la fuente a las filas de la tabla
             table.setFont(montserrat);
             table.setRowHeight(40); // Altura de las filas
 
         } catch (FontFormatException | IOException e) {
             e.printStackTrace();
-            // Si falla la carga de fuente, se usa la predeterminada
+            // Si falla la carga de la fuente, se usa la predeterminada
         }
 
-        // Centrar columnas de texto
+        // Centrar el texto de las columnas
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment(JLabel.CENTER);
         table.getColumnModel().getColumn(0).setCellRenderer(centerRenderer);
         table.getColumnModel().getColumn(1).setCellRenderer(centerRenderer);
         table.getColumnModel().getColumn(2).setCellRenderer(centerRenderer);
 
-        // Renderizador para la columna de icono
+        // Renderizador para la columna de icono (columna 3)
         table.getColumnModel().getColumn(3).setCellRenderer(new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value,
@@ -98,40 +119,40 @@ public class Comandas extends javax.swing.JFrame {
             }
         });
 
+        // Configuración adicional de la cabecera de la tabla
         JTableHeader header = table.getTableHeader();
-
         header.setFont(new Font("Montserrat", Font.BOLD, 14));
         header.setBackground(new Color(60, 63, 65)); // Fondo gris oscuro
         header.setForeground(Color.WHITE); // Texto blanco
         header.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1)); // Borde negro delgado
         table.setRowHeight(40); // Alto de las filas
 
-        // Crear scroll y agregarlo al panel principal (fondo)
+        // Crear un JScrollPane para agregar la tabla y configurarlo en el panel
         JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.setBounds(20, 70, 760, 300); // <- Cambié la altura de 460 a 320 para dejar espacio para tu botón
+        scrollPane.setBounds(20, 70, 760, 300); // Ajustar tamaño y posición
         fondo.setLayout(null); // Layout absoluto para posicionar manualmente
         fondo.add(scrollPane);
 
+        // Agregar un MouseListener para abrir una nueva ventana con la información de la comanda
         table.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 int row = table.rowAtPoint(e.getPoint());
                 int column = table.columnAtPoint(e.getPoint());
 
-                // Verifica si la columna es la de la lupa (ejemplo: columna 3)
+                // Verifica si la columna seleccionada es la de la lupa (columna 3)
                 if (column == 3) {
                     // Obtiene los datos de la fila seleccionada
                     String comanda = table.getValueAt(row, 0).toString();
                     String mesa = table.getValueAt(row, 1).toString();
                     String estado = table.getValueAt(row, 2).toString();
 
-                    // Abre una nueva ventana con la información
+                    // Abre una nueva ventana con la información detallada de la comanda
                     InformacionComanda ventana = new InformacionComanda(comanda, mesa, estado);
                     ventana.setVisible(true);
                 }
             }
         });
-
     }
 
     @SuppressWarnings("unchecked")
