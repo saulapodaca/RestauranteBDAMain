@@ -14,7 +14,7 @@ import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarClienteFr
 import itson.sistemarestaurantepresentacion.pantallaregistros.RegistrarIngredienteForm;
 
 public class Control {
-
+   private Control control;
     private static Control instance;
     IIngredientesBO ingredientesBO = FabricaObjNegocio.crearIngredienteBO();
     IClientesFrecuentesBO clientesBO = FabricaObjNegocio.crearClientesFrecuentesBO();

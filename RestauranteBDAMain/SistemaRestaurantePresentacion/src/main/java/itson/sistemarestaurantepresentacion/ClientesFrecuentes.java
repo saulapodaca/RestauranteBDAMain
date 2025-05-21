@@ -8,6 +8,7 @@ import itson.sistemarestaurantepresentacion.listeners.ClientesFiltradosListener;
 import itson.sistemarestaurantedominio.ClienteFrecuente;
 import itson.sistemarestaurantenegocio.IClientesFrecuentesBO;
 import itson.sistemarestaurantepresentacion.buscadores.BuscadorClientesFrecuentesPanel;
+import itson.sistemarestaurantepresentacion.control.Control;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
@@ -24,6 +25,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
+
 /**
  *
  * @author rauln
@@ -35,6 +37,7 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
     private JScrollPane jScrollPane1;
     private IClientesFrecuentesBO clientesFrecuentesBO;
     private ClientesFiltradosListener listener;
+    private Control control;
 
     /**
      * Crea una nueva instancia de la clase {@code ClientesFrecuentes}. Este
@@ -46,6 +49,7 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
      * @param clientesFrecuentesBO El objeto que implementa la interfaz
      * {@link IClientesFrecuentesBO}, el cual se encargará de la lógica de
      * negocio relacionada con los clientes frecuentes.
+     * @param control
      * @see #initComponents()
      * @see #crearTabla()
      * @see
@@ -55,6 +59,7 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
      */
     public ClientesFrecuentes(IClientesFrecuentesBO clientesFrecuentesBO) {
         this.clientesFrecuentesBO = clientesFrecuentesBO;
+       
         initComponents();
         crearTabla();
 
@@ -173,12 +178,24 @@ public class ClientesFrecuentes extends javax.swing.JFrame implements ClientesFi
 
         botonRegistrarCliente.setBackground(new java.awt.Color(255, 153, 153));
         botonRegistrarCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconRegistrarCliente.png"))); // NOI18N
+        botonRegistrarCliente.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                botonRegistrarClienteMouseClicked(evt);
+            }
+        });
         fondo.add(botonRegistrarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 300, 40));
 
         getContentPane().add(fondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botonRegistrarClienteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_botonRegistrarClienteMouseClicked
+        // TODO add your handling code here:
+        Control cont = new Control();
+        cont.abrirRegistrarClientesFrecuentes();
+    }//GEN-LAST:event_botonRegistrarClienteMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel botonRegistrarCliente;
     private itson.sistemarestaurantepresentacion.buscadores.BuscadorClientesFrecuentesPanel buscadorClientesFrecuentesPanel1;
